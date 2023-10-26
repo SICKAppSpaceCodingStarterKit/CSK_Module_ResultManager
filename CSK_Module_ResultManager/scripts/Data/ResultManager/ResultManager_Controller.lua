@@ -15,12 +15,43 @@ local tmrResultManager = Timer.create()
 tmrResultManager:setExpirationTime(300)
 tmrResultManager:setPeriodic(false)
 
+-- Timer to wait for other modules to be ready to register to their events
+local tmrWaitForSetupOfOtherModules = Timer.create()
+tmrWaitForSetupOfOtherModules:setExpirationTime(1000)
+tmrWaitForSetupOfOtherModules:setPeriodic(false)
+
 -- Reference to global handle
 local resultManager_Model
 
 -- ************************ UI Events Start ********************************
+-- Only to prevent WARNING messages, but these are only examples/placeholders for dynamically created events/functions
+----------------------------------------------------------------
+Script.serveEvent('CSK_ResultManager.OnNewResult_EXPRESSION', 'OnNewResult_EXPRESSION')
+----------------------------------------------------------------
 
--- Script.serveEvent("CSK_ResultManager.OnNewEvent", "ResultManager_OnNewEvent")
+-- Real events
+--------------------------------------------------
+
+Script.serveEvent('CSK_ResultManager.OnNewStatusListOfExpressions', 'ResultManager_OnNewStatusListOfExpressions')
+Script.serveEvent('CSK_ResultManager.OnNewStatusSelectedExpression', 'ResultManager_OnNewStatusSelectedExpression')
+Script.serveEvent('CSK_ResultManager.OnNewStatusExpressionName', 'ResultManager_OnNewStatusExpressionName')
+Script.serveEvent('CSK_ResultManager.OnNewStatusExpression', 'ResultManager_OnNewStatusExpression')
+Script.serveEvent('CSK_ResultManager.OnNewStatusResult', 'ResultManager_OnNewStatusResult')
+Script.serveEvent('CSK_ResultManager.OnNewStatusCriteriaResult', 'ResultManager_OnNewStatusCriteriaResult')
+
+Script.serveEvent('CSK_ResultManager.OnNewStatusCriteriaType', 'ResultManager_OnNewStatusCriteriaType')
+Script.serveEvent('CSK_ResultManager.OnNewStatusCriteria', 'ResultManager_OnNewStatusCriteria')
+Script.serveEvent('CSK_ResultManager.OnNewStatusCriteriaString', 'ResultManager_OnNewStatusCriteriaString')
+
+Script.serveEvent('CSK_ResultManager.OnNewStatusCriteriaMaximum', 'ResultManager_OnNewStatusCriteriaMaximum')
+Script.serveEvent('CSK_ResultManager.OnNewStatusParameterList', 'ResultManager_OnNewStatusParameterList')
+
+Script.serveEvent('CSK_ResultManager.OnNewStatusSelectedParameter', 'ResultManager_OnNewStatusSelectedParameter')
+Script.serveEvent('CSK_ResultManager.OnNewStatusLinkedEvent', 'ResultManager_OnNewStatusLinkedEvent')
+Script.serveEvent('CSK_ResultManager.OnNewStatusEventParameterPosition', 'ResultManager_OnNewStatusEventParameterPosition')
+
+Script.serveEvent('CSK_ResultManager.OnNewStatusAvailableEvents', 'ResultManager_OnNewStatusAvailableEvents')
+
 Script.serveEvent("CSK_ResultManager.OnNewStatusLoadParameterOnReboot", "ResultManager_OnNewStatusLoadParameterOnReboot")
 Script.serveEvent("CSK_ResultManager.OnPersistentDataModuleAvailable", "ResultManager_OnPersistentDataModuleAvailable")
 Script.serveEvent("CSK_ResultManager.OnNewParameterName", "ResultManager_OnNewParameterName")
@@ -31,17 +62,7 @@ Script.serveEvent('CSK_ResultManager.OnUserLevelMaintenanceActive', 'ResultManag
 Script.serveEvent('CSK_ResultManager.OnUserLevelServiceActive', 'ResultManager_OnUserLevelServiceActive')
 Script.serveEvent('CSK_ResultManager.OnUserLevelAdminActive', 'ResultManager_OnUserLevelAdminActive')
 
--- ...
-
 -- ************************ UI Events End **********************************
-
---[[
---- Some internal code docu for local used function
-local function functionName()
-  -- Do something
-
-end
-]]
 
 --**************************************************************************
 --********************** End Global Scope **********************************
@@ -108,12 +129,45 @@ local function handleOnExpiredTmrResultManager()
 
   updateUserLevel()
 
-  -- Script.notifyEvent("ResultManager_OnNewEvent", false)
+  Script.notifyEvent("ResultManager_OnNewStatusListOfExpressions", resultManager_Model.helperFuncs.createJsonList(resultManager_Model.parameters.expressions))
+  Script.notifyEvent("ResultManager_OnNewStatusSelectedExpression", resultManager_Model.selectedExpression)
+  if resultManager_Model.selectedExpression ~= '' then
+    Script.notifyEvent("ResultManager_OnNewStatusExpressionName", resultManager_Model.parameters.expressions[resultManager_Model.selectedExpression].name)
+    Script.notifyEvent("ResultManager_OnNewStatusExpression", resultManager_Model.parameters.expressions[resultManager_Model.selectedExpression].expression)
+    Script.notifyEvent("ResultManager_OnNewStatusCriteriaType", resultManager_Model.parameters.expressions[resultManager_Model.selectedExpression].criteriaType)
 
+    if resultManager_Model.parameters.expressions[resultManager_Model.selectedExpression].criteriaType == 'STRING' then
+      Script.notifyEvent("ResultManager_OnNewStatusCriteriaString", resultManager_Model.parameters.expressions[resultManager_Model.selectedExpression].criteria)
+    else
+      Script.notifyEvent("ResultManager_OnNewStatusCriteria", resultManager_Model.parameters.expressions[resultManager_Model.selectedExpression].criteria)
+    end
+
+    if resultManager_Model.parameters.expressions[resultManager_Model.selectedExpression].criteriaType == 'RANGE' then
+      Script.notifyEvent("ResultManager_OnNewStatusCriteriaMaximum", resultManager_Model.parameters.expressions[resultManager_Model.selectedExpression].criteriaMax)
+    end
+    Script.notifyEvent("ResultManager_OnNewStatusParameterList", resultManager_Model.helperFuncs.createJsonListExpressionParameters(resultManager_Model.parameters.expressions[resultManager_Model.selectedExpression].events, resultManager_Model.parameters.expressions[resultManager_Model.selectedExpression].data))
+
+    Script.notifyEvent("ResultManager_OnNewStatusSelectedParameter", resultManager_Model.selectedParameter)
+    if resultManager_Model.selectedParameter ~= '' then
+      Script.notifyEvent("ResultManager_OnNewStatusLinkedEvent", resultManager_Model.parameters.expressions[resultManager_Model.selectedExpression].events[resultManager_Model.selectedParameter])
+      Script.notifyEvent("ResultManager_OnNewStatusSelectedParameter", resultManager_Model.selectedParameter)
+      Script.notifyEvent("ResultManager_OnNewStatusEventParameterPosition", resultManager_Model.parameters.expressions[resultManager_Model.selectedExpression].parameterPositions[resultManager_Model.selectedParameter])
+    else
+      Script.notifyEvent("ResultManager_OnNewStatusSelectedParameter", 'none Selected')
+      Script.notifyEvent("ResultManager_OnNewStatusEventParameterPosition", 1)
+    end
+  else
+    Script.notifyEvent("ResultManager_OnNewStatusExpression", '')
+    Script.notifyEvent("ResultManager_OnNewStatusParameterList", resultManager_Model.helperFuncs.createJsonListExpressionParameters(nil))
+
+  end
+
+  local eventList = resultManager_Model.helperFuncs.getAvailableEvents()
+  Script.notifyEvent("ResultManager_OnNewStatusAvailableEvents", resultManager_Model.helperFuncs.createStringListBySimpleTable(eventList))
   Script.notifyEvent("ResultManager_OnNewStatusLoadParameterOnReboot", resultManager_Model.parameterLoadOnReboot)
   Script.notifyEvent("ResultManager_OnPersistentDataModuleAvailable", resultManager_Model.persistentModuleAvailable)
   Script.notifyEvent("ResultManager_OnNewParameterName", resultManager_Model.parametersName)
-  -- ...
+
 end
 Timer.register(tmrResultManager, "OnExpired", handleOnExpiredTmrResultManager)
 
@@ -126,20 +180,231 @@ local function pageCalled()
 end
 Script.serveFunction("CSK_ResultManager.pageCalled", pageCalled)
 
---[[
-local function setSomething(value)
-  _G.logger:info(nameOfModule .. ": Set new value = " .. value)
-  resultManager_Model.varA = value
+local function selectExpressionByName(selection)
+  local suc
+  if resultManager_Model.parameters.expressions[selection] then
+    suc = true
+    _G.logger:fine(nameOfModule .. ": Select expression '" .. tostring(selection) .. "'.")
+    resultManager_Model.selectedExpression = selection
+    resultManager_Model.selectedParameter = ''
+  else
+    suc = false
+  end
+  handleOnExpiredTmrResultManager()
+  return suc
 end
-Script.serveFunction("CSK_ResultManager.setSomething", setSomething)
-]]
+Script.serveFunction('CSK_ResultManager.selectExpressionByName', selectExpressionByName)
+
+local function setExpressionName(name)
+  resultManager_Model.newExpressionName = name
+end
+Script.serveFunction('CSK_ResultManager.setExpressionName', setExpressionName)
+
+local function addExpressionViaUI()
+  if resultManager_Model.newExpressionName ~= '' then
+    resultManager_Model.addExpression(resultManager_Model.newExpressionName, '', 'NUMBER', 100, nil, nil)
+    selectExpressionByName(resultManager_Model.newExpressionName)
+  else
+    _G.logger:warning(nameOfModule .. ": No expression name defined in UI.")
+  end
+end
+Script.serveFunction('CSK_ResultManager.addExpressionViaUI', addExpressionViaUI)
+
+local function deleteExpressionViaUI()
+  if resultManager_Model.parameters.expressions[resultManager_Model.selectedExpression] then
+    _G.logger:info(nameOfModule .. ": Delete expression '" .. tostring(resultManager_Model.selectedExpression) .. "'.")
+    resultManager_Model.deregisterFromParameterEvent(resultManager_Model.selectedExpression)
+    resultManager_Model.parameters.expressions[resultManager_Model.selectedExpression] = nil
+  else
+    _G.logger:warning(nameOfModule .. ": Expression '" .. tostring(resultManager_Model.selectedExpression) .. "' not available to delete.")
+  end
+
+  resultManager_Model.selectedExpression = ''
+  resultManager_Model.selectedParameter = ''
+
+  -- Check if there is another expression available to select
+  for key, _ in pairs(resultManager_Model.parameters.expressions) do
+    resultManager_Model.selectedExpression = key
+    break
+  end
+  handleOnExpiredTmrResultManager()
+end
+Script.serveFunction('CSK_ResultManager.deleteExpressionViaUI', deleteExpressionViaUI)
+
+local function setExpression(expression)
+  if resultManager_Model.parameters.expressions[resultManager_Model.selectedExpression] then
+    _G.logger:fine(nameOfModule .. ": Set expression to '" .. tostring(expression) .. "'.")
+    resultManager_Model.parameters.expressions[resultManager_Model.selectedExpression].expression = expression
+  end
+end
+Script.serveFunction('CSK_ResultManager.setExpression', setExpression)
+
+local function setCriteriaType(criteriaType)
+  if resultManager_Model.parameters.expressions[resultManager_Model.selectedExpression] then
+    _G.logger:fine(nameOfModule .. ": Set criteria type to '" .. tostring(criteriaType) .. "'.")
+    resultManager_Model.parameters.expressions[resultManager_Model.selectedExpression].criteriaType = criteriaType
+
+    if criteriaType == 'NUMBER' then
+      resultManager_Model.parameters.expressions[resultManager_Model.selectedExpression].criteria = 123.0
+    elseif criteriaType == 'RANGE' then
+      resultManager_Model.parameters.expressions[resultManager_Model.selectedExpression].criteria = 1.0
+      resultManager_Model.parameters.expressions[resultManager_Model.selectedExpression].criteriaMax = 100.0
+    elseif criteriaType == 'BOOL' then
+      resultManager_Model.parameters.expressions[resultManager_Model.selectedExpression].criteria = true
+    elseif criteriaType == 'STRING' then
+      resultManager_Model.parameters.expressions[resultManager_Model.selectedExpression].criteria = 'TextToCheck'
+    end
+    handleOnExpiredTmrResultManager()
+  end
+end
+Script.serveFunction('CSK_ResultManager.setCriteriaType', setCriteriaType)
+
+local function setCriteria(criteria)
+  if resultManager_Model.parameters.expressions[resultManager_Model.selectedExpression] then
+    _G.logger:fine(nameOfModule .. ": Set criteria to '" .. tostring(criteria) .. "'.")
+    resultManager_Model.parameters.expressions[resultManager_Model.selectedExpression].criteria = criteria
+  end
+end
+Script.serveFunction('CSK_ResultManager.setCriteria', setCriteria)
+
+local function setCriteriaMaximum(maxCriteria)
+  if resultManager_Model.parameters.expressions[resultManager_Model.selectedExpression] then
+    _G.logger:fine(nameOfModule .. ": Set criteria maximum to '" .. tostring(maxCriteria) .. "'.")
+    resultManager_Model.parameters.expressions[resultManager_Model.selectedExpression].criteriaMax = maxCriteria
+  end
+end
+Script.serveFunction('CSK_ResultManager.setCriteriaMaximum', setCriteriaMaximum)
+
+--- Function to check if selection in UIs DynamicTable can find related pattern
+---@param selection string Full text of selection
+---@param pattern string Pattern to search for
+local function checkSelection(selection, pattern)
+  if selection ~= "" then
+    local _, pos = string.find(selection, pattern)
+    if pos == nil then
+    else
+      pos = tonumber(pos)
+      local endPos = string.find(selection, '"', pos+1)
+      local tempSelection = string.sub(selection, pos+1, endPos-1)
+      if tempSelection ~= nil and tempSelection ~= '-' then
+        return tempSelection
+      end
+    end
+  end
+  return nil
+end
+
+local function selectParameterViaUI(selection)
+  local tempSelection = checkSelection(selection, '"DTC_ParameterName":"param')
+  if tempSelection then
+    _G.logger:fine(nameOfModule .. ": Selected 'param" .. tostring(tempSelection) .. "'.")
+    resultManager_Model.selectedParameter = tonumber(tempSelection)
+    handleOnExpiredTmrResultManager()
+  end
+end
+Script.serveFunction('CSK_ResultManager.selectParameterViaUI', selectParameterViaUI)
+
+local function selectParameter(parameter)
+  if resultManager_Model.parameters.expressions[resultManager_Model.selectedExpression]['paramAmount'] then
+    if parameter <= resultManager_Model.parameters.expressions[resultManager_Model.selectedExpression]['paramAmount'] then
+      _G.logger:fine(nameOfModule .. ": Selected 'param" .. parameter .. "'.")
+      resultManager_Model.selectedParameter = parameter
+      handleOnExpiredTmrResultManager()
+      return true
+    else
+      _G.logger:warning(nameOfModule .. ": Parameter 'param" .. parameter .. "' is not available.")
+      return false
+    end
+  else
+    return false
+  end
+end
+Script.serveFunction('CSK_ResultManager.selectParameter', selectParameter)
+
+local function addParameterViaUI()
+  if resultManager_Model.parameters.expressions[resultManager_Model.selectedExpression] then
+    table.insert(resultManager_Model.parameters.expressions[resultManager_Model.selectedExpression].events, '')
+    resultManager_Model.addParameter(resultManager_Model.selectedExpression, #resultManager_Model.parameters.expressions[resultManager_Model.selectedExpression].events, 1)
+    selectParameter(#resultManager_Model.parameters.expressions[resultManager_Model.selectedExpression].events)
+    handleOnExpiredTmrResultManager()
+  end
+end
+Script.serveFunction('CSK_ResultManager.addParameterViaUI', addParameterViaUI)
+
+local function clearParameterDataViaUI()
+  resultManager_Model.clearParameterData(resultManager_Model.selectedExpression)
+  Script.notifyEvent("ResultManager_OnNewStatusParameterList", resultManager_Model.helperFuncs.createJsonListExpressionParameters(resultManager_Model.parameters.expressions[resultManager_Model.selectedExpression].events, resultManager_Model.parameters.expressions[resultManager_Model.selectedExpression].data))
+end
+Script.serveFunction('CSK_ResultManager.clearParameterDataViaUI', clearParameterDataViaUI)
+
+--- Function to delete parameter / registration to parameter event
+---@param exp string Expression parameter is related to
+---@param param int Number of parameter to delete
+local function deleteParameter(exp, param)
+  if resultManager_Model.parameters.expressions[exp].events[param] then
+    _G.logger:info(nameOfModule .. ": Delete 'param".. param .. "' of expression '" .. exp .. "'.")
+    resultManager_Model.deregisterFromParameterEvent(exp)
+    table.remove(resultManager_Model.parameters.expressions[exp].events, param)
+    table.remove(resultManager_Model.parameters.expressions[exp].parameterPositions, param)
+    resultManager_Model.parameters.expressions[exp]['paramAmount'] = resultManager_Model.parameters.expressions[exp]['paramAmount'] - 1
+    resultManager_Model.registerToParameterEvents(exp)
+    resultManager_Model.clearParameterData(exp)
+    resultManager_Model.selectedParameter = ''
+  end
+end
+
+--- Function to clear all parameter / registration to parameter events of expression
+---@param exp string Expression to clear all parameters
+local function deleteAllParameter(exp)
+  for i = 1, #resultManager_Model.parameters.expressions[exp].events do
+    deleteParameter(exp, #resultManager_Model.parameters.expressions[exp].events)
+  end
+end
+
+local function deleteParameterViaUI()
+  deleteParameter(resultManager_Model.selectedExpression, resultManager_Model.selectedParameter)
+  handleOnExpiredTmrResultManager()
+end
+Script.serveFunction('CSK_ResultManager.deleteParameterViaUI', deleteParameterViaUI)
+
+local function setParameterEvent(event)
+  if resultManager_Model.parameters.expressions[resultManager_Model.selectedExpression] then
+    if Script.isServedAsEvent(event) then
+      _G.logger:info(nameOfModule .. ": Register to event '" .. event .. "' for 'param" .. tostring(resultManager_Model.selectedParameter) .. "' of expression '" .. resultManager_Model.selectedExpression .. "'.")
+      resultManager_Model.deregisterFromParameterEvent(resultManager_Model.selectedExpression)
+      resultManager_Model.parameters.expressions[resultManager_Model.selectedExpression].events[resultManager_Model.selectedParameter] = event
+      resultManager_Model.parameters.expressions[resultManager_Model.selectedExpression].parameterPositions[resultManager_Model.selectedParameter] = 1
+      resultManager_Model.registerToParameterEvents(resultManager_Model.selectedExpression)
+      resultManager_Model.clearParameterData(resultManager_Model.selectedExpression)
+    else
+      _G.logger:warning(nameOfModule .. ": Event '" .. event .. "' is not available to register.")
+    end
+    handleOnExpiredTmrResultManager()
+  end
+end
+Script.serveFunction('CSK_ResultManager.setParameterEvent', setParameterEvent)
+
+local function setParameterPosition(pos)
+  if pos >= 1 and pos <= 8 then
+    _G.logger:info(nameOfModule .. ": Set parameterPosition of 'param" .. tostring(resultManager_Model.selectedParameter) .. "' to '" .. pos .. "'.")
+    resultManager_Model.parameters.expressions[resultManager_Model.selectedExpression].parameterPositions[resultManager_Model.selectedParameter] = pos
+  else
+    _G.logger:warning(nameOfModule .. ": Parameter position needs to be between 1 and 8.")
+  end
+end
+Script.serveFunction('CSK_ResultManager.setParameterPosition', setParameterPosition)
+
+local function selectEventViaUI(event)
+  setParameterEvent(event)
+end
+Script.serveFunction('CSK_ResultManager.selectEventViaUI', selectEventViaUI)
 
 -- *****************************************************************
 -- Following function can be adapted for CSK_PersistentData module usage
 -- *****************************************************************
 
 local function setParameterName(name)
-  _G.logger:info(nameOfModule .. ": Set parameter name: " .. tostring(name))
+  _G.logger:fine(nameOfModule .. ": Set parameter name: " .. tostring(name))
   resultManager_Model.parametersName = name
 end
 Script.serveFunction("CSK_ResultManager.setParameterName", setParameterName)
@@ -161,11 +426,33 @@ local function loadParameters()
     local data = CSK_PersistentData.getParameter(resultManager_Model.parametersName)
     if data then
       _G.logger:info(nameOfModule .. ": Loaded parameters from CSK_PersistentData module.")
-      resultManager_Model.parameters = resultManager_Model.helperFuncs.convertContainer2Table(data)
-      -- If something needs to be configured/activated with new loaded data, place this here:
-      -- ...
-      -- ...
 
+      -- Clear old registrations for parameter events
+      for expressionName, _ in pairs(resultManager_Model.parameters.expressions) do
+        resultManager_Model.deregisterFromParameterEvent(expressionName)
+      end
+
+      resultManager_Model.parameters = resultManager_Model.helperFuncs.convertContainer2Table(data)
+
+      local lastSelected = ''
+      -- If something needs to be configured/activated with new loaded data, place this here:
+      for expressionName, _ in pairs(resultManager_Model.parameters.expressions) do
+        for key, value in ipairs(resultManager_Model.parameters.expressions[expressionName]['events']) do
+          resultManager_Model.addParameter(expressionName, key)
+        end
+        if not Script.isServedAsEvent("CSK_ResultManager.OnNewResult_" .. expressionName) then
+          Script.serveEvent("CSK_ResultManager.OnNewResult_" .. expressionName, "ResultManager_OnNewResult_" .. expressionName, 'bool:1')
+        end
+        lastSelected = expressionName
+      end
+
+      -- 2nd run to register to events
+      for expressionName, _ in pairs(resultManager_Model.parameters.expressions) do
+        resultManager_Model.registerToParameterEvents(expressionName)
+      end
+
+      resultManager_Model.selectedExpression = lastSelected
+      resultManager_Model.selectedParameter = ''
       CSK_ResultManager.pageCalled()
     else
       _G.logger:warning(nameOfModule .. ": Loading parameters from CSK_PersistentData module did not work.")
@@ -178,12 +465,12 @@ Script.serveFunction("CSK_ResultManager.loadParameters", loadParameters)
 
 local function setLoadOnReboot(status)
   resultManager_Model.parameterLoadOnReboot = status
-  _G.logger:info(nameOfModule .. ": Set new status to load setting on reboot: " .. tostring(status))
+  _G.logger:fine(nameOfModule .. ": Set new status to load setting on reboot: " .. tostring(status))
 end
 Script.serveFunction("CSK_ResultManager.setLoadOnReboot", setLoadOnReboot)
 
---- Function to react on initial load of persistent parameters
-local function handleOnInitialDataLoaded()
+--- Function to react on timer started after initial load of persistent parameters
+local function handleOnWaitForSetupTimerExpired()
 
   if string.sub(CSK_PersistentData.getVersion(), 1, 1) == '1' then
 
@@ -204,6 +491,12 @@ local function handleOnInitialDataLoaded()
     end
     Script.notifyEvent('ResultManager_OnDataLoadedOnReboot')
   end
+end
+Timer.register(tmrWaitForSetupOfOtherModules, 'OnExpired', handleOnWaitForSetupTimerExpired)
+
+--- Function to react on initial load of persistent parameters
+local function handleOnInitialDataLoaded()
+  tmrWaitForSetupOfOtherModules:start()
 end
 Script.register("CSK_PersistentData.OnInitialDataLoaded", handleOnInitialDataLoaded)
 

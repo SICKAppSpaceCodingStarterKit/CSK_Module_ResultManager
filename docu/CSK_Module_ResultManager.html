@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.12">
 <meta name="author" content="SICK AG">
-<title>Documentation - CSK_Module_ResultManager 0.1.0</title>
+<title>Documentation - CSK_Module_ResultManager 1.0.0</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>
 /* Stylesheet for CodeRay to match GitHub theme | MIT License | http://foundation.zurb.com */
@@ -615,11 +615,11 @@ h1,h2,h3,h4,h5,h6{color:#007cc1}
 </head>
 <body class="article toc2 toc-left">
 <div id="header">
-<h1>Documentation - CSK_Module_ResultManager 0.1.0</h1>
+<h1>Documentation - CSK_Module_ResultManager 1.0.0</h1>
 <div class="details">
 <span id="author" class="author">SICK AG</span><br>
-<span id="revnumber">version 0.1.0,</span>
-<span id="revdate">2023-10-19</span>
+<span id="revnumber">version 1.0.0,</span>
+<span id="revdate">2023-10-26</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -638,18 +638,51 @@ h1,h2,h3,h4,h5,h6{color:#007cc1}
 <li><a href="#_overview">Overview</a></li>
 <li><a href="#_functions">Functions</a>
 <ul class="sectlevel4">
+<li><a href="#API:Function:CSK_ResultManager.addExpression"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-function">addExpression()</span></a></li>
+<li><a href="#API:Function:CSK_ResultManager.addExpressionViaUI"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-function">addExpressionViaUI()</span></a></li>
+<li><a href="#API:Function:CSK_ResultManager.addParameterViaUI"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-function">addParameterViaUI()</span></a></li>
+<li><a href="#API:Function:CSK_ResultManager.clearParameterDataViaUI"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-function">clearParameterDataViaUI()</span></a></li>
+<li><a href="#API:Function:CSK_ResultManager.deleteExpressionViaUI"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-function">deleteExpressionViaUI()</span></a></li>
+<li><a href="#API:Function:CSK_ResultManager.deleteParameterViaUI"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-function">deleteParameterViaUI()</span></a></li>
 <li><a href="#API:Function:CSK_ResultManager.loadParameters"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-function">loadParameters()</span></a></li>
 <li><a href="#API:Function:CSK_ResultManager.pageCalled"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-function">pageCalled()</span></a></li>
+<li><a href="#API:Function:CSK_ResultManager.selectEventViaUI"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-function">selectEventViaUI()</span></a></li>
+<li><a href="#API:Function:CSK_ResultManager.selectExpressionByName"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-function">selectExpressionByName()</span></a></li>
+<li><a href="#API:Function:CSK_ResultManager.selectParameter"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-function">selectParameter()</span></a></li>
+<li><a href="#API:Function:CSK_ResultManager.selectParameterViaUI"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-function">selectParameterViaUI()</span></a></li>
 <li><a href="#API:Function:CSK_ResultManager.sendParameters"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-function">sendParameters()</span></a></li>
+<li><a href="#API:Function:CSK_ResultManager.setCriteria"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-function">setCriteria()</span></a></li>
+<li><a href="#API:Function:CSK_ResultManager.setCriteriaMaximum"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-function">setCriteriaMaximum()</span></a></li>
+<li><a href="#API:Function:CSK_ResultManager.setCriteriaType"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-function">setCriteriaType()</span></a></li>
+<li><a href="#API:Function:CSK_ResultManager.setExpression"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-function">setExpression()</span></a></li>
+<li><a href="#API:Function:CSK_ResultManager.setExpressionName"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-function">setExpressionName()</span></a></li>
 <li><a href="#API:Function:CSK_ResultManager.setLoadOnReboot"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-function">setLoadOnReboot()</span></a></li>
+<li><a href="#API:Function:CSK_ResultManager.setParameterEvent"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-function">setParameterEvent()</span></a></li>
 <li><a href="#API:Function:CSK_ResultManager.setParameterName"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-function">setParameterName()</span></a></li>
+<li><a href="#API:Function:CSK_ResultManager.setParameterPosition"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-function">setParameterPosition()</span></a></li>
 </ul>
 </li>
 <li><a href="#_events">Events</a>
 <ul class="sectlevel4">
 <li><a href="#API:Event:CSK_ResultManager.OnDataLoadedOnReboot"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-event">OnDataLoadedOnReboot</span></a></li>
 <li><a href="#API:Event:CSK_ResultManager.OnNewParameterName"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-event">OnNewParameterName</span></a></li>
+<li><a href="#API:Event:CSK_ResultManager.OnNewResult_EXPRESSION"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-event">OnNewResult_EXPRESSION</span></a></li>
+<li><a href="#API:Event:CSK_ResultManager.OnNewStatusAvailableEvents"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-event">OnNewStatusAvailableEvents</span></a></li>
+<li><a href="#API:Event:CSK_ResultManager.OnNewStatusCriteria"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-event">OnNewStatusCriteria</span></a></li>
+<li><a href="#API:Event:CSK_ResultManager.OnNewStatusCriteriaMaximum"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-event">OnNewStatusCriteriaMaximum</span></a></li>
+<li><a href="#API:Event:CSK_ResultManager.OnNewStatusCriteriaResult"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-event">OnNewStatusCriteriaResult</span></a></li>
+<li><a href="#API:Event:CSK_ResultManager.OnNewStatusCriteriaString"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-event">OnNewStatusCriteriaString</span></a></li>
+<li><a href="#API:Event:CSK_ResultManager.OnNewStatusCriteriaType"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-event">OnNewStatusCriteriaType</span></a></li>
+<li><a href="#API:Event:CSK_ResultManager.OnNewStatusEventParameterPosition"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-event">OnNewStatusEventParameterPosition</span></a></li>
+<li><a href="#API:Event:CSK_ResultManager.OnNewStatusExpression"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-event">OnNewStatusExpression</span></a></li>
+<li><a href="#API:Event:CSK_ResultManager.OnNewStatusExpressionName"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-event">OnNewStatusExpressionName</span></a></li>
+<li><a href="#API:Event:CSK_ResultManager.OnNewStatusLinkedEvent"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-event">OnNewStatusLinkedEvent</span></a></li>
+<li><a href="#API:Event:CSK_ResultManager.OnNewStatusListOfExpressions"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-event">OnNewStatusListOfExpressions</span></a></li>
 <li><a href="#API:Event:CSK_ResultManager.OnNewStatusLoadParameterOnReboot"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-event">OnNewStatusLoadParameterOnReboot</span></a></li>
+<li><a href="#API:Event:CSK_ResultManager.OnNewStatusParameterList"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-event">OnNewStatusParameterList</span></a></li>
+<li><a href="#API:Event:CSK_ResultManager.OnNewStatusResult"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-event">OnNewStatusResult</span></a></li>
+<li><a href="#API:Event:CSK_ResultManager.OnNewStatusSelectedExpression"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-event">OnNewStatusSelectedExpression</span></a></li>
+<li><a href="#API:Event:CSK_ResultManager.OnNewStatusSelectedParameter"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-event">OnNewStatusSelectedParameter</span></a></li>
 <li><a href="#API:Event:CSK_ResultManager.OnPersistentDataModuleAvailable"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-event">OnPersistentDataModuleAvailable</span></a></li>
 <li><a href="#API:Event:CSK_ResultManager.OnUserLevelAdminActive"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-event">OnUserLevelAdminActive</span></a></li>
 <li><a href="#API:Event:CSK_ResultManager.OnUserLevelMaintenanceActive"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-event">OnUserLevelMaintenanceActive</span></a></li>
@@ -659,6 +692,11 @@ h1,h2,h3,h4,h5,h6{color:#007cc1}
 </li>
 </ul>
 </li>
+</ul>
+</li>
+<li><a href="#_enumerations">Enumerations</a>
+<ul class="sectlevel2">
+<li><a href="#API:Enum:CSK_ResultManager.CriteriaType"><span class="api-enum">CSK_ResultManager.CriteriaType</span></a></li>
 </ul>
 </li>
 </ul>
@@ -680,11 +718,11 @@ h1,h2,h3,h4,h5,h6{color:#007cc1}
 </tr>
 <tr>
 <th class="tableblock halign-left valign-top"><p class="tableblock">Version</p></th>
-<td class="tableblock halign-left valign-top"><p class="tableblock">0.1.0</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1.0.0</p></td>
 </tr>
 <tr>
 <th class="tableblock halign-left valign-top"><p class="tableblock">Date</p></th>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2023-10-19</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2023-10-26</p></td>
 </tr>
 <tr>
 <th class="tableblock halign-left valign-top"><p class="tableblock">Author</p></th>
@@ -728,14 +766,36 @@ h1,h2,h3,h4,h5,h6{color:#007cc1}
 <div class="sect3">
 <h4 id="_short_description_2">Short description</h4>
 <div class="paragraph">
-<p>Please fill in information regarding: What is the idea of this module and its features?<br>
-How to use this module in general&#8230;&#8203;. like:<br>
+<p>Module to provide result management / expression functionality.<br>
+This module is helpful to check if the results of other modules are valid.<br>
+It makes use of the "LuaXP" expression evaluator. For more details please visit <a href="https://www.toggledbits.com/luaxp" class="bare">https://www.toggledbits.com/luaxp</a>.<br>
 <br>
 Typically the features of this module are used like this (check also main script of this module):<br>
-<strong>1) Setup</strong><br>
-ToDo<br>
 <br>
-<strong>2) Something else&#8230;&#8203;</strong><br></p>
+<strong>1) Create new expression</strong><br>
+Set a name/identifier for your expression via 'setExpressionName' and add it via 'addExpressionViaUI'.<br>
+<br>
+<strong>2) Configure expression</strong><br>
+Define an expression like 'param1 + param2' via 'setExpression'.<br>
+INFO: For more information regarding valid expression syntax please visit <a href="https://www.toggledbits.com/node/13" class="bare">https://www.toggledbits.com/node/13</a>.<br>
+Define the criteria and its type via 'setCriteria' / 'setCriteriaType'.<br>
+<br>
+<strong>3) Parameter</strong><br>
+If you make use of parameters within your expression (e.g. 'param1 + param2'), you need to define where these parameters get their value from.<br>
+To do so, you need to add a parameter to your expression via 'addParameterViaUI' and select it via 'selectParameter'.<br>
+Now you can configure the related event for this parameter via 'setParameterEvent'.<br>
+If the event provides multiple parameter, you optionally can select the required one by setting the position via 'setParameterPosition'.<br>
+Repeat this for each parameter.<br>
+<br>
+<strong>4) Processing</strong><br>
+Each expression will wait till ALL parameters got their values via the configured events.<br>
+As soon as all parameters are available, it will start the processing of the expression.<br>
+It will compare this result with the defined criteria and will provide its result via a dynamically "CSK_ResultManager.OnNewResult_EXPRESSION" event.<br>
+(EXPRESSION will be replaced by the name of the added expression (e.g. "CSK_OnNewResult_CheckSumOfXY").<br>
+At the end it will clear all parameter values and will wait for new values.<br>
+INFO: Please make sure that the frequency of the events is in sync to not mix the result of different sources.<br>
+<br>
+Another possibility is to make use of 'addExpression' which combines the mentioned steps.<br></p>
 </div>
 </div>
 <div class="sect3">
@@ -743,19 +803,70 @@ ToDo<br>
 <div class="ulist">
 <ul>
 <li>
+<p><a href="#API:Function:CSK_ResultManager.addExpression">addExpression()</a></p>
+</li>
+<li>
+<p><a href="#API:Function:CSK_ResultManager.addExpressionViaUI">addExpressionViaUI()</a></p>
+</li>
+<li>
+<p><a href="#API:Function:CSK_ResultManager.addParameterViaUI">addParameterViaUI()</a></p>
+</li>
+<li>
+<p><a href="#API:Function:CSK_ResultManager.clearParameterDataViaUI">clearParameterDataViaUI()</a></p>
+</li>
+<li>
+<p><a href="#API:Function:CSK_ResultManager.deleteExpressionViaUI">deleteExpressionViaUI()</a></p>
+</li>
+<li>
+<p><a href="#API:Function:CSK_ResultManager.deleteParameterViaUI">deleteParameterViaUI()</a></p>
+</li>
+<li>
 <p><a href="#API:Function:CSK_ResultManager.loadParameters">loadParameters()</a></p>
 </li>
 <li>
 <p><a href="#API:Function:CSK_ResultManager.pageCalled">pageCalled()</a></p>
 </li>
 <li>
+<p><a href="#API:Function:CSK_ResultManager.selectEventViaUI">selectEventViaUI()</a></p>
+</li>
+<li>
+<p><a href="#API:Function:CSK_ResultManager.selectExpressionByName">selectExpressionByName()</a></p>
+</li>
+<li>
+<p><a href="#API:Function:CSK_ResultManager.selectParameter">selectParameter()</a></p>
+</li>
+<li>
+<p><a href="#API:Function:CSK_ResultManager.selectParameterViaUI">selectParameterViaUI()</a></p>
+</li>
+<li>
 <p><a href="#API:Function:CSK_ResultManager.sendParameters">sendParameters()</a></p>
+</li>
+<li>
+<p><a href="#API:Function:CSK_ResultManager.setCriteria">setCriteria()</a></p>
+</li>
+<li>
+<p><a href="#API:Function:CSK_ResultManager.setCriteriaMaximum">setCriteriaMaximum()</a></p>
+</li>
+<li>
+<p><a href="#API:Function:CSK_ResultManager.setCriteriaType">setCriteriaType()</a></p>
+</li>
+<li>
+<p><a href="#API:Function:CSK_ResultManager.setExpression">setExpression()</a></p>
+</li>
+<li>
+<p><a href="#API:Function:CSK_ResultManager.setExpressionName">setExpressionName()</a></p>
 </li>
 <li>
 <p><a href="#API:Function:CSK_ResultManager.setLoadOnReboot">setLoadOnReboot()</a></p>
 </li>
 <li>
+<p><a href="#API:Function:CSK_ResultManager.setParameterEvent">setParameterEvent()</a></p>
+</li>
+<li>
 <p><a href="#API:Function:CSK_ResultManager.setParameterName">setParameterName()</a></p>
+</li>
+<li>
+<p><a href="#API:Function:CSK_ResultManager.setParameterPosition">setParameterPosition()</a></p>
 </li>
 <li>
 <p><a href="#API:Event:CSK_ResultManager.OnDataLoadedOnReboot">OnDataLoadedOnReboot</a></p>
@@ -764,7 +875,55 @@ ToDo<br>
 <p><a href="#API:Event:CSK_ResultManager.OnNewParameterName">OnNewParameterName</a></p>
 </li>
 <li>
+<p><a href="#API:Event:CSK_ResultManager.OnNewResult_EXPRESSION">OnNewResult_EXPRESSION</a></p>
+</li>
+<li>
+<p><a href="#API:Event:CSK_ResultManager.OnNewStatusAvailableEvents">OnNewStatusAvailableEvents</a></p>
+</li>
+<li>
+<p><a href="#API:Event:CSK_ResultManager.OnNewStatusCriteria">OnNewStatusCriteria</a></p>
+</li>
+<li>
+<p><a href="#API:Event:CSK_ResultManager.OnNewStatusCriteriaMaximum">OnNewStatusCriteriaMaximum</a></p>
+</li>
+<li>
+<p><a href="#API:Event:CSK_ResultManager.OnNewStatusCriteriaResult">OnNewStatusCriteriaResult</a></p>
+</li>
+<li>
+<p><a href="#API:Event:CSK_ResultManager.OnNewStatusCriteriaString">OnNewStatusCriteriaString</a></p>
+</li>
+<li>
+<p><a href="#API:Event:CSK_ResultManager.OnNewStatusCriteriaType">OnNewStatusCriteriaType</a></p>
+</li>
+<li>
+<p><a href="#API:Event:CSK_ResultManager.OnNewStatusEventParameterPosition">OnNewStatusEventParameterPosition</a></p>
+</li>
+<li>
+<p><a href="#API:Event:CSK_ResultManager.OnNewStatusExpression">OnNewStatusExpression</a></p>
+</li>
+<li>
+<p><a href="#API:Event:CSK_ResultManager.OnNewStatusExpressionName">OnNewStatusExpressionName</a></p>
+</li>
+<li>
+<p><a href="#API:Event:CSK_ResultManager.OnNewStatusLinkedEvent">OnNewStatusLinkedEvent</a></p>
+</li>
+<li>
+<p><a href="#API:Event:CSK_ResultManager.OnNewStatusListOfExpressions">OnNewStatusListOfExpressions</a></p>
+</li>
+<li>
 <p><a href="#API:Event:CSK_ResultManager.OnNewStatusLoadParameterOnReboot">OnNewStatusLoadParameterOnReboot</a></p>
+</li>
+<li>
+<p><a href="#API:Event:CSK_ResultManager.OnNewStatusParameterList">OnNewStatusParameterList</a></p>
+</li>
+<li>
+<p><a href="#API:Event:CSK_ResultManager.OnNewStatusResult">OnNewStatusResult</a></p>
+</li>
+<li>
+<p><a href="#API:Event:CSK_ResultManager.OnNewStatusSelectedExpression">OnNewStatusSelectedExpression</a></p>
+</li>
+<li>
+<p><a href="#API:Event:CSK_ResultManager.OnNewStatusSelectedParameter">OnNewStatusSelectedParameter</a></p>
 </li>
 <li>
 <p><a href="#API:Event:CSK_ResultManager.OnPersistentDataModuleAvailable">OnPersistentDataModuleAvailable</a></p>
@@ -787,15 +946,182 @@ ToDo<br>
 <div class="sect3">
 <h4 id="_functions">Functions</h4>
 <div class="sect4">
-<h5 id="API:Function:CSK_ResultManager.loadParameters"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-function">loadParameters()</span></h5>
+<h5 id="API:Function:CSK_ResultManager.addExpression"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-function">addExpression()</span></h5>
 <div class="sect5">
 <h6 id="_short_description_3">Short description</h6>
+<div class="paragraph">
+<p>Function to add a new expression.</p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_parameters">Parameters</h6>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 12.5%;">
+<col style="width: 37.5%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Multiplicity</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">name</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">STRING</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Name of the expression to process.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">expression</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">STRING</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Expression to perform.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">criteriaType</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ENUM<br>
+<a href="#API:Enum:CSK_ResultManager.CriteriaType">CSK_ResultManager.CriteriaType</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Type of criteria.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">criteria</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">AUTO</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Expected result of the expression (optionally minimum if criteria is a 'RANGE').</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">criteriaMax</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">FLOAT</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">?</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Optional maximum value of criteria.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">events</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">STRING</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">*</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Optional list of events to receive values for parameters.<br>
+Event on position '1' is related to expression parameter 'param1' and so on.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">parameterPosition</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">INT</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">*</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Optional list of the used parameter positions within the defined events (see parameter 'events').</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect5">
+<h6 id="_sample_auto_generated">Sample (auto-generated)</h6>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="lua">CSK_ResultManager.addExpression(name, expression, criteriaType, criteria, criteriaMax, events, parameterPosition)</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="API:Function:CSK_ResultManager.addExpressionViaUI"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-function">addExpressionViaUI()</span></h5>
+<div class="sect5">
+<h6 id="_short_description_4">Short description</h6>
+<div class="paragraph">
+<p>Function to add new expression via UI,</p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_sample_auto_generated_2">Sample (auto-generated)</h6>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="lua">CSK_ResultManager.addExpressionViaUI()</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="API:Function:CSK_ResultManager.addParameterViaUI"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-function">addParameterViaUI()</span></h5>
+<div class="sect5">
+<h6 id="_short_description_5">Short description</h6>
+<div class="paragraph">
+<p>Function to add parameter to be used within expression.</p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_sample_auto_generated_3">Sample (auto-generated)</h6>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="lua">CSK_ResultManager.addParameterViaUI()</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="API:Function:CSK_ResultManager.clearParameterDataViaUI"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-function">clearParameterDataViaUI()</span></h5>
+<div class="sect5">
+<h6 id="_short_description_6">Short description</h6>
+<div class="paragraph">
+<p>Function to clear current stored data of currently selected expression.</p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_sample_auto_generated_4">Sample (auto-generated)</h6>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="lua">CSK_ResultManager.clearParameterDataViaUI()</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="API:Function:CSK_ResultManager.deleteExpressionViaUI"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-function">deleteExpressionViaUI()</span></h5>
+<div class="sect5">
+<h6 id="_short_description_7">Short description</h6>
+<div class="paragraph">
+<p>Function to delete preselected expression.</p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_sample_auto_generated_5">Sample (auto-generated)</h6>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="lua">CSK_ResultManager.deleteExpressionViaUI()</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="API:Function:CSK_ResultManager.deleteParameterViaUI"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-function">deleteParameterViaUI()</span></h5>
+<div class="sect5">
+<h6 id="_short_description_8">Short description</h6>
+<div class="paragraph">
+<p>Function to delete parameter of expression.</p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_sample_auto_generated_6">Sample (auto-generated)</h6>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="lua">CSK_ResultManager.deleteParameterViaUI()</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="API:Function:CSK_ResultManager.loadParameters"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-function">loadParameters()</span></h5>
+<div class="sect5">
+<h6 id="_short_description_9">Short description</h6>
 <div class="paragraph">
 <p>Load parameters for this module from the CSK_PersistentData module if possible and use them.</p>
 </div>
 </div>
 <div class="sect5">
-<h6 id="_sample_auto_generated">Sample (auto-generated)</h6>
+<h6 id="_sample_auto_generated_7">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="lua">CSK_ResultManager.loadParameters()</code></pre>
@@ -806,7 +1132,7 @@ ToDo<br>
 <div class="sect4">
 <h5 id="API:Function:CSK_ResultManager.pageCalled"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-function">pageCalled()</span></h5>
 <div class="sect5">
-<h6 id="_short_description_4">Short description</h6>
+<h6 id="_short_description_10">Short description</h6>
 <div class="paragraph">
 <p>Function to register "OnResume" of the module UI (only as helper function).</p>
 </div>
@@ -839,7 +1165,7 @@ ToDo<br>
 </table>
 </div>
 <div class="sect5">
-<h6 id="_sample_auto_generated_2">Sample (auto-generated)</h6>
+<h6 id="_sample_auto_generated_8">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="lua">empty = CSK_ResultManager.pageCalled()</code></pre>
@@ -848,15 +1174,245 @@ ToDo<br>
 </div>
 </div>
 <div class="sect4">
+<h5 id="API:Function:CSK_ResultManager.selectEventViaUI"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-function">selectEventViaUI()</span></h5>
+<div class="sect5">
+<h6 id="_short_description_11">Short description</h6>
+<div class="paragraph">
+<p>Function to select event out of list.</p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_parameters_2">Parameters</h6>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 12.5%;">
+<col style="width: 37.5%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Multiplicity</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">event</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">STRING</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Event</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect5">
+<h6 id="_sample_auto_generated_9">Sample (auto-generated)</h6>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="lua">CSK_ResultManager.selectEventViaUI(event)</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="API:Function:CSK_ResultManager.selectExpressionByName"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-function">selectExpressionByName()</span></h5>
+<div class="sect5">
+<h6 id="_short_description_12">Short description</h6>
+<div class="paragraph">
+<p>Function to select an expression by its name.</p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_parameters_3">Parameters</h6>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 12.5%;">
+<col style="width: 37.5%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Multiplicity</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">selection</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">STRING</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Selected expression.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect5">
+<h6 id="_return_values_2">Return values</h6>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 12.5%;">
+<col style="width: 37.5%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Multiplicity</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">success</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">BOOL</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Success</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect5">
+<h6 id="_sample_auto_generated_10">Sample (auto-generated)</h6>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="lua">success = CSK_ResultManager.selectExpressionByName(selection)</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="API:Function:CSK_ResultManager.selectParameter"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-function">selectParameter()</span></h5>
+<div class="sect5">
+<h6 id="_short_description_13">Short description</h6>
+<div class="paragraph">
+<p>Function to select parameter of preselected expression.</p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_parameters_4">Parameters</h6>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 12.5%;">
+<col style="width: 37.5%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Multiplicity</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">parameterNo</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">INT</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Number of parameter (1 = param1)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect5">
+<h6 id="_return_values_3">Return values</h6>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 12.5%;">
+<col style="width: 37.5%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Multiplicity</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">success</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">BOOL</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Success</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect5">
+<h6 id="_sample_auto_generated_11">Sample (auto-generated)</h6>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="lua">success = CSK_ResultManager.selectParameter(parameterNo)</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="API:Function:CSK_ResultManager.selectParameterViaUI"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-function">selectParameterViaUI()</span></h5>
+<div class="sect5">
+<h6 id="_short_description_14">Short description</h6>
+<div class="paragraph">
+<p>Function to select expression parameter.</p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_parameters_5">Parameters</h6>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 12.5%;">
+<col style="width: 37.5%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Multiplicity</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">selection</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">STRING</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Selection</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect5">
+<h6 id="_sample_auto_generated_12">Sample (auto-generated)</h6>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="lua">CSK_ResultManager.selectParameterViaUI(selection)</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect4">
 <h5 id="API:Function:CSK_ResultManager.sendParameters"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-function">sendParameters()</span></h5>
 <div class="sect5">
-<h6 id="_short_description_5">Short description</h6>
+<h6 id="_short_description_15">Short description</h6>
 <div class="paragraph">
 <p>Send parameters to CSK_PersistentData module if possible to save them.</p>
 </div>
 </div>
 <div class="sect5">
-<h6 id="_sample_auto_generated_3">Sample (auto-generated)</h6>
+<h6 id="_sample_auto_generated_13">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="lua">CSK_ResultManager.sendParameters()</code></pre>
@@ -865,15 +1421,235 @@ ToDo<br>
 </div>
 </div>
 <div class="sect4">
+<h5 id="API:Function:CSK_ResultManager.setCriteria"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-function">setCriteria()</span></h5>
+<div class="sect5">
+<h6 id="_short_description_16">Short description</h6>
+<div class="paragraph">
+<p>Function to set criteria of expression (if range, this is the minimum valid value).</p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_parameters_6">Parameters</h6>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 12.5%;">
+<col style="width: 37.5%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Multiplicity</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">criteria</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">AUTO</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Criteria</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect5">
+<h6 id="_sample_auto_generated_14">Sample (auto-generated)</h6>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="lua">CSK_ResultManager.setCriteria(criteria)</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="API:Function:CSK_ResultManager.setCriteriaMaximum"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-function">setCriteriaMaximum()</span></h5>
+<div class="sect5">
+<h6 id="_short_description_17">Short description</h6>
+<div class="paragraph">
+<p>Function to set maximum value of criteria range.</p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_parameters_7">Parameters</h6>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 12.5%;">
+<col style="width: 37.5%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Multiplicity</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">maxCriteria</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">FLOAT</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Maximum accepted value.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect5">
+<h6 id="_sample_auto_generated_15">Sample (auto-generated)</h6>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="lua">CSK_ResultManager.setCriteriaMaximum(maxCriteria)</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="API:Function:CSK_ResultManager.setCriteriaType"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-function">setCriteriaType()</span></h5>
+<div class="sect5">
+<h6 id="_short_description_18">Short description</h6>
+<div class="paragraph">
+<p>Function to set type of criteria (see Enum CriteriaType).</p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_parameters_8">Parameters</h6>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 12.5%;">
+<col style="width: 37.5%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Multiplicity</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">criteriaType</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">STRING</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Type of criteria.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect5">
+<h6 id="_sample_auto_generated_16">Sample (auto-generated)</h6>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="lua">CSK_ResultManager.setCriteriaType(criteriaType)</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="API:Function:CSK_ResultManager.setExpression"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-function">setExpression()</span></h5>
+<div class="sect5">
+<h6 id="_short_description_19">Short description</h6>
+<div class="paragraph">
+<p>Function to set expression to process for currently selected expressionName.</p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_parameters_9">Parameters</h6>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 12.5%;">
+<col style="width: 37.5%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Multiplicity</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">expression</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">STRING</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Expression (like 'param1 * param2').</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect5">
+<h6 id="_sample_auto_generated_17">Sample (auto-generated)</h6>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="lua">CSK_ResultManager.setExpression(expression)</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="API:Function:CSK_ResultManager.setExpressionName"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-function">setExpressionName()</span></h5>
+<div class="sect5">
+<h6 id="_short_description_20">Short description</h6>
+<div class="paragraph">
+<p>Function to set name for new expression to create.</p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_parameters_10">Parameters</h6>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 12.5%;">
+<col style="width: 37.5%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Multiplicity</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">name</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">STRING</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Name of expression.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect5">
+<h6 id="_sample_auto_generated_18">Sample (auto-generated)</h6>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="lua">CSK_ResultManager.setExpressionName(name)</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect4">
 <h5 id="API:Function:CSK_ResultManager.setLoadOnReboot"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-function">setLoadOnReboot()</span></h5>
 <div class="sect5">
-<h6 id="_short_description_6">Short description</h6>
+<h6 id="_short_description_21">Short description</h6>
 <div class="paragraph">
 <p>Configure if this module should load its saved parameters at app/device boot up.</p>
 </div>
 </div>
 <div class="sect5">
-<h6 id="_parameters">Parameters</h6>
+<h6 id="_parameters_11">Parameters</h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 25%;">
@@ -900,7 +1676,7 @@ ToDo<br>
 </table>
 </div>
 <div class="sect5">
-<h6 id="_sample_auto_generated_4">Sample (auto-generated)</h6>
+<h6 id="_sample_auto_generated_19">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="lua">CSK_ResultManager.setLoadOnReboot(status)</code></pre>
@@ -909,15 +1685,59 @@ ToDo<br>
 </div>
 </div>
 <div class="sect4">
+<h5 id="API:Function:CSK_ResultManager.setParameterEvent"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-function">setParameterEvent()</span></h5>
+<div class="sect5">
+<h6 id="_short_description_22">Short description</h6>
+<div class="paragraph">
+<p>Function to set event to register to for updating values of selected parameter of expression.</p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_parameters_12">Parameters</h6>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 12.5%;">
+<col style="width: 37.5%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Multiplicity</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">event</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">STRING</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Event</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect5">
+<h6 id="_sample_auto_generated_20">Sample (auto-generated)</h6>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="lua">CSK_ResultManager.setParameterEvent(event)</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect4">
 <h5 id="API:Function:CSK_ResultManager.setParameterName"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-function">setParameterName()</span></h5>
 <div class="sect5">
-<h6 id="_short_description_7">Short description</h6>
+<h6 id="_short_description_23">Short description</h6>
 <div class="paragraph">
 <p>Function to set the name of the parameters if saved/loaded via the CSK_PersistentData module.</p>
 </div>
 </div>
 <div class="sect5">
-<h6 id="_parameters_2">Parameters</h6>
+<h6 id="_parameters_13">Parameters</h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 25%;">
@@ -944,10 +1764,54 @@ ToDo<br>
 </table>
 </div>
 <div class="sect5">
-<h6 id="_sample_auto_generated_5">Sample (auto-generated)</h6>
+<h6 id="_sample_auto_generated_21">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="lua">CSK_ResultManager.setParameterName(name)</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="API:Function:CSK_ResultManager.setParameterPosition"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-function">setParameterPosition()</span></h5>
+<div class="sect5">
+<h6 id="_short_description_24">Short description</h6>
+<div class="paragraph">
+<p>Function to set the parameter position within the registered event.</p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_parameters_14">Parameters</h6>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 12.5%;">
+<col style="width: 37.5%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Multiplicity</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">pos</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">INT</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Event parameter position (default is '1').</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect5">
+<h6 id="_sample_auto_generated_22">Sample (auto-generated)</h6>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="lua">CSK_ResultManager.setParameterPosition(pos)</code></pre>
 </div>
 </div>
 </div>
@@ -958,13 +1822,13 @@ ToDo<br>
 <div class="sect4">
 <h5 id="API:Event:CSK_ResultManager.OnDataLoadedOnReboot"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-event">OnDataLoadedOnReboot</span></h5>
 <div class="sect5">
-<h6 id="_short_description_8">Short description</h6>
+<h6 id="_short_description_25">Short description</h6>
 <div class="paragraph">
 <p>Event to call if module tried to load parameters and should be ready.</p>
 </div>
 </div>
 <div class="sect5">
-<h6 id="_sample_auto_generated_6">Sample (auto-generated)</h6>
+<h6 id="_sample_auto_generated_23">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnDataLoadedOnReboot</span>()
@@ -979,7 +1843,7 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 <div class="sect4">
 <h5 id="API:Event:CSK_ResultManager.OnNewParameterName"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-event">OnNewParameterName</span></h5>
 <div class="sect5">
-<h6 id="_short_description_9">Short description</h6>
+<h6 id="_short_description_26">Short description</h6>
 <div class="paragraph">
 <p>Notify name of persistent data parameter.</p>
 </div>
@@ -1012,7 +1876,7 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 </table>
 </div>
 <div class="sect5">
-<h6 id="_sample_auto_generated_7">Sample (auto-generated)</h6>
+<h6 id="_sample_auto_generated_24">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnNewParameterName</span>(name)
@@ -1025,11 +1889,13 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 </div>
 </div>
 <div class="sect4">
-<h5 id="API:Event:CSK_ResultManager.OnNewStatusLoadParameterOnReboot"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-event">OnNewStatusLoadParameterOnReboot</span></h5>
+<h5 id="API:Event:CSK_ResultManager.OnNewResult_EXPRESSION"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-event">OnNewResult_EXPRESSION</span></h5>
 <div class="sect5">
-<h6 id="_short_description_10">Short description</h6>
+<h6 id="_short_description_27">Short description</h6>
 <div class="paragraph">
-<p>Notify status if parameters should be loaded on app/device boot up.</p>
+<p>Example of dynamically served event to provide result of expression.<br>
+EXPRESSION will be replaced by the name of the added expression (e.g. "CSK_OnNewResult_CheckSumOfXY").<br>
+INFO: Other modules can check via "Script.isServedAsFunction" if event exists.<br></p>
 </div>
 </div>
 <div class="sect5">
@@ -1060,24 +1926,24 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 </table>
 </div>
 <div class="sect5">
-<h6 id="_sample_auto_generated_8">Sample (auto-generated)</h6>
+<h6 id="_sample_auto_generated_25">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnNewStatusLoadParameterOnReboot</span>(status)
+<pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnNewResult_EXPRESSION</span>(status)
   <span class="comment">-- Do something</span>
 <span class="keyword">end</span>
 
-Script.register(<span class="string"><span class="delimiter">&quot;</span><span class="content">CSK_ResultManager.OnNewStatusLoadParameterOnReboot</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">handleOnNewStatusLoadParameterOnReboot</span><span class="delimiter">&quot;</span></span>)</code></pre>
+Script.register(<span class="string"><span class="delimiter">&quot;</span><span class="content">CSK_ResultManager.OnNewResult_EXPRESSION</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">handleOnNewResult_EXPRESSION</span><span class="delimiter">&quot;</span></span>)</code></pre>
 </div>
 </div>
 </div>
 </div>
 <div class="sect4">
-<h5 id="API:Event:CSK_ResultManager.OnPersistentDataModuleAvailable"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-event">OnPersistentDataModuleAvailable</span></h5>
+<h5 id="API:Event:CSK_ResultManager.OnNewStatusAvailableEvents"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-event">OnNewStatusAvailableEvents</span></h5>
 <div class="sect5">
-<h6 id="_short_description_11">Short description</h6>
+<h6 id="_short_description_28">Short description</h6>
 <div class="paragraph">
-<p>Notify status if features of CSK_PersistendData module are available.</p>
+<p>Notify available events.</p>
 </div>
 </div>
 <div class="sect5">
@@ -1099,33 +1965,33 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">status</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">BOOL</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">listOfEvents</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">STRING</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Status</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">JSON list</p></td>
 </tr>
 </tbody>
 </table>
 </div>
 <div class="sect5">
-<h6 id="_sample_auto_generated_9">Sample (auto-generated)</h6>
+<h6 id="_sample_auto_generated_26">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnPersistentDataModuleAvailable</span>(status)
+<pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnNewStatusAvailableEvents</span>(listOfEvents)
   <span class="comment">-- Do something</span>
 <span class="keyword">end</span>
 
-Script.register(<span class="string"><span class="delimiter">&quot;</span><span class="content">CSK_ResultManager.OnPersistentDataModuleAvailable</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">handleOnPersistentDataModuleAvailable</span><span class="delimiter">&quot;</span></span>)</code></pre>
+Script.register(<span class="string"><span class="delimiter">&quot;</span><span class="content">CSK_ResultManager.OnNewStatusAvailableEvents</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">handleOnNewStatusAvailableEvents</span><span class="delimiter">&quot;</span></span>)</code></pre>
 </div>
 </div>
 </div>
 </div>
 <div class="sect4">
-<h5 id="API:Event:CSK_ResultManager.OnUserLevelAdminActive"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-event">OnUserLevelAdminActive</span></h5>
+<h5 id="API:Event:CSK_ResultManager.OnNewStatusCriteria"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-event">OnNewStatusCriteria</span></h5>
 <div class="sect5">
-<h6 id="_short_description_12">Short description</h6>
+<h6 id="_short_description_29">Short description</h6>
 <div class="paragraph">
-<p>Status of Admin userlevel. Used internally in combination with the CSK_UserManagement module if available.</p>
+<p>Notify (minimum) criteria for selected expression.</p>
 </div>
 </div>
 <div class="sect5">
@@ -1147,33 +2013,33 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">status</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">BOOL</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">criteria</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">AUTO</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Status</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Criteria</p></td>
 </tr>
 </tbody>
 </table>
 </div>
 <div class="sect5">
-<h6 id="_sample_auto_generated_10">Sample (auto-generated)</h6>
+<h6 id="_sample_auto_generated_27">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnUserLevelAdminActive</span>(status)
+<pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnNewStatusCriteria</span>(criteria)
   <span class="comment">-- Do something</span>
 <span class="keyword">end</span>
 
-Script.register(<span class="string"><span class="delimiter">&quot;</span><span class="content">CSK_ResultManager.OnUserLevelAdminActive</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">handleOnUserLevelAdminActive</span><span class="delimiter">&quot;</span></span>)</code></pre>
+Script.register(<span class="string"><span class="delimiter">&quot;</span><span class="content">CSK_ResultManager.OnNewStatusCriteria</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">handleOnNewStatusCriteria</span><span class="delimiter">&quot;</span></span>)</code></pre>
 </div>
 </div>
 </div>
 </div>
 <div class="sect4">
-<h5 id="API:Event:CSK_ResultManager.OnUserLevelMaintenanceActive"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-event">OnUserLevelMaintenanceActive</span></h5>
+<h5 id="API:Event:CSK_ResultManager.OnNewStatusCriteriaMaximum"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-event">OnNewStatusCriteriaMaximum</span></h5>
 <div class="sect5">
-<h6 id="_short_description_13">Short description</h6>
+<h6 id="_short_description_30">Short description</h6>
 <div class="paragraph">
-<p>Status of Maintenance userlevel. Used internally in combination with the CSK_UserManagement module if available.</p>
+<p>Notify maximum value of criteria (if criteria is a range).</p>
 </div>
 </div>
 <div class="sect5">
@@ -1195,33 +2061,33 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">status</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">BOOL</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">maxCriteria</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">FLOAT</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Status</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Maximum value of criteria.</p></td>
 </tr>
 </tbody>
 </table>
 </div>
 <div class="sect5">
-<h6 id="_sample_auto_generated_11">Sample (auto-generated)</h6>
+<h6 id="_sample_auto_generated_28">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnUserLevelMaintenanceActive</span>(status)
+<pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnNewStatusCriteriaMaximum</span>(maxCriteria)
   <span class="comment">-- Do something</span>
 <span class="keyword">end</span>
 
-Script.register(<span class="string"><span class="delimiter">&quot;</span><span class="content">CSK_ResultManager.OnUserLevelMaintenanceActive</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">handleOnUserLevelMaintenanceActive</span><span class="delimiter">&quot;</span></span>)</code></pre>
+Script.register(<span class="string"><span class="delimiter">&quot;</span><span class="content">CSK_ResultManager.OnNewStatusCriteriaMaximum</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">handleOnNewStatusCriteriaMaximum</span><span class="delimiter">&quot;</span></span>)</code></pre>
 </div>
 </div>
 </div>
 </div>
 <div class="sect4">
-<h5 id="API:Event:CSK_ResultManager.OnUserLevelOperatorActive"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-event">OnUserLevelOperatorActive</span></h5>
+<h5 id="API:Event:CSK_ResultManager.OnNewStatusCriteriaResult"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-event">OnNewStatusCriteriaResult</span></h5>
 <div class="sect5">
-<h6 id="_short_description_14">Short description</h6>
+<h6 id="_short_description_31">Short description</h6>
 <div class="paragraph">
-<p>Status of Operator userlevel. Used internally in combination with the CSK_UserManagement module if available.</p>
+<p>Notify current criteria result of selected expression.</p>
 </div>
 </div>
 <div class="sect5">
@@ -1243,37 +2109,373 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">status</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">result</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">BOOL</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Status</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Result</p></td>
 </tr>
 </tbody>
 </table>
 </div>
 <div class="sect5">
-<h6 id="_sample_auto_generated_12">Sample (auto-generated)</h6>
+<h6 id="_sample_auto_generated_29">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnUserLevelOperatorActive</span>(status)
+<pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnNewStatusCriteriaResult</span>(result)
   <span class="comment">-- Do something</span>
 <span class="keyword">end</span>
 
-Script.register(<span class="string"><span class="delimiter">&quot;</span><span class="content">CSK_ResultManager.OnUserLevelOperatorActive</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">handleOnUserLevelOperatorActive</span><span class="delimiter">&quot;</span></span>)</code></pre>
+Script.register(<span class="string"><span class="delimiter">&quot;</span><span class="content">CSK_ResultManager.OnNewStatusCriteriaResult</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">handleOnNewStatusCriteriaResult</span><span class="delimiter">&quot;</span></span>)</code></pre>
 </div>
 </div>
 </div>
 </div>
 <div class="sect4">
-<h5 id="API:Event:CSK_ResultManager.OnUserLevelServiceActive"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-event">OnUserLevelServiceActive</span></h5>
+<h5 id="API:Event:CSK_ResultManager.OnNewStatusCriteriaString"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-event">OnNewStatusCriteriaString</span></h5>
 <div class="sect5">
-<h6 id="_short_description_15">Short description</h6>
+<h6 id="_short_description_32">Short description</h6>
 <div class="paragraph">
-<p>Status of Service userlevel. Used internally in combination with the CSK_UserManagement module if available.</p>
+<p>Notify string criteria.</p>
 </div>
 </div>
 <div class="sect5">
 <h6 id="_callback_arguments_7">Callback arguments</h6>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 12.5%;">
+<col style="width: 37.5%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Multiplicity</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">criteria</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">STRING</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Criteria</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect5">
+<h6 id="_sample_auto_generated_30">Sample (auto-generated)</h6>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnNewStatusCriteriaString</span>(criteria)
+  <span class="comment">-- Do something</span>
+<span class="keyword">end</span>
+
+Script.register(<span class="string"><span class="delimiter">&quot;</span><span class="content">CSK_ResultManager.OnNewStatusCriteriaString</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">handleOnNewStatusCriteriaString</span><span class="delimiter">&quot;</span></span>)</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="API:Event:CSK_ResultManager.OnNewStatusCriteriaType"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-event">OnNewStatusCriteriaType</span></h5>
+<div class="sect5">
+<h6 id="_short_description_33">Short description</h6>
+<div class="paragraph">
+<p>Notify type of criteria.</p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_callback_arguments_8">Callback arguments</h6>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 12.5%;">
+<col style="width: 37.5%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Multiplicity</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">type</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">STRING</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Type</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect5">
+<h6 id="_sample_auto_generated_31">Sample (auto-generated)</h6>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnNewStatusCriteriaType</span>(<span class="predefined">type</span>)
+  <span class="comment">-- Do something</span>
+<span class="keyword">end</span>
+
+Script.register(<span class="string"><span class="delimiter">&quot;</span><span class="content">CSK_ResultManager.OnNewStatusCriteriaType</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">handleOnNewStatusCriteriaType</span><span class="delimiter">&quot;</span></span>)</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="API:Event:CSK_ResultManager.OnNewStatusEventParameterPosition"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-event">OnNewStatusEventParameterPosition</span></h5>
+<div class="sect5">
+<h6 id="_short_description_34">Short description</h6>
+<div class="paragraph">
+<p>Notify parameter position to be used for currently selected parameter event.</p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_callback_arguments_9">Callback arguments</h6>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 12.5%;">
+<col style="width: 37.5%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Multiplicity</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">parameterPosition</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">INT</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Position of parameter.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect5">
+<h6 id="_sample_auto_generated_32">Sample (auto-generated)</h6>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnNewStatusEventParameterPosition</span>(parameterPosition)
+  <span class="comment">-- Do something</span>
+<span class="keyword">end</span>
+
+Script.register(<span class="string"><span class="delimiter">&quot;</span><span class="content">CSK_ResultManager.OnNewStatusEventParameterPosition</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">handleOnNewStatusEventParameterPosition</span><span class="delimiter">&quot;</span></span>)</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="API:Event:CSK_ResultManager.OnNewStatusExpression"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-event">OnNewStatusExpression</span></h5>
+<div class="sect5">
+<h6 id="_short_description_35">Short description</h6>
+<div class="paragraph">
+<p>Notify expression to process of current selected expression.</p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_callback_arguments_10">Callback arguments</h6>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 12.5%;">
+<col style="width: 37.5%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Multiplicity</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">expression</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">STRING</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Expression to process.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect5">
+<h6 id="_sample_auto_generated_33">Sample (auto-generated)</h6>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnNewStatusExpression</span>(expression)
+  <span class="comment">-- Do something</span>
+<span class="keyword">end</span>
+
+Script.register(<span class="string"><span class="delimiter">&quot;</span><span class="content">CSK_ResultManager.OnNewStatusExpression</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">handleOnNewStatusExpression</span><span class="delimiter">&quot;</span></span>)</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="API:Event:CSK_ResultManager.OnNewStatusExpressionName"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-event">OnNewStatusExpressionName</span></h5>
+<div class="sect5">
+<h6 id="_short_description_36">Short description</h6>
+<div class="paragraph">
+<p>Notify name of currently selected expression.</p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_callback_arguments_11">Callback arguments</h6>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 12.5%;">
+<col style="width: 37.5%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Multiplicity</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">name</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">STRING</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Name of expression.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect5">
+<h6 id="_sample_auto_generated_34">Sample (auto-generated)</h6>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnNewStatusExpressionName</span>(name)
+  <span class="comment">-- Do something</span>
+<span class="keyword">end</span>
+
+Script.register(<span class="string"><span class="delimiter">&quot;</span><span class="content">CSK_ResultManager.OnNewStatusExpressionName</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">handleOnNewStatusExpressionName</span><span class="delimiter">&quot;</span></span>)</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="API:Event:CSK_ResultManager.OnNewStatusLinkedEvent"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-event">OnNewStatusLinkedEvent</span></h5>
+<div class="sect5">
+<h6 id="_short_description_37">Short description</h6>
+<div class="paragraph">
+<p>Notify linked event of selected expression parameter.</p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_callback_arguments_12">Callback arguments</h6>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 12.5%;">
+<col style="width: 37.5%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Multiplicity</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">eventName</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">STRING</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Name of event.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect5">
+<h6 id="_sample_auto_generated_35">Sample (auto-generated)</h6>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnNewStatusLinkedEvent</span>(eventName)
+  <span class="comment">-- Do something</span>
+<span class="keyword">end</span>
+
+Script.register(<span class="string"><span class="delimiter">&quot;</span><span class="content">CSK_ResultManager.OnNewStatusLinkedEvent</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">handleOnNewStatusLinkedEvent</span><span class="delimiter">&quot;</span></span>)</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="API:Event:CSK_ResultManager.OnNewStatusListOfExpressions"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-event">OnNewStatusListOfExpressions</span></h5>
+<div class="sect5">
+<h6 id="_short_description_38">Short description</h6>
+<div class="paragraph">
+<p>Notify list of available expressions.</p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_callback_arguments_13">Callback arguments</h6>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 12.5%;">
+<col style="width: 37.5%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Multiplicity</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">list</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">STRING</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">List</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect5">
+<h6 id="_sample_auto_generated_36">Sample (auto-generated)</h6>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnNewStatusListOfExpressions</span>(list)
+  <span class="comment">-- Do something</span>
+<span class="keyword">end</span>
+
+Script.register(<span class="string"><span class="delimiter">&quot;</span><span class="content">CSK_ResultManager.OnNewStatusListOfExpressions</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">handleOnNewStatusListOfExpressions</span><span class="delimiter">&quot;</span></span>)</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="API:Event:CSK_ResultManager.OnNewStatusLoadParameterOnReboot"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-event">OnNewStatusLoadParameterOnReboot</span></h5>
+<div class="sect5">
+<h6 id="_short_description_39">Short description</h6>
+<div class="paragraph">
+<p>Notify status if parameters should be loaded on app/device boot up.</p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_callback_arguments_14">Callback arguments</h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 25%;">
@@ -1300,7 +2502,439 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 </table>
 </div>
 <div class="sect5">
-<h6 id="_sample_auto_generated_13">Sample (auto-generated)</h6>
+<h6 id="_sample_auto_generated_37">Sample (auto-generated)</h6>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnNewStatusLoadParameterOnReboot</span>(status)
+  <span class="comment">-- Do something</span>
+<span class="keyword">end</span>
+
+Script.register(<span class="string"><span class="delimiter">&quot;</span><span class="content">CSK_ResultManager.OnNewStatusLoadParameterOnReboot</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">handleOnNewStatusLoadParameterOnReboot</span><span class="delimiter">&quot;</span></span>)</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="API:Event:CSK_ResultManager.OnNewStatusParameterList"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-event">OnNewStatusParameterList</span></h5>
+<div class="sect5">
+<h6 id="_short_description_40">Short description</h6>
+<div class="paragraph">
+<p>Notify list of expression parameters.</p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_callback_arguments_15">Callback arguments</h6>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 12.5%;">
+<col style="width: 37.5%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Multiplicity</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">list</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">STRING</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">List of expression parameter details.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect5">
+<h6 id="_sample_auto_generated_38">Sample (auto-generated)</h6>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnNewStatusParameterList</span>(list)
+  <span class="comment">-- Do something</span>
+<span class="keyword">end</span>
+
+Script.register(<span class="string"><span class="delimiter">&quot;</span><span class="content">CSK_ResultManager.OnNewStatusParameterList</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">handleOnNewStatusParameterList</span><span class="delimiter">&quot;</span></span>)</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="API:Event:CSK_ResultManager.OnNewStatusResult"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-event">OnNewStatusResult</span></h5>
+<div class="sect5">
+<h6 id="_short_description_41">Short description</h6>
+<div class="paragraph">
+<p>Notify current result of selected expression.</p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_callback_arguments_16">Callback arguments</h6>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 12.5%;">
+<col style="width: 37.5%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Multiplicity</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">result</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">STRING</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Result</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect5">
+<h6 id="_sample_auto_generated_39">Sample (auto-generated)</h6>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnNewStatusResult</span>(result)
+  <span class="comment">-- Do something</span>
+<span class="keyword">end</span>
+
+Script.register(<span class="string"><span class="delimiter">&quot;</span><span class="content">CSK_ResultManager.OnNewStatusResult</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">handleOnNewStatusResult</span><span class="delimiter">&quot;</span></span>)</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="API:Event:CSK_ResultManager.OnNewStatusSelectedExpression"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-event">OnNewStatusSelectedExpression</span></h5>
+<div class="sect5">
+<h6 id="_short_description_42">Short description</h6>
+<div class="paragraph">
+<p>Notify selected expression.</p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_callback_arguments_17">Callback arguments</h6>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 12.5%;">
+<col style="width: 37.5%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Multiplicity</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">selection</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">STRING</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Selected expression</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect5">
+<h6 id="_sample_auto_generated_40">Sample (auto-generated)</h6>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnNewStatusSelectedExpression</span>(selection)
+  <span class="comment">-- Do something</span>
+<span class="keyword">end</span>
+
+Script.register(<span class="string"><span class="delimiter">&quot;</span><span class="content">CSK_ResultManager.OnNewStatusSelectedExpression</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">handleOnNewStatusSelectedExpression</span><span class="delimiter">&quot;</span></span>)</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="API:Event:CSK_ResultManager.OnNewStatusSelectedParameter"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-event">OnNewStatusSelectedParameter</span></h5>
+<div class="sect5">
+<h6 id="_short_description_43">Short description</h6>
+<div class="paragraph">
+<p>Notify name of selected expression parameter.</p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_callback_arguments_18">Callback arguments</h6>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 12.5%;">
+<col style="width: 37.5%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Multiplicity</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">parametername</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">STRING</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Name of parameter.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect5">
+<h6 id="_sample_auto_generated_41">Sample (auto-generated)</h6>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnNewStatusSelectedParameter</span>(parametername)
+  <span class="comment">-- Do something</span>
+<span class="keyword">end</span>
+
+Script.register(<span class="string"><span class="delimiter">&quot;</span><span class="content">CSK_ResultManager.OnNewStatusSelectedParameter</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">handleOnNewStatusSelectedParameter</span><span class="delimiter">&quot;</span></span>)</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="API:Event:CSK_ResultManager.OnPersistentDataModuleAvailable"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-event">OnPersistentDataModuleAvailable</span></h5>
+<div class="sect5">
+<h6 id="_short_description_44">Short description</h6>
+<div class="paragraph">
+<p>Notify status if features of CSK_PersistendData module are available.</p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_callback_arguments_19">Callback arguments</h6>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 12.5%;">
+<col style="width: 37.5%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Multiplicity</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">status</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">BOOL</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Status</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect5">
+<h6 id="_sample_auto_generated_42">Sample (auto-generated)</h6>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnPersistentDataModuleAvailable</span>(status)
+  <span class="comment">-- Do something</span>
+<span class="keyword">end</span>
+
+Script.register(<span class="string"><span class="delimiter">&quot;</span><span class="content">CSK_ResultManager.OnPersistentDataModuleAvailable</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">handleOnPersistentDataModuleAvailable</span><span class="delimiter">&quot;</span></span>)</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="API:Event:CSK_ResultManager.OnUserLevelAdminActive"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-event">OnUserLevelAdminActive</span></h5>
+<div class="sect5">
+<h6 id="_short_description_45">Short description</h6>
+<div class="paragraph">
+<p>Status of Admin userlevel. Used internally in combination with the CSK_UserManagement module if available.</p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_callback_arguments_20">Callback arguments</h6>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 12.5%;">
+<col style="width: 37.5%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Multiplicity</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">status</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">BOOL</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Status</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect5">
+<h6 id="_sample_auto_generated_43">Sample (auto-generated)</h6>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnUserLevelAdminActive</span>(status)
+  <span class="comment">-- Do something</span>
+<span class="keyword">end</span>
+
+Script.register(<span class="string"><span class="delimiter">&quot;</span><span class="content">CSK_ResultManager.OnUserLevelAdminActive</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">handleOnUserLevelAdminActive</span><span class="delimiter">&quot;</span></span>)</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="API:Event:CSK_ResultManager.OnUserLevelMaintenanceActive"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-event">OnUserLevelMaintenanceActive</span></h5>
+<div class="sect5">
+<h6 id="_short_description_46">Short description</h6>
+<div class="paragraph">
+<p>Status of Maintenance userlevel. Used internally in combination with the CSK_UserManagement module if available.</p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_callback_arguments_21">Callback arguments</h6>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 12.5%;">
+<col style="width: 37.5%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Multiplicity</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">status</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">BOOL</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Status</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect5">
+<h6 id="_sample_auto_generated_44">Sample (auto-generated)</h6>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnUserLevelMaintenanceActive</span>(status)
+  <span class="comment">-- Do something</span>
+<span class="keyword">end</span>
+
+Script.register(<span class="string"><span class="delimiter">&quot;</span><span class="content">CSK_ResultManager.OnUserLevelMaintenanceActive</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">handleOnUserLevelMaintenanceActive</span><span class="delimiter">&quot;</span></span>)</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="API:Event:CSK_ResultManager.OnUserLevelOperatorActive"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-event">OnUserLevelOperatorActive</span></h5>
+<div class="sect5">
+<h6 id="_short_description_47">Short description</h6>
+<div class="paragraph">
+<p>Status of Operator userlevel. Used internally in combination with the CSK_UserManagement module if available.</p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_callback_arguments_22">Callback arguments</h6>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 12.5%;">
+<col style="width: 37.5%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Multiplicity</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">status</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">BOOL</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Status</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect5">
+<h6 id="_sample_auto_generated_45">Sample (auto-generated)</h6>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnUserLevelOperatorActive</span>(status)
+  <span class="comment">-- Do something</span>
+<span class="keyword">end</span>
+
+Script.register(<span class="string"><span class="delimiter">&quot;</span><span class="content">CSK_ResultManager.OnUserLevelOperatorActive</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">handleOnUserLevelOperatorActive</span><span class="delimiter">&quot;</span></span>)</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="API:Event:CSK_ResultManager.OnUserLevelServiceActive"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-event">OnUserLevelServiceActive</span></h5>
+<div class="sect5">
+<h6 id="_short_description_48">Short description</h6>
+<div class="paragraph">
+<p>Status of Service userlevel. Used internally in combination with the CSK_UserManagement module if available.</p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_callback_arguments_23">Callback arguments</h6>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 12.5%;">
+<col style="width: 37.5%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Multiplicity</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">status</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">BOOL</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Status</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect5">
+<h6 id="_sample_auto_generated_46">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnUserLevelServiceActive</span>(status)
@@ -1316,11 +2950,73 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 </div>
 </div>
 </div>
+<div class="sect1">
+<h2 id="_enumerations">Enumerations</h2>
+<div class="sectionbody">
+<div class="dlist">
+<dl>
+<dt class="hdlist1">C</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#API:Enum:CSK_ResultManager.CriteriaType">CSK_ResultManager.CriteriaType</a></p>
+</li>
+</ul>
+</div>
+</dd>
+</dl>
+</div>
+<div class="sect2">
+<h3 id="API:Enum:CSK_ResultManager.CriteriaType"><span class="api-enum">CSK_ResultManager.CriteriaType</span></h3>
+<div class="paragraph">
+<p>Type of criteria.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Items</caption>
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Value</th>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="literal"><pre>STRING</pre></div></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">STRING</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Criteria is a STRING.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="literal"><pre>NUMBER</pre></div></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">NUMBER</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Criteria is a specific number value.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="literal"><pre>RANGE</pre></div></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">RANGE</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Criteria is within a range of numbers.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="literal"><pre>BOOL</pre></div></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">BOOL</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Criteria is a BOOL.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Version 0.1.0<br>
-Last updated 2023-10-19 11:16:11 +0200
+Version 1.0.0<br>
+Last updated 2023-10-26 09:26:52 +0200
 </div>
 </div>
 <script type="text/javascript">
