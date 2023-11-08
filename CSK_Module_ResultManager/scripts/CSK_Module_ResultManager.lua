@@ -28,8 +28,7 @@
 
 -- If app property "LuaLoadAllEngineAPI" is FALSE, use this to load and check for required APIs
 -- This can improve performance of garbage collection
-
---_G.availableAPIs = require('Data/ResultManager/helper/checkAPIs') -- can be used to adjust function scope of the module related on available APIs of the device
+_G.availableAPIs = require('Data/ResultManager/helper/checkAPIs') -- can be used to adjust function scope of the module related on available APIs of the device
 -----------------------------------------------------------
 -- Logger
 _G.logger = Log.SharedLogger.create('ModuleLogger')
@@ -60,19 +59,16 @@ local function main()
   --       If so, the app will trigger the "OnDataLoadedOnReboot" event if ready after loading parameters
   --
   -- Can be used e.g. like this
+  --
+  -- local events = {'ValueProvider.OnNewValueA', 'ValueProvider.OnNewValueB'}
+  -- local nameOfCheck = 'checkIfParameterSumIs50'
+  -- CSK_ResultManager.addExpression(nameOfCheck, 'param1 + param2', 'NUMBER', 50, nil, events)
   ----------------------------------------------------------------------------------------
 
-  -- _G.resultManager_Model.doSomething() -- if you want to start a function
-  -- ...
   CSK_ResultManager.pageCalled() -- Update UI
 
 end
 Script.register("Engine.OnStarted", main)
-
---OR
-
--- Call function after persistent data was loaded
---Script.register("CSK_ResultManager.OnDataLoadedOnReboot", main)
 
 --**************************************************************************
 --**********************End Function Scope *********************************

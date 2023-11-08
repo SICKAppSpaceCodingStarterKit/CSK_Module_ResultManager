@@ -6,15 +6,43 @@
         </crown>
         <crown name="CSK_ResultManager">
             <trait>released</trait>
-            <desc>Please fill in information regarding: What is the idea of this module and its features? +
-How to use this module in general.... like: + 
-{empty} + 
+            <desc>Module to provide result management / expression functionality. +
+This module is helpful to check if the results of other modules are valid. +
+It makes use of the "LuaXP" expression evaluator. For more details please visit https://www.toggledbits.com/luaxp. +
+{empty} +
 Typically the features of this module are used like this (check also main script of this module): +
-**1) Setup** +
-ToDo +
-{empty} + 
-**2) Something else...** +
-</desc>
+{empty} +
+**1) Create new expression** +
+Set a name/identifier for your expression via 'setExpressionName' and add it via 'addExpressionViaUI'. +
+{empty} +
+**2) Configure expression** +
+Define an expression like 'param1 + param2' via 'setExpression'. +
+INFO: For more information regarding valid expression syntax please visit https://www.toggledbits.com/node/13. +
+Define the criteria and its type via 'setCriteria' / 'setCriteriaType'. +
+{empty} +
+**3) Parameter** +
+If you make use of parameters within your expression (e.g. 'param1 + param2'), you need to define where these parameters get their value from. +
+To do so, you need to add a parameter to your expression via 'addParameterViaUI' and select it via 'selectParameter'. +
+Now you can configure the related event for this parameter via 'setParameterEvent'. +
+If the event provides multiple parameter, you optionally can select the required one by setting the position via 'setParameterPosition'. +
+Repeat this for each parameter. +
+{empty} +
+**4) Processing** +
+Each expression will wait till ALL parameters got their values via the configured events. +
+As soon as all parameters are available, it will start the processing of the expression. +
+It will compare this result with the defined criteria and will provide its result via a dynamically "CSK_ResultManager.OnNewResult_EXPRESSION" event. +
+(EXPRESSION will be replaced by the name of the added expression (e.g. "CSK_OnNewResult_CheckSumOfXY"). +
+At the end it will clear all parameter values and will wait for new values. +
+INFO: Please make sure that the frequency of the events is in sync to not mix the result of different sources. +
+{empty} +
+Another possibility is to make use of 'addExpression' which combines the mentioned steps. +</desc>
+            <enum name="CriteriaType" trait="released">
+                <desc>Type of criteria.</desc>
+                <item desc="Criteria is a STRING." name="STRING">STRING</item>
+                <item desc="Criteria is a specific number value." name="NUMBER">NUMBER</item>
+                <item desc="Criteria is within a range of numbers." name="RANGE">RANGE</item>
+                <item desc="Criteria is a BOOL." name="BOOL">BOOL</item>
+            </enum>
             <serves>
                 <event name="OnNewStatusLoadParameterOnReboot">
                     <desc>Notify status if parameters should be loaded on app/device boot up.</desc>
@@ -47,6 +75,72 @@ ToDo +
                     <desc>Status of Admin userlevel. Used internally in combination with the CSK_UserManagement module if available.</desc>
                     <param desc="Status" multiplicity="1" name="status" type="bool"/>
                 </event>
+                <event name="OnNewStatusSelectedExpression">
+                    <desc>Notify selected expression.</desc>
+                    <param desc="Selected expression" multiplicity="1" name="selection" type="string"/>
+                </event>
+                <event name="OnNewStatusExpressionName">
+                    <desc>Notify name of currently selected expression.</desc>
+                    <param desc="Name of expression." multiplicity="1" name="name" type="string"/>
+                </event>
+                <event name="OnNewStatusExpression">
+                    <desc>Notify expression to process of current selected expression.</desc>
+                    <param desc="Expression to process." multiplicity="1" name="expression" type="string"/>
+                </event>
+                <event name="OnNewStatusCriteria">
+                    <desc>Notify (minimum) criteria for selected expression.</desc>
+                    <param desc="Criteria" multiplicity="1" name="criteria" type="auto"/>
+                </event>
+                <event name="OnNewStatusCriteriaMaximum">
+                    <desc>Notify maximum value of criteria (if criteria is a range).</desc>
+                    <param desc="Maximum value of criteria." multiplicity="1" name="maxCriteria" type="float"/>
+                </event>
+                <event name="OnNewStatusParameterList">
+                    <desc>Notify list of expression parameters.</desc>
+                    <param desc="List of expression parameter details." multiplicity="1" name="list" type="string"/>
+                </event>
+                <event name="OnNewStatusListOfExpressions">
+                    <desc>Notify list of available expressions.</desc>
+                    <param desc="List" multiplicity="1" name="list" type="string"/>
+                </event>
+                <event name="OnNewStatusResult">
+                    <desc>Notify current result of selected expression.</desc>
+                    <param desc="Result" multiplicity="1" name="result" type="string"/>
+                </event>
+                <event name="OnNewStatusCriteriaType">
+                    <desc>Notify type of criteria.</desc>
+                    <param desc="Type" multiplicity="1" name="type" type="string"/>
+                </event>
+                <event name="OnNewStatusCriteriaString">
+                    <desc>Notify string criteria.</desc>
+                    <param desc="Criteria" multiplicity="1" name="criteria" type="string"/>
+                </event>
+                <event name="OnNewStatusLinkedEvent">
+                    <desc>Notify linked event of selected expression parameter.</desc>
+                    <param desc="Name of event." multiplicity="1" name="eventName" type="string"/>
+                </event>
+                <event name="OnNewStatusSelectedParameter">
+                    <desc>Notify name of selected expression parameter.</desc>
+                    <param desc="Name of parameter." multiplicity="1" name="parametername" type="string"/>
+                </event>
+                <event name="OnNewResult_EXPRESSION">
+                    <desc>Example of dynamically served event to provide result of expression. +
+EXPRESSION will be replaced by the name of the added expression (e.g. "CSK_OnNewResult_CheckSumOfXY"). +
+INFO: Other modules can check via "Script.isServedAsFunction" if event exists. +</desc>
+                    <param desc="Status" multiplicity="1" name="status" type="bool"/>
+                </event>
+                <event name="OnNewStatusAvailableEvents">
+                    <desc>Notify available events.</desc>
+                    <param desc="JSON list" multiplicity="1" name="listOfEvents" type="string"/>
+                </event>
+                <event name="OnNewStatusCriteriaResult">
+                    <desc>Notify current criteria result of selected expression.</desc>
+                    <param desc="Result" multiplicity="1" name="result" type="bool"/>
+                </event>
+                <event name="OnNewStatusEventParameterPosition">
+                    <desc>Notify parameter position to be used for currently selected parameter event.</desc>
+                    <param desc="Position of parameter." multiplicity="1" name="parameterPosition" type="int"/>
+                </event>
                 <function name="setParameterName">
                     <desc>Function to set the name of the parameters if saved/loaded via the CSK_PersistentData module.</desc>
                     <param desc="Name of the parameter." multiplicity="1" name="name" type="string"/>
@@ -65,15 +159,86 @@ ToDo +
                     <desc>Function to register "OnResume" of the module UI (only as helper function).</desc>
                     <return desc="Empty string (only needed to simplify binding)." multiplicity="1" name="empty" type="string"/>
                 </function>
+                <function name="selectExpressionByName">
+                    <desc>Function to select an expression by its name.</desc>
+                    <param desc="Selected expression." multiplicity="1" name="selection" type="string"/>
+                    <return desc="Success" multiplicity="1" name="success" type="bool"/>
+                </function>
+                <function name="setExpressionName">
+                    <desc>Function to set name for new expression to create.</desc>
+                    <param desc="Name of expression." multiplicity="1" name="name" type="string"/>
+                </function>
+                <function name="addExpressionViaUI">
+                    <desc>Function to add new expression via UI,</desc>
+                </function>
+                <function name="setExpression">
+                    <desc>Function to set expression to process for currently selected expressionName.</desc>
+                    <param desc="Expression (like 'param1 * param2')." multiplicity="1" name="expression" type="string"/>
+                </function>
+                <function name="setCriteria">
+                    <desc>Function to set criteria of expression (if range, this is the minimum valid value).</desc>
+                    <param desc="Criteria" multiplicity="1" name="criteria" type="auto"/>
+                </function>
+                <function name="setCriteriaMaximum">
+                    <desc>Function to set maximum value of criteria range.</desc>
+                    <param desc="Maximum accepted value." multiplicity="1" name="maxCriteria" type="float"/>
+                </function>
+                <function name="setCriteriaType">
+                    <desc>Function to set type of criteria (see Enum CriteriaType).</desc>
+                    <param desc="Type of criteria." multiplicity="1" name="criteriaType" type="string"/>
+                </function>
+                <function name="addParameterViaUI">
+                    <desc>Function to add parameter to be used within expression.</desc>
+                </function>
+                <function name="selectParameterViaUI">
+                    <desc>Function to select expression parameter.</desc>
+                    <param desc="Selection" multiplicity="1" name="selection" type="string"/>
+                </function>
+                <function name="deleteExpressionViaUI">
+                    <desc>Function to delete preselected expression.</desc>
+                </function>
+                <function name="setParameterEvent">
+                    <desc>Function to set event to register to for updating values of selected parameter of expression.</desc>
+                    <param desc="Event" multiplicity="1" name="event" type="string"/>
+                </function>
+                <function name="clearParameterDataViaUI">
+                    <desc>Function to clear current stored data of currently selected expression.</desc>
+                </function>
+                <function name="deleteParameterViaUI">
+                    <desc>Function to delete parameter of expression.</desc>
+                </function>
+                <function name="addExpression">
+                    <desc>Function to add a new expression.</desc>
+                    <param desc="Name of the expression to process." multiplicity="1" name="name" type="string"/>
+                    <param desc="Expression to perform." multiplicity="1" name="expression" type="string"/>
+                    <param desc="Type of criteria." multiplicity="1" name="criteriaType" ref="CSK_ResultManager.CriteriaType" type="enum"/>
+                    <param desc="Expected result of the expression (optionally minimum if criteria is a 'RANGE')." multiplicity="1" name="criteria" type="auto"/>
+                    <param desc="Optional maximum value of criteria." multiplicity="?" name="criteriaMax" type="float"/>
+                    <param alias="string" desc="Optional list of events to receive values for parameters. +&#10;Event on position '1' is related to expression parameter 'param1' and so on." multiplicity="*" name="events" type="string"/>
+                    <param desc="Optional list of the used parameter positions within the defined events (see parameter 'events')." multiplicity="*" name="parameterPosition" type="int"/>
+                </function>
+                <function name="selectParameter">
+                    <desc>Function to select parameter of preselected expression.</desc>
+                    <param desc="Number of parameter (1 = param1)" multiplicity="1" name="parameterNo" type="int"/>
+                    <return desc="Success" multiplicity="1" name="success" type="bool"/>
+                </function>
+                <function name="selectEventViaUI">
+                    <desc>Function to select event out of list.</desc>
+                    <param desc="Event" multiplicity="1" name="event" type="string"/>
+                </function>
+                <function name="setParameterPosition">
+                    <desc>Function to set the parameter position within the registered event.</desc>
+                    <param desc="Event parameter position (default is '1')." multiplicity="1" name="pos" type="int"/>
+                </function>
             </serves>
         </crown>
         <meta key="author">SICK AG</meta>
-        <meta key="version">0.1.0</meta>
+        <meta key="version">1.0.0</meta>
         <meta key="priority">low</meta>
         <meta key="copy-protected">false</meta>
         <meta key="read-protected">false</meta>
         <meta key="crown2-flow-engine">false</meta>
-        <meta key="LuaLoadAllEngineAPI">true</meta>
+        <meta key="LuaLoadAllEngineAPI">false</meta>
         <entry default="CSK_Module_ResultManager.lua" path="scripts"/>
     </application>
 </manifest>

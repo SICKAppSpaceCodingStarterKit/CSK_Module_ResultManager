@@ -17,6 +17,32 @@ funcs.json = require('Data/ResultManager/helper/Json')
 --**********************Start Function Scope *******************************
 --**************************************************************************
 
+--- Function to create a json string out of expression parameters table content
+---@param eventContent string[] Table with linked events for expression parameters
+---@param valueContent string[] Table with current expression parameter values
+---@return string jsonstring JSON string
+local function createJsonListExpressionParameters(eventContent, valueContent)
+
+  local list = {}
+  if eventContent == nil then
+    list = {{DTC_ParameterName = '-', DTC_LinkedEvent = '-', DTC_CurrentValue = '-'},}
+  else
+
+    for key, value in ipairs(eventContent) do
+      local paramName = 'param' .. tostring(key)
+      table.insert(list, {DTC_ParameterName = paramName, DTC_LinkedEvent = value, DTC_CurrentValue = valueContent[paramName]})
+    end
+
+    if #list == 0 then
+      list = {{DTC_ParameterName = '-', DTC_LinkedEvent = '-', DTC_CurrentValue = '-'},}
+    end
+  end
+
+  local jsonstring = funcs.json.encode(list)
+  return jsonstring
+end
+funcs.createJsonListExpressionParameters = createJsonListExpressionParameters
+
 --- Function to create a list with numbers
 ---@param size int Size of the list
 ---@return string list List of numbers
@@ -44,7 +70,9 @@ local function convertTable2Container(content)
     if type(value) == 'table' then
       cont:add(key, convertTable2Container(value), nil)
     else
-      cont:add(key, value, nil)
+      if type(value) ~= 'function' then
+        cont:add(key, value, nil)
+      end
     end
   end
   return cont
@@ -141,6 +169,37 @@ local function createStringListBySimpleTable(content)
   return list
 end
 funcs.createStringListBySimpleTable = createStringListBySimpleTable
+
+local function getAvailableEvents()
+  local listOfEvents = {}
+
+  local appNames = Engine.listApps()
+
+  for key, value in pairs(appNames) do
+    local startPos = string.find(value, '_', 5)
+    if startPos then
+      local crownName = 'CSK' .. string.sub(value, startPos, #value)
+      local content = Engine.getCrownAsXML(crownName)
+      local lastSearchPos = 0
+
+      while true do
+        local _, eventStart = string.find(content, 'event name="', lastSearchPos)
+        if eventStart then
+          lastSearchPos = eventStart+1
+          local endPos = string.find(content, '"', eventStart+1)
+          if endPos then
+            local eventName = crownName .. '.' .. string.sub(content, eventStart+1, endPos-1)
+            table.insert(listOfEvents, eventName)
+          end
+        else
+          break
+        end
+      end
+    end
+  end
+  return listOfEvents
+end
+funcs.getAvailableEvents = getAvailableEvents
 
 return funcs
 
