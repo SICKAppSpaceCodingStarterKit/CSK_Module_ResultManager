@@ -18,7 +18,25 @@ Set a name/identifier for your expression via 'setExpressionName' and add it via
 **2) Configure expression** +
 Define an expression like 'param1 + param2' via 'setExpression'. +
 INFO: For more information regarding valid expression syntax please visit https://www.toggledbits.com/node/13. +
-Define the criteria and its type via 'setCriteria' / 'setCriteriaType'. +
+{empty} +
+Furthermore there are additional syntaxes available: +
+{empty} +
+**stringPack** : returns a binary string (see https://www.lua.org/manual/5.3/manual.html#6.4.2) +
+Sample: stringPack('I2', param1) or stringPack('I2I4I2', param1, param2, param3) +
+{empty} +
+**stringUnpack** : returns the value packed in binary string (see https://www.lua.org/manual/5.3/manual.html#6.4.2) +
+Sample: stringUnpack('I2', param1) or stringPack('I4', param1, 1,4) +
+The additional parameters are only needed if it is necessary to substract a substring out of the received value, e.g. here it will cut the binary string from position 1 to 4. +
+INFO: 'stringUnpack' only works with one single parameter! +
+{empty} +
+**searchAndCut** : searches for 2 strings in the received data as start and end positions and cuts the part between these positions. It is possible to add 2 additional numeric values to extend/reduce the positions. +
+Sample: searchAndCut(param1, 'Value1', '}') or searchAndCut(param1, 'Value1', '}', 1, -2) +
+{empty} +
+**dateTime** : returns Date and Time in string format = 'YYYY-MM-DDTHH_MM_SS', like '20240709T14_12_59' +
+{empty} +
+**timestamp** : returns a timestamp as string, like '2265809' +
+{empty} +
+After that define the criteria and its type via 'setCriteria' / 'setCriteriaType'. +
 {empty} +
 **3) Parameter** +
 If you make use of parameters within your expression (e.g. 'param1 + param2'), you need to define where these parameters get their value from. +
@@ -30,7 +48,8 @@ Repeat this for each parameter. +
 **4) Processing** +
 Each expression will wait till ALL parameters got their values via the configured events. +
 As soon as all parameters are available, it will start the processing of the expression. +
-It will compare this result with the defined criteria and will provide its result via a dynamically "CSK_ResultManager.OnNewResult_EXPRESSION" event. +
+It will compare this result with the defined criteria and will provide its result via a dynamically created "CSK_ResultManager.OnNewCriteriaResult_EXPRESSION" event. +
+The result of the expression itself will be provided via  a dynamically created "CSK_ResultManager.OnNewResult_EXPRESSION" event. +
 (EXPRESSION will be replaced by the name of the added expression (e.g. "CSK_OnNewResult_CheckSumOfXY"). +
 At the end it will clear all parameter values and will wait for new values. +
 INFO: Please make sure that the frequency of the events is in sync to not mix the result of different sources. +
@@ -124,14 +143,18 @@ Another possibility is to make use of 'addExpression' which combines the mention
                     <param desc="Name of parameter." multiplicity="1" name="parametername" type="string"/>
                 </event>
                 <event name="OnNewResult_EXPRESSION">
-                    <desc>Example of dynamically served event to provide result of expression. +
+                    <desc>Example of dynamically served event to provide the result of expression itself. +
 EXPRESSION will be replaced by the name of the added expression (e.g. "CSK_OnNewResult_CheckSumOfXY"). +
 INFO: Other modules can check via "Script.isServedAsFunction" if event exists. +</desc>
-                    <param desc="Status" multiplicity="1" name="status" type="bool"/>
+                    <param desc="Status" multiplicity="1" name="result" type="auto"/>
                 </event>
                 <event name="OnNewStatusAvailableEvents">
                     <desc>Notify available events.</desc>
                     <param desc="JSON list" multiplicity="1" name="listOfEvents" type="string"/>
+                </event>
+                <event name="OnNewStatusFlowConfigPriority">
+                    <desc>Notify if FlowConfig should have priority for FlowConfig relevant configurations.</desc>
+                    <param desc="Status" multiplicity="1" name="status" type="bool"/>
                 </event>
                 <event name="OnNewStatusCriteriaResult">
                     <desc>Notify current criteria result of selected expression.</desc>
@@ -141,15 +164,50 @@ INFO: Other modules can check via "Script.isServedAsFunction" if event exists. +
                     <desc>Notify parameter position to be used for currently selected parameter event.</desc>
                     <param desc="Position of parameter." multiplicity="1" name="parameterPosition" type="int"/>
                 </event>
+                <event name="OnNewCriteriaResult_EXPRESSION">
+                    <desc>Example of dynamically served event to provide criteria result of expression. +
+EXPRESSION will be replaced by the name of the added expression (e.g. "CSK_OnNewCriteriaResult_CheckSumOfXY"). +
+INFO: Other modules can check via "Script.isServedAsFunction" if event exists. +</desc>
+                    <param desc="Status" multiplicity="1" name="status" type="bool"/>
+                </event>
+                <event name="OnNewStatusExpressionSelected">
+                    <desc>Notify status if an expression is selected.</desc>
+                    <param desc="Status" multiplicity="1" name="status" type="bool"/>
+                </event>
+                <event name="OnNewData_EXPRESSION">
+                    <desc>Notify forwarded data of expression.</desc>
+                    <param desc="Optional data1" multiplicity="?" name="data1" type="auto"/>
+                    <param desc="Optional data2" multiplicity="?" name="data2" type="auto"/>
+                    <param desc="Optional data3" multiplicity="?" name="data3" type="auto"/>
+                    <param desc="Optional data4" multiplicity="?" name="data4" type="auto"/>
+                </event>
+                <event name="OnNewStatusMergeData">
+                    <desc>Notify if multiple data should be merged to new event.</desc>
+                    <param desc="Status" multiplicity="1" name="status" type="bool"/>
+                </event>
+                <event name="OnNewStatusEventInfo">
+                    <desc>Notify info about event name of expression.</desc>
+                    <param desc="Name of event(s)." multiplicity="1" name="eventInfo" type="string"/>
+                </event>
+                <event name="OnNewStatusCSKStyle">
+                    <desc>Notify UI style to use for CSK modules.</desc>
+                    <param desc="UI style" multiplicity="1" name="theme" type="string"/>
+                </event>
+                <event name="OnNewStatusModuleVersion">
+                    <desc>Notify version of module.</desc>
+                    <param desc="Version" multiplicity="1" name="version" type="string"/>
+                </event>
+                <event name="OnNewStatusModuleIsActive">
+                    <desc>Notify if module can be used on device.</desc>
+                    <param desc="Status" multiplicity="1" name="status" type="bool"/>
+                </event>
                 <function name="setParameterName">
                     <desc>Function to set the name of the parameters if saved/loaded via the CSK_PersistentData module.</desc>
                     <param desc="Name of the parameter." multiplicity="1" name="name" type="string"/>
                 </function>
                 <function name="sendParameters">
                     <desc>Send parameters to CSK_PersistentData module if possible to save them.</desc>
-                </function>
-                <function name="loadParameters">
-                    <desc>Load parameters for this module from the CSK_PersistentData module if possible and use them.</desc>
+                    <param desc="[Optional] Set to TRUE if the data should NOT be saved immediately after sending." multiplicity="?" name="noDataSave" type="bool"/>
                 </function>
                 <function name="setLoadOnReboot">
                     <desc>Configure if this module should load its saved parameters at app/device boot up.</desc>
@@ -210,6 +268,7 @@ INFO: Other modules can check via "Script.isServedAsFunction" if event exists. +
                 <function name="addExpression">
                     <desc>Function to add a new expression.</desc>
                     <param desc="Name of the expression to process." multiplicity="1" name="name" type="string"/>
+                    <param desc="Status if multiple data should only be merged to single event." multiplicity="1" name="mergeData" type="bool"/>
                     <param desc="Expression to perform." multiplicity="1" name="expression" type="string"/>
                     <param desc="Type of criteria." multiplicity="1" name="criteriaType" ref="CSK_ResultManager.CriteriaType" type="enum"/>
                     <param desc="Expected result of the expression (optionally minimum if criteria is a 'RANGE')." multiplicity="1" name="criteria" type="auto"/>
@@ -230,10 +289,128 @@ INFO: Other modules can check via "Script.isServedAsFunction" if event exists. +
                     <desc>Function to set the parameter position within the registered event.</desc>
                     <param desc="Event parameter position (default is '1')." multiplicity="1" name="pos" type="int"/>
                 </function>
+                <function name="executeExpressionViaUI">
+                    <desc>Function to execute current set expression (see 'selectExpressionByName'). Will only work for static expressions (will not consider dynamic parameters...).</desc>
+                </function>
+                <function name="setMergeData">
+                    <desc>Function to set status if only multiple data should be merged into new event.</desc>
+                    <param desc="Status" multiplicity="1" name="status" type="bool"/>
+                </function>
+                <function name="setFlowConfigPriority">
+                    <desc>Function to configure if FlowConfig should have priority for FlowConfig relevant configuration.</desc>
+                    <param desc="Status" multiplicity="1" name="status" type="bool"/>
+                </function>
+                <function name="clearFlowConfigRelevantConfiguration">
+                    <desc>Function to clear FlowConfig relevant configurations.</desc>
+                </function>
+                <function name="getStatusModuleActive">
+                    <desc>Function to get status if module is active.</desc>
+                    <return desc="Status" multiplicity="1" name="status" type="bool"/>
+                </function>
+                <function name="loadParameters">
+                    <desc>Load parameters for this module from the CSK_PersistentData module if possible and use them.</desc>
+                    <return desc="Success to load parameters." multiplicity="1" name="success" type="bool"/>
+                </function>
+                <function name="getParameters">
+                    <trait>released</trait>
+                    <desc>Function to get all parameters of the client in JSON format.</desc>
+                    <return desc="JSON string with all parameters." multiplicity="1" name="jsonParameters" type="string"/>
+                </function>
+                <function name="resetModule">
+                    <desc>Function to reset main configuration of module.</desc>
+                </function>
             </serves>
         </crown>
+        <crown name="ResultManager_FC">
+            <trait>released</trait>
+            <desc>Crown to provide CSK_FlowConfig relevant features.</desc>
+            <enum name="ResultType" trait="released" type="string">
+                <desc>Types of results to provide.</desc>
+                <item desc="Check if result of expression matches the criteria definition. Will return BOOL value." name="CRITERIA">CRITERIA</item>
+                <item desc="Result of expression. Return value depends on configuration." name="EXPRESSION">EXPRESSION</item>
+                <item desc="Merge incoming data of multiple sources to provide as single source with multiple parameters." name="DATA">DATA</item>
+            </enum>
+            <serves/>
+            <crown name="DataSource">
+                <desc>Set source(s) of incoming data to use as parameter in expression / to merge data</desc>
+                <serves>
+                    <function name="create">
+                        <desc>Internally used CSK_FlowConfig create function.</desc>
+                        <param desc="Name of expression." multiplicity="1" name="ExpressionName" type="string"/>
+                        <param desc="Parameter position within source1 (default is '1')." multiplicity="?" name="ParamPos1" type="int"/>
+                        <param desc="Parameter position within source2 (default is '1')." multiplicity="?" name="ParamPos2" type="int"/>
+                        <param desc="Parameter position within source3 (default is '1')." multiplicity="?" name="ParamPos3" type="int"/>
+                        <param desc="Parameter position within source4 (default is '1')." multiplicity="?" name="ParamPos4" type="int"/>
+                        <return desc="Handle to internally used FlowConfig instance." multiplicity="1" name="handle" type="handle"/>
+                    </function>
+                    <function name="dataSource">
+                        <include>data-flow</include>
+                        <desc>Set source(s) of incoming data to use as parameter in expression / to merge data</desc>
+                        <param desc="Handle to internally used FlowConfig instance." multiplicity="1" name="handle" type="handle"/>
+                        <param desc="Source of param1 to use in expression.&#10;&#10;Parameter:&#10;1: Data (AUTO)" multiplicity="?" name="source1" ref="ResultManager_FC.ResultType" type="string"/>
+                        <param desc="Source of param2 to use in expression.&#10;&#10;Parameter:&#10;1: Data (AUTO)" multiplicity="?" name="source2" type="string"/>
+                        <param desc="Source of param3 to use in expression.&#10;&#10;Parameter:&#10;1: Data (AUTO)" multiplicity="?" name="source3" type="string"/>
+                        <param desc="Source of param4 to use in expression.&#10;&#10;Parameter:&#10;1: Data (AUTO)" multiplicity="?" name="source4" type="string"/>
+                    </function>
+                </serves>
+            </crown>
+            <crown name="OnNewResult">
+                <trait>released</trait>
+                <desc>Provide result of expression or merged data.</desc>
+                <serves>
+                    <event name="OnNewResult">
+                        <include>data-flow</include>
+                        <desc>Provide result of expression or merged data.</desc>
+                        <param desc="Handle to internally used FlowConfig instance." multiplicity="1" name="handle" type="handle"/>
+                        <param desc="'CSK_ResultManager.OnNewCriteriaResult_[EXPRESSION]' or 'CSK_ResultManager.OnNewResult_[EXPRESSION]' or 'CSK_ResultManager.OnNewData_[EXPRESSION]'&#10;&#10;Parameter:&#10;1: Result (AUTO)&#10;2-4: (optional) AUTO data types if 'Mode' = 'DATA'" multiplicity="1" name="OnNewResult" type="string"/>
+                    </event>
+                    <function name="create">
+                        <trait>released</trait>
+                        <desc>Internally used CSK_FlowConfig create function.</desc>
+                        <param desc="Name of expression." multiplicity="1" name="ExpressionName" type="string"/>
+                        <param desc="Type of result to provide.&#10;&#10;'CRITERIA' = Result if defined criteria was fullfilled&#10;&#10;'EXPRESSION' = Result of defined expression&#10;&#10;'DATA' = Provide merged data of multiple sources" multiplicity="1" name="Mode" ref="ResultManager_FC.ResultType" type="enum"/>
+                        <return desc="Handle to internally used FlowConfig instance." multiplicity="1" name="handle" type="handle"/>
+                    </function>
+                    <function name="register">
+                        <trait>released</trait>
+                        <desc>Internally used CSK_FlowConfig register function.</desc>
+                        <param desc="Handle to internally used FlowConfig instance." multiplicity="1" name="handle" type="handle"/>
+                        <param desc="Internal parameter (not used)." multiplicity="1" name="eventname" type="string"/>
+                        <param desc="Internally used callback function." multiplicity="1" name="callback" type="string"/>
+                        <return desc="Success of register process." multiplicity="1" name="success" type="bool"/>
+                    </function>
+                </serves>
+            </crown>
+            <crown name="Process">
+                <trait>released</trait>
+                <desc>Set source(s) of incoming data to use as parameter in expression / to merge data and provide result of expression or merged data.</desc>
+                <serves>
+                    <function name="create">
+                        <trait>released</trait>
+                        <desc>Internally used CSK_FlowConfig create function.</desc>
+                        <param desc="Name of expression." multiplicity="1" name="ExpressionName" type="string"/>
+                        <param desc="Type of result to provide.&#10;&#10;'CRITERIA' = Result if defined criteria was fullfilled&#10;&#10;'EXPRESSION' = Result of defined expression&#10;&#10;'DATA' = Provide merged data of multiple sources" multiplicity="1" name="Mode" ref="ResultManager_FC.ResultType" type="enum"/>
+                        <param desc="Position of parameter1 within event. (default is '1')" multiplicity="?" name="Param1EventPos" type="int"/>
+                        <param desc="Position of parameter2 within event. (default is '1')" multiplicity="?" name="Param2EventPos" type="int"/>
+                        <param desc="Position of parameter3 within event. (default is '1')" multiplicity="?" name="Param3EventPos" type="int"/>
+                        <param desc="Position of parameter4 within event. (default is '1')" multiplicity="?" name="Param4EventPos" type="int"/>
+                        <return desc="Handle to internally used FlowConfig instance." multiplicity="1" name="handle" type="handle"/>
+                    </function>
+                    <function name="process">
+                        <include>data-flow</include>
+                        <desc>Set source(s) of incoming data to use as parameter in expression / to merge data and provide result of expression or merged data.</desc>
+                        <param desc="Handle to internally used FlowConfig instance." multiplicity="1" name="handle" type="handle"/>
+                        <param desc="Source of param1 to use in expression.&#10;&#10;Parameter:&#10;1: Data (AUTO)" multiplicity="?" name="source1" type="string"/>
+                        <param desc="Source of param2 to use in expression.&#10;&#10;Parameter:&#10;1: Data (AUTO)" multiplicity="?" name="source2" type="string"/>
+                        <param desc="Source of param3 to use in expression.&#10;&#10;Parameter:&#10;1: Data (AUTO)" multiplicity="?" name="source3" type="string"/>
+                        <param desc="Source of param4 to use in expression.&#10;&#10;Parameter:&#10;1: Data (AUTO)" multiplicity="?" name="source4" type="string"/>
+                        <return desc="'CSK_ResultManager.OnNewCriteriaResult_[EXPRESSION]' or 'CSK_ResultManager.OnNewResult_[EXPRESSION]' or 'CSK_ResultManager.OnNewData_[EXPRESSION]'&#10;&#10;Parameter:&#10;1: Result (AUTO)&#10;2-4: (optional) AUTO data types if 'Mode' = 'DATA'" multiplicity="1" name="OnNewResult" type="string"/>
+                    </function>
+                </serves>
+            </crown>
+        </crown>
         <meta key="author">SICK AG</meta>
-        <meta key="version">1.0.0</meta>
+        <meta key="version">2.0.0</meta>
         <meta key="priority">low</meta>
         <meta key="copy-protected">false</meta>
         <meta key="read-protected">false</meta>
