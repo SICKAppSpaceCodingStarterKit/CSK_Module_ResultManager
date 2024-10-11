@@ -137,7 +137,7 @@ local function handleOnExpiredTmrResultManager()
 
   updateUserLevel()
 
-  Script.notifyEvent("ResultManager_OnNewStatusModuleVersion", resultManager_Model.version)
+  Script.notifyEvent("ResultManager_OnNewStatusModuleVersion", 'v' .. resultManager_Model.version)
   Script.notifyEvent("ResultManager_OnNewStatusCSKStyle", resultManager_Model.styleForUI)
   Script.notifyEvent("ResultManager_OnNewStatusModuleIsActive", _G.availableAPIs.default)
 
