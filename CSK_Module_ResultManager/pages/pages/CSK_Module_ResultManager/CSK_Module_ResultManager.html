@@ -252,6 +252,23 @@
                                         </layout-row>
                                     </layout-column>
                                     <layout-column id="ColumnLayout29" style="align-items: stretch">
+                                        <layout-row id="RowLayout33"
+                                            style="justify-content: flex-end; align-items: center">
+                                            <davinci-value-display id="VD_ShowProcessData" value="Show process data:"
+                                                title="Set status if UI should show processed data.">
+                                            </davinci-value-display>
+                                            <davinci-toggle-switch id="TS_ShowProcessData"
+                                                title="Set status if UI should show processed data.">
+                                                <crown-edpws-binding property="checked"
+                                                    name="CSK_ResultManager/OnNewStatusShowProcessData"
+                                                    update-on-resume>
+                                                </crown-edpws-binding>
+                                                <crown-binding event="change"
+                                                    name="CSK_ResultManager/setShowProcessData" path="param/args/status"
+                                                    auto-commit>
+                                                </crown-binding>
+                                            </davinci-toggle-switch>
+                                        </layout-row>
                                     </layout-column>
                                 </layout-row>
                                 <layout-row id="RowLayout31">
@@ -838,20 +855,51 @@
                                                                                 update-on-resume>
                                                                             </crown-edpws-binding>
                                                                         </stacked-view>
-                                                                        <layout-row id="RowLayout18"
+                                                                        <layout-row id="RowLayout3"
                                                                             style="align-items: center">
-                                                                            <davinci-value-display
-                                                                                id="VD_CriteriaResult"
-                                                                                value="Criteria result:">
-                                                                            </davinci-value-display>
-                                                                            <davinci-status-indicator
-                                                                                id="SI_CriteriaResult">
-                                                                                <span></span>
-                                                                                <crown-edpws-binding property="status"
-                                                                                    name="CSK_ResultManager/OnNewStatusCriteriaResult"
-                                                                                    update-on-resume>
-                                                                                </crown-edpws-binding>
-                                                                            </davinci-status-indicator>
+                                                                            <layout-column id="ColumnLayout7">
+                                                                                <layout-row id="RowLayout18"
+                                                                                    style="align-items: center">
+                                                                                    <davinci-value-display
+                                                                                        id="VD_CriteriaResult"
+                                                                                        value="Criteria result:">
+                                                                                    </davinci-value-display>
+                                                                                    <davinci-status-indicator
+                                                                                        id="SI_CriteriaResult">
+                                                                                        <span></span>
+                                                                                        <crown-edpws-binding
+                                                                                            property="status"
+                                                                                            name="CSK_ResultManager/OnNewStatusCriteriaResult"
+                                                                                            update-on-resume>
+                                                                                        </crown-edpws-binding>
+                                                                                    </davinci-status-indicator>
+                                                                                </layout-row>
+                                                                            </layout-column>
+                                                                            <layout-column id="ColumnLayout31"
+                                                                                style="align-items: flex-end">
+                                                                                <layout-row id="RowLayout24"
+                                                                                    style="align-items: center">
+                                                                                    <davinci-value-display
+                                                                                        id="VD_CheckCriteriaToForward"
+                                                                                        value="Check criteria to forward:"
+                                                                                        title="Only forward result if criteria was valid.">
+                                                                                    </davinci-value-display>
+                                                                                    <davinci-toggle-switch
+                                                                                        id="TS_CheckCriteriaToForward"
+                                                                                        title="Only forward result if criteria was valid.">
+                                                                                        <crown-edpws-binding
+                                                                                            property="checked"
+                                                                                            name="CSK_ResultManager/OnNewStatusCheckCriteriaToForwardResult"
+                                                                                            update-on-resume>
+                                                                                        </crown-edpws-binding>
+                                                                                        <crown-binding event="change"
+                                                                                            name="CSK_ResultManager/setCheckCriteriaToForward"
+                                                                                            path="param/args/status"
+                                                                                            auto-commit>
+                                                                                        </crown-binding>
+                                                                                    </davinci-toggle-switch>
+                                                                                </layout-row>
+                                                                            </layout-column>
                                                                         </layout-row>
                                                                         <davinci-value-display id="VD_EventInfo">
                                                                             <crown-edpws-binding property="value"
@@ -859,6 +907,10 @@
                                                                                 update-on-resume>
                                                                             </crown-edpws-binding>
                                                                         </davinci-value-display>
+                                                                        <layout-row id="RowLayout35"
+                                                                            class="myCustomSpacerVert10_CSK_Module_ResultManager"
+                                                                            style="flex-grow: 0; flex-shrink: 0">
+                                                                        </layout-row>
                                                                     </layout-column>
                                                                 </layout-row>
                                                             </stacked-pane>

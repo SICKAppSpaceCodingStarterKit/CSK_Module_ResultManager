@@ -43,12 +43,14 @@ Script.serveEvent('CSK_ResultManager.OnNewStatusEventInfo', 'ResultManager_OnNew
 
 Script.serveEvent('CSK_ResultManager.OnNewStatusMergeData', 'ResultManager_OnNewStatusMergeData')
 Script.serveEvent('CSK_ResultManager.OnNewStatusExpression', 'ResultManager_OnNewStatusExpression')
+Script.serveEvent('CSK_ResultManager.OnNewStatusShowProcessData', 'ResultManager_OnNewStatusShowProcessData')
 Script.serveEvent('CSK_ResultManager.OnNewStatusResult', 'ResultManager_OnNewStatusResult')
 Script.serveEvent('CSK_ResultManager.OnNewStatusCriteriaResult', 'ResultManager_OnNewStatusCriteriaResult')
 
 Script.serveEvent('CSK_ResultManager.OnNewStatusCriteriaType', 'ResultManager_OnNewStatusCriteriaType')
 Script.serveEvent('CSK_ResultManager.OnNewStatusCriteria', 'ResultManager_OnNewStatusCriteria')
 Script.serveEvent('CSK_ResultManager.OnNewStatusCriteriaString', 'ResultManager_OnNewStatusCriteriaString')
+Script.serveEvent('CSK_ResultManager.OnNewStatusCheckCriteriaToForwardResult', 'ResultManager_OnNewStatusCheckCriteriaToForwardResult')
 
 Script.serveEvent('CSK_ResultManager.OnNewStatusCriteriaMaximum', 'ResultManager_OnNewStatusCriteriaMaximum')
 Script.serveEvent('CSK_ResultManager.OnNewStatusParameterList', 'ResultManager_OnNewStatusParameterList')
@@ -148,10 +150,12 @@ local function handleOnExpiredTmrResultManager()
   if resultManager_Model.selectedExpression ~= '' then
     Script.notifyEvent("ResultManager_OnNewStatusExpressionSelected", true)
     Script.notifyEvent("ResultManager_OnNewStatusExpressionName", resultManager_Model.parameters.expressions[resultManager_Model.selectedExpression].name)
+    Script.notifyEvent("ResultManager_OnNewStatusShowProcessData", resultManager_Model.showProcessData)
     Script.notifyEvent("ResultManager_OnNewStatusMergeData", resultManager_Model.parameters.expressions[resultManager_Model.selectedExpression].mergeData)
 
     Script.notifyEvent("ResultManager_OnNewStatusExpression", resultManager_Model.parameters.expressions[resultManager_Model.selectedExpression].expression)
     Script.notifyEvent("ResultManager_OnNewStatusCriteriaType", resultManager_Model.parameters.expressions[resultManager_Model.selectedExpression].criteriaType)
+    Script.notifyEvent("ResultManager_OnNewStatusCheckCriteriaToForwardResult", resultManager_Model.parameters.expressions[resultManager_Model.selectedExpression].checkCriteraToForward)
 
     if resultManager_Model.parameters.expressions[resultManager_Model.selectedExpression].criteriaType == 'STRING' then
       Script.notifyEvent("ResultManager_OnNewStatusCriteriaString", resultManager_Model.parameters.expressions[resultManager_Model.selectedExpression].criteria)
@@ -218,6 +222,11 @@ local function setExpressionName(name)
   resultManager_Model.newExpressionName = name
 end
 Script.serveFunction('CSK_ResultManager.setExpressionName', setExpressionName)
+
+local function setShowProcessData(status)
+  resultManager_Model.showProcessData = status
+end
+Script.serveFunction('CSK_ResultManager.setShowProcessData', setShowProcessData)
 
 local function addExpressionViaUI()
   if resultManager_Model.newExpressionName ~= '' then
@@ -301,6 +310,14 @@ local function setCriteriaMaximum(maxCriteria)
   end
 end
 Script.serveFunction('CSK_ResultManager.setCriteriaMaximum', setCriteriaMaximum)
+
+local function setCheckCriteriaToForward(status)
+  if resultManager_Model.parameters.expressions[resultManager_Model.selectedExpression] then
+    _G.logger:fine(nameOfModule .. ": Set status do check criteria to forward result to '" .. tostring(status) .. "'.")
+    resultManager_Model.parameters.expressions[resultManager_Model.selectedExpression].checkCriteraToForward = status
+  end
+end
+Script.serveFunction('CSK_ResultManager.setCheckCriteriaToForward', setCheckCriteriaToForward)
 
 --- Function to check if selection in UIs DynamicTable can find related pattern
 ---@param selection string Full text of selection

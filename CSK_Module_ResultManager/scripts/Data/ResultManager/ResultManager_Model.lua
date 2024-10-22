@@ -34,6 +34,7 @@ resultManager_Model.helperFuncs = require('Data/ResultManager/helper/funcs')
 -- Loading LuaXP as a simple arithmetic expression parser for Lua.
 resultManager_Model.luaXP = require('Data/ResultManager/LuaXP')
 
+resultManager_Model.showProcessData = false -- Status if process data should be shown in UI
 resultManager_Model.selectedExpression = '' -- Name of selected expression to edit / show
 resultManager_Model.newExpressionName = 'ExpressionName' -- Name for new expression to create
 resultManager_Model.selectedParameter = '' -- Selected parameter of expression
@@ -59,6 +60,7 @@ resultManager_Model.parameters.expressions[name].parameterPositions = {} -- Posi
 resultManager_Model.parameters.expressions[name].data = {} -- Stores temporarily the incoming parameters, received by the configured events.
 resultManager_Model.parameters.expressions[name].eventFunctions = {} -- Internally used functions to react on events of parameter values.
 resultManager_Model.parameters.expressions[name].paramAmount -- Amount of parameters to collect before expression processing.
+resultManager_Model.parameters.expressions[name].checkCriteraToForward -- Status if results should only be forwarded via events if criteria was valid
 ]]
 
 --**************************************************************************
@@ -334,13 +336,12 @@ local function process(expressionName, data)
       end
 
       -- If currently selected show result on UI
-      if expressionName == resultManager_Model.selectedExpression then
+      if expressionName == resultManager_Model.selectedExpression and resultManager_Model.showProcessData then
         Script.notifyEvent("ResultManager_OnNewStatusParameterList", resultManager_Model.helperFuncs.createJsonListExpressionParameters(resultManager_Model.parameters.expressions[expressionName].events, resultManager_Model.parameters.expressions[expressionName].data, resultManager_Model.selectedParameter))
         if processOK then
           Script.notifyEvent('ResultManager_OnNewStatusResult', tostring(resultValue))
         end
         Script.notifyEvent('ResultManager_OnNewStatusCriteriaResult', suc)
-
       end
 
       _G.logger:fine(nameOfModule .. ": Result of expression '" .. tostring(expressionName) .. "' = " .. tostring(suc))
@@ -350,7 +351,14 @@ local function process(expressionName, data)
         Script.notifyEvent('ResultManager_OnNewCriteriaResult_'..expressionName, suc)
       end
       if Script.isServedAsEvent("CSK_ResultManager.OnNewResult_" .. expressionName) then
-        Script.notifyEvent('ResultManager_OnNewResult_'..expressionName, resultValue)
+        if resultManager_Model.parameters.expressions[expressionName].checkCriteraToForward == true then
+          -- Only notify result if criteria was valid
+          if suc then
+            Script.notifyEvent('ResultManager_OnNewResult_'..expressionName, resultValue)
+          end
+        else
+          Script.notifyEvent('ResultManager_OnNewResult_'..expressionName, resultValue)
+        end
       end
 
       -- Clear parameters
@@ -483,6 +491,7 @@ local function addExpression(name, mergeData, expression, criteriaType, criteria
       resultManager_Model.parameters.expressions[name].mergeData = mergeData
       resultManager_Model.parameters.expressions[name].criteriaType = criteriaType
       resultManager_Model.parameters.expressions[name].criteria = criteria
+      resultManager_Model.parameters.expressions[name].checkCriteraToForward = false
       if criteriaMax then
         resultManager_Model.parameters.expressions[name].criteriaMax = criteriaMax
       else

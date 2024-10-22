@@ -8,6 +8,8 @@ All notable changes to this project will be documented in this file.
 - Added new syntaxes: 'stringPack', 'stringUnpack', 'searchAndCut', 'dateTime', 'timestamp'
 - New feature to merge multiple parameters of different events and to provide them within a single event with multiple parameters (see 'setMergeData' and 'OnNewData_EXPRESSION')
 - New feature to provide the result of the expression criteria ('OnNewCriteriaResult_EXPRESSION')
+- New feature to only forward result if criteria is valid ('setCheckCriteriaToForward')
+- Selectable if processed data should be shown in UI ('setShowProcessData')
 - Provide version of module via 'OnNewStatusModuleVersion'
 - Function 'getParameters' to provide PersistentData parameters
 - Check if features of module can be used on device and provide this via 'OnNewStatusModuleIsActive' event / 'getStatusModuleActive' function
