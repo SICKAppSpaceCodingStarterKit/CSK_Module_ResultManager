@@ -16,6 +16,7 @@ All notable changes to this project will be documented in this file.
 - Function to 'resetModule' to default setup
 
 ### Improvements
+- Prevent runtime error based on wrong expression definition
 - extended 'addExpression' with attribute to set if it should only merge data
 - proper UI table selection
 - Improved behaviour for loading parameters (not needed to wait for other modules)

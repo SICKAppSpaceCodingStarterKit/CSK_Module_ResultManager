@@ -276,7 +276,7 @@ local function process(expressionName, data)
 
     if resultValue == nil then
       Script.notifyEvent('ResultManager_OnNewStatusResult', "Error in evaluation of expression: " .. tostring(err.message))
-      error("Error in evaluation of expression: " .. tostring(err.message))
+      _G.logger:warning(nameOfModule .. ": Error in evaluation of expression: " .. tostring(err.message))
     else
       local suc = false
       local processOK = true
