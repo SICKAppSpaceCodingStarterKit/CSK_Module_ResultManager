@@ -61,6 +61,9 @@ resultManager_Model.parameters.expressions[name].data = {} -- Stores temporarily
 resultManager_Model.parameters.expressions[name].eventFunctions = {} -- Internally used functions to react on events of parameter values.
 resultManager_Model.parameters.expressions[name].paramAmount -- Amount of parameters to collect before expression processing.
 resultManager_Model.parameters.expressions[name].checkCriteraToForward -- Status if results should only be forwarded via events if criteria was valid
+resultManager_Model.parameters.expressions[name].customResultMode -- Status if custom results should be used as results related to criteria instead of expression result itself
+resultManager_Model.parameters.expressions[name].customResultOK -- Result to provide in customResult mode if criteria was valid
+resultManager_Model.parameters.expressions[name].customResultNOK -- Result to provide in customResult mode if criteria was not valid
 ]]
 
 --**************************************************************************
@@ -354,10 +357,22 @@ local function process(expressionName, data)
         if resultManager_Model.parameters.expressions[expressionName].checkCriteraToForward == true then
           -- Only notify result if criteria was valid
           if suc then
-            Script.notifyEvent('ResultManager_OnNewResult_'..expressionName, resultValue)
+            if resultManager_Model.parameters.expressions[expressionName].customResultMode then
+              Script.notifyEvent('ResultManager_OnNewResult_'..expressionName, resultManager_Model.parameters.expressions[expressionName].customResultOK)
+            else
+              Script.notifyEvent('ResultManager_OnNewResult_'..expressionName, resultValue)
+            end
           end
         else
-          Script.notifyEvent('ResultManager_OnNewResult_'..expressionName, resultValue)
+          if resultManager_Model.parameters.expressions[expressionName].customResultMode then
+            if suc then
+              Script.notifyEvent('ResultManager_OnNewResult_'..expressionName, resultManager_Model.parameters.expressions[expressionName].customResultOK)
+            else
+              Script.notifyEvent('ResultManager_OnNewResult_'..expressionName, resultManager_Model.parameters.expressions[expressionName].customResultNOK)
+            end
+          else
+            Script.notifyEvent('ResultManager_OnNewResult_'..expressionName, resultValue)
+          end
         end
       end
 
@@ -492,6 +507,11 @@ local function addExpression(name, mergeData, expression, criteriaType, criteria
       resultManager_Model.parameters.expressions[name].criteriaType = criteriaType
       resultManager_Model.parameters.expressions[name].criteria = criteria
       resultManager_Model.parameters.expressions[name].checkCriteraToForward = false
+
+      resultManager_Model.parameters.expressions[name].customResultMode = false
+      resultManager_Model.parameters.expressions[name].customResultOK = ''
+      resultManager_Model.parameters.expressions[name].customResultNOK = ''
+
       if criteriaMax then
         resultManager_Model.parameters.expressions[name].criteriaMax = criteriaMax
       else

@@ -619,7 +619,7 @@ h1,h2,h3,h4,h5,h6{color:#007cc1}
 <div class="details">
 <span id="author" class="author">SICK AG</span><br>
 <span id="revnumber">version 2.0.0,</span>
-<span id="revdate">2024-10-22</span>
+<span id="revdate">2024-11-15</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -660,6 +660,9 @@ h1,h2,h3,h4,h5,h6{color:#007cc1}
 <li><a href="#API:Function:CSK_ResultManager.setCriteria"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-function">setCriteria()</span></a></li>
 <li><a href="#API:Function:CSK_ResultManager.setCriteriaMaximum"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-function">setCriteriaMaximum()</span></a></li>
 <li><a href="#API:Function:CSK_ResultManager.setCriteriaType"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-function">setCriteriaType()</span></a></li>
+<li><a href="#API:Function:CSK_ResultManager.setCustomResultMode"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-function">setCustomResultMode()</span></a></li>
+<li><a href="#API:Function:CSK_ResultManager.setCustomResultNOK"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-function">setCustomResultNOK()</span></a></li>
+<li><a href="#API:Function:CSK_ResultManager.setCustomResultOK"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-function">setCustomResultOK()</span></a></li>
 <li><a href="#API:Function:CSK_ResultManager.setExpression"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-function">setExpression()</span></a></li>
 <li><a href="#API:Function:CSK_ResultManager.setExpressionName"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-function">setExpressionName()</span></a></li>
 <li><a href="#API:Function:CSK_ResultManager.setFlowConfigPriority"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-function">setFlowConfigPriority()</span></a></li>
@@ -686,6 +689,9 @@ h1,h2,h3,h4,h5,h6{color:#007cc1}
 <li><a href="#API:Event:CSK_ResultManager.OnNewStatusCriteriaString"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-event">OnNewStatusCriteriaString</span></a></li>
 <li><a href="#API:Event:CSK_ResultManager.OnNewStatusCriteriaType"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-event">OnNewStatusCriteriaType</span></a></li>
 <li><a href="#API:Event:CSK_ResultManager.OnNewStatusCSKStyle"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-event">OnNewStatusCSKStyle</span></a></li>
+<li><a href="#API:Event:CSK_ResultManager.OnNewStatusCustomResultMode"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-event">OnNewStatusCustomResultMode</span></a></li>
+<li><a href="#API:Event:CSK_ResultManager.OnNewStatusCustomResultNOK"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-event">OnNewStatusCustomResultNOK</span></a></li>
+<li><a href="#API:Event:CSK_ResultManager.OnNewStatusCustomResultOK"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-event">OnNewStatusCustomResultOK</span></a></li>
 <li><a href="#API:Event:CSK_ResultManager.OnNewStatusEventInfo"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-event">OnNewStatusEventInfo</span></a></li>
 <li><a href="#API:Event:CSK_ResultManager.OnNewStatusEventParameterPosition"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-event">OnNewStatusEventParameterPosition</span></a></li>
 <li><a href="#API:Event:CSK_ResultManager.OnNewStatusExpression"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-event">OnNewStatusExpression</span></a></li>
@@ -714,13 +720,13 @@ h1,h2,h3,h4,h5,h6{color:#007cc1}
 </li>
 <li><a href="#API:Crown:ResultManager_FC"><span class="api-crown">ResultManager_FC</span></a>
 <ul class="sectlevel3">
-<li><a href="#_short_description_69">Short description</a></li>
+<li><a href="#_short_description_75">Short description</a></li>
 <li><a href="#_overview_2">Overview</a></li>
 </ul>
 </li>
 <li><a href="#API:Crown:ResultManager_FC.DataSource"><span class="api-crown">ResultManager_FC.DataSource</span></a>
 <ul class="sectlevel3">
-<li><a href="#_short_description_70">Short description</a></li>
+<li><a href="#_short_description_76">Short description</a></li>
 <li><a href="#_overview_3">Overview</a></li>
 <li><a href="#_functions_2">Functions</a>
 <ul class="sectlevel4">
@@ -732,7 +738,7 @@ h1,h2,h3,h4,h5,h6{color:#007cc1}
 </li>
 <li><a href="#API:Crown:ResultManager_FC.OnNewResult"><span class="api-crown">ResultManager_FC.OnNewResult</span></a>
 <ul class="sectlevel3">
-<li><a href="#_short_description_73">Short description</a></li>
+<li><a href="#_short_description_79">Short description</a></li>
 <li><a href="#_overview_4">Overview</a></li>
 <li><a href="#_functions_3">Functions</a>
 <ul class="sectlevel4">
@@ -749,7 +755,7 @@ h1,h2,h3,h4,h5,h6{color:#007cc1}
 </li>
 <li><a href="#API:Crown:ResultManager_FC.Process"><span class="api-crown">ResultManager_FC.Process</span></a>
 <ul class="sectlevel3">
-<li><a href="#_short_description_77">Short description</a></li>
+<li><a href="#_short_description_83">Short description</a></li>
 <li><a href="#_overview_5">Overview</a></li>
 <li><a href="#_functions_4">Functions</a>
 <ul class="sectlevel4">
@@ -790,7 +796,7 @@ h1,h2,h3,h4,h5,h6{color:#007cc1}
 </tr>
 <tr>
 <th class="tableblock halign-left valign-top"><p class="tableblock">Date</p></th>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2024-10-22</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2024-11-15</p></td>
 </tr>
 <tr>
 <th class="tableblock halign-left valign-top"><p class="tableblock">Author</p></th>
@@ -896,13 +902,19 @@ Repeat this for each parameter.<br>
 Each expression will wait till ALL parameters got their values via the configured events.<br>
 As soon as all parameters are available, it will start the processing of the expression.<br>
 It will compare this result with the defined criteria and will provide its result via a dynamically created "CSK_ResultManager.OnNewCriteriaResult_EXPRESSION" event.<br>
-The result of the expression itself will be provided via a dynamically created "CSK_ResultManager.OnNewResult_EXPRESSION" event.<br>
-INFO: It is possible to only provide the result if the criteria was valid. See 'setCheckCriteriaToForward'.<br>
+<br>
+Via a dynamically created "CSK_ResultManager.OnNewResult_EXPRESSION" event, the module can provide:<br>
 (EXPRESSION will be replaced by the name of the added expression (e.g. "CSK_OnNewResult_CheckSumOfXY").<br>
+<br>
+- the result of the expression itself (default)<br>
+or<br>
+- a custom defined result related to the status if the crtieria was valid or not (see 'setCustomResultMode')<br>
+<br>
+INFO: In general it is possible to only provide the result if the criteria was valid. See 'setCheckCriteriaToForward'.<br>
 At the end it will clear all parameter values and will wait for new values.<br>
 INFO: Please make sure that the frequency of the events is in sync to not mix the result of different sources.<br>
 <br>
-Another possibility is to make use of 'addExpression' which combines the mentioned steps.<br></p>
+Another possibility is to make use of 'addExpression' which combines most of the mentioned steps.<br></p>
 </div>
 </div>
 <div class="sect3">
@@ -976,6 +988,15 @@ Another possibility is to make use of 'addExpression' which combines the mention
 <p><a href="#API:Function:CSK_ResultManager.setCriteriaType">setCriteriaType()</a></p>
 </li>
 <li>
+<p><a href="#API:Function:CSK_ResultManager.setCustomResultMode">setCustomResultMode()</a></p>
+</li>
+<li>
+<p><a href="#API:Function:CSK_ResultManager.setCustomResultNOK">setCustomResultNOK()</a></p>
+</li>
+<li>
+<p><a href="#API:Function:CSK_ResultManager.setCustomResultOK">setCustomResultOK()</a></p>
+</li>
+<li>
 <p><a href="#API:Function:CSK_ResultManager.setExpression">setExpression()</a></p>
 </li>
 <li>
@@ -1040,6 +1061,15 @@ Another possibility is to make use of 'addExpression' which combines the mention
 </li>
 <li>
 <p><a href="#API:Event:CSK_ResultManager.OnNewStatusCSKStyle">OnNewStatusCSKStyle</a></p>
+</li>
+<li>
+<p><a href="#API:Event:CSK_ResultManager.OnNewStatusCustomResultMode">OnNewStatusCustomResultMode</a></p>
+</li>
+<li>
+<p><a href="#API:Event:CSK_ResultManager.OnNewStatusCustomResultNOK">OnNewStatusCustomResultNOK</a></p>
+</li>
+<li>
+<p><a href="#API:Event:CSK_ResultManager.OnNewStatusCustomResultOK">OnNewStatusCustomResultOK</a></p>
 </li>
 <li>
 <p><a href="#API:Event:CSK_ResultManager.OnNewStatusEventInfo">OnNewStatusEventInfo</a></p>
@@ -1963,15 +1993,147 @@ Event on position '1' is related to expression parameter 'param1' and so on.</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="API:Function:CSK_ResultManager.setExpression"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-function">setExpression()</span></h5>
+<h5 id="API:Function:CSK_ResultManager.setCustomResultMode"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-function">setCustomResultMode()</span></h5>
 <div class="sect5">
 <h6 id="_short_description_25">Short description</h6>
+<div class="paragraph">
+<p>Function to set if custom results should be forwarded instead of expression result itself.</p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_parameters_11">Parameters</h6>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 12.5%;">
+<col style="width: 37.5%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Multiplicity</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">status</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">BOOL</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Status</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect5">
+<h6 id="_sample_auto_generated_23">Sample (auto-generated)</h6>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="lua">CSK_ResultManager.setCustomResultMode(status)</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="API:Function:CSK_ResultManager.setCustomResultNOK"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-function">setCustomResultNOK()</span></h5>
+<div class="sect5">
+<h6 id="_short_description_26">Short description</h6>
+<div class="paragraph">
+<p>Function to set result to provide if criteria was not valid and customResult mode is active.</p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_parameters_12">Parameters</h6>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 12.5%;">
+<col style="width: 37.5%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Multiplicity</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">result</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">STRING</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Result</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect5">
+<h6 id="_sample_auto_generated_24">Sample (auto-generated)</h6>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="lua">CSK_ResultManager.setCustomResultNOK(result)</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="API:Function:CSK_ResultManager.setCustomResultOK"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-function">setCustomResultOK()</span></h5>
+<div class="sect5">
+<h6 id="_short_description_27">Short description</h6>
+<div class="paragraph">
+<p>Function to set result to provide if criteria was valid and customResult mode is active.</p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_parameters_13">Parameters</h6>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 12.5%;">
+<col style="width: 37.5%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Multiplicity</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">result</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">STRING</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Result</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect5">
+<h6 id="_sample_auto_generated_25">Sample (auto-generated)</h6>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="lua">CSK_ResultManager.setCustomResultOK(result)</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="API:Function:CSK_ResultManager.setExpression"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-function">setExpression()</span></h5>
+<div class="sect5">
+<h6 id="_short_description_28">Short description</h6>
 <div class="paragraph">
 <p>Function to set expression to process for currently selected expressionName.</p>
 </div>
 </div>
 <div class="sect5">
-<h6 id="_parameters_11">Parameters</h6>
+<h6 id="_parameters_14">Parameters</h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 25%;">
@@ -1998,7 +2160,7 @@ Event on position '1' is related to expression parameter 'param1' and so on.</p>
 </table>
 </div>
 <div class="sect5">
-<h6 id="_sample_auto_generated_23">Sample (auto-generated)</h6>
+<h6 id="_sample_auto_generated_26">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="lua">CSK_ResultManager.setExpression(expression)</code></pre>
@@ -2009,13 +2171,13 @@ Event on position '1' is related to expression parameter 'param1' and so on.</p>
 <div class="sect4">
 <h5 id="API:Function:CSK_ResultManager.setExpressionName"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-function">setExpressionName()</span></h5>
 <div class="sect5">
-<h6 id="_short_description_26">Short description</h6>
+<h6 id="_short_description_29">Short description</h6>
 <div class="paragraph">
 <p>Function to set name for new expression to create.</p>
 </div>
 </div>
 <div class="sect5">
-<h6 id="_parameters_12">Parameters</h6>
+<h6 id="_parameters_15">Parameters</h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 25%;">
@@ -2042,7 +2204,7 @@ Event on position '1' is related to expression parameter 'param1' and so on.</p>
 </table>
 </div>
 <div class="sect5">
-<h6 id="_sample_auto_generated_24">Sample (auto-generated)</h6>
+<h6 id="_sample_auto_generated_27">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="lua">CSK_ResultManager.setExpressionName(name)</code></pre>
@@ -2053,13 +2215,13 @@ Event on position '1' is related to expression parameter 'param1' and so on.</p>
 <div class="sect4">
 <h5 id="API:Function:CSK_ResultManager.setFlowConfigPriority"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-function">setFlowConfigPriority()</span></h5>
 <div class="sect5">
-<h6 id="_short_description_27">Short description</h6>
+<h6 id="_short_description_30">Short description</h6>
 <div class="paragraph">
 <p>Function to configure if FlowConfig should have priority for FlowConfig relevant configuration.</p>
 </div>
 </div>
 <div class="sect5">
-<h6 id="_parameters_13">Parameters</h6>
+<h6 id="_parameters_16">Parameters</h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 25%;">
@@ -2086,7 +2248,7 @@ Event on position '1' is related to expression parameter 'param1' and so on.</p>
 </table>
 </div>
 <div class="sect5">
-<h6 id="_sample_auto_generated_25">Sample (auto-generated)</h6>
+<h6 id="_sample_auto_generated_28">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="lua">CSK_ResultManager.setFlowConfigPriority(status)</code></pre>
@@ -2097,13 +2259,13 @@ Event on position '1' is related to expression parameter 'param1' and so on.</p>
 <div class="sect4">
 <h5 id="API:Function:CSK_ResultManager.setLoadOnReboot"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-function">setLoadOnReboot()</span></h5>
 <div class="sect5">
-<h6 id="_short_description_28">Short description</h6>
+<h6 id="_short_description_31">Short description</h6>
 <div class="paragraph">
 <p>Configure if this module should load its saved parameters at app/device boot up.</p>
 </div>
 </div>
 <div class="sect5">
-<h6 id="_parameters_14">Parameters</h6>
+<h6 id="_parameters_17">Parameters</h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 25%;">
@@ -2130,7 +2292,7 @@ Event on position '1' is related to expression parameter 'param1' and so on.</p>
 </table>
 </div>
 <div class="sect5">
-<h6 id="_sample_auto_generated_26">Sample (auto-generated)</h6>
+<h6 id="_sample_auto_generated_29">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="lua">CSK_ResultManager.setLoadOnReboot(status)</code></pre>
@@ -2141,13 +2303,13 @@ Event on position '1' is related to expression parameter 'param1' and so on.</p>
 <div class="sect4">
 <h5 id="API:Function:CSK_ResultManager.setMergeData"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-function">setMergeData()</span></h5>
 <div class="sect5">
-<h6 id="_short_description_29">Short description</h6>
+<h6 id="_short_description_32">Short description</h6>
 <div class="paragraph">
 <p>Function to set status if only multiple data should be merged into new event.</p>
 </div>
 </div>
 <div class="sect5">
-<h6 id="_parameters_15">Parameters</h6>
+<h6 id="_parameters_18">Parameters</h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 25%;">
@@ -2174,7 +2336,7 @@ Event on position '1' is related to expression parameter 'param1' and so on.</p>
 </table>
 </div>
 <div class="sect5">
-<h6 id="_sample_auto_generated_27">Sample (auto-generated)</h6>
+<h6 id="_sample_auto_generated_30">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="lua">CSK_ResultManager.setMergeData(status)</code></pre>
@@ -2185,13 +2347,13 @@ Event on position '1' is related to expression parameter 'param1' and so on.</p>
 <div class="sect4">
 <h5 id="API:Function:CSK_ResultManager.setParameterEvent"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-function">setParameterEvent()</span></h5>
 <div class="sect5">
-<h6 id="_short_description_30">Short description</h6>
+<h6 id="_short_description_33">Short description</h6>
 <div class="paragraph">
 <p>Function to set event to register to for updating values of selected parameter of expression.</p>
 </div>
 </div>
 <div class="sect5">
-<h6 id="_parameters_16">Parameters</h6>
+<h6 id="_parameters_19">Parameters</h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 25%;">
@@ -2218,7 +2380,7 @@ Event on position '1' is related to expression parameter 'param1' and so on.</p>
 </table>
 </div>
 <div class="sect5">
-<h6 id="_sample_auto_generated_28">Sample (auto-generated)</h6>
+<h6 id="_sample_auto_generated_31">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="lua">CSK_ResultManager.setParameterEvent(event)</code></pre>
@@ -2229,13 +2391,13 @@ Event on position '1' is related to expression parameter 'param1' and so on.</p>
 <div class="sect4">
 <h5 id="API:Function:CSK_ResultManager.setParameterName"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-function">setParameterName()</span></h5>
 <div class="sect5">
-<h6 id="_short_description_31">Short description</h6>
+<h6 id="_short_description_34">Short description</h6>
 <div class="paragraph">
 <p>Function to set the name of the parameters if saved/loaded via the CSK_PersistentData module.</p>
 </div>
 </div>
 <div class="sect5">
-<h6 id="_parameters_17">Parameters</h6>
+<h6 id="_parameters_20">Parameters</h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 25%;">
@@ -2262,7 +2424,7 @@ Event on position '1' is related to expression parameter 'param1' and so on.</p>
 </table>
 </div>
 <div class="sect5">
-<h6 id="_sample_auto_generated_29">Sample (auto-generated)</h6>
+<h6 id="_sample_auto_generated_32">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="lua">CSK_ResultManager.setParameterName(name)</code></pre>
@@ -2273,13 +2435,13 @@ Event on position '1' is related to expression parameter 'param1' and so on.</p>
 <div class="sect4">
 <h5 id="API:Function:CSK_ResultManager.setParameterPosition"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-function">setParameterPosition()</span></h5>
 <div class="sect5">
-<h6 id="_short_description_32">Short description</h6>
+<h6 id="_short_description_35">Short description</h6>
 <div class="paragraph">
 <p>Function to set the parameter position within the registered event.</p>
 </div>
 </div>
 <div class="sect5">
-<h6 id="_parameters_18">Parameters</h6>
+<h6 id="_parameters_21">Parameters</h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 25%;">
@@ -2306,7 +2468,7 @@ Event on position '1' is related to expression parameter 'param1' and so on.</p>
 </table>
 </div>
 <div class="sect5">
-<h6 id="_sample_auto_generated_30">Sample (auto-generated)</h6>
+<h6 id="_sample_auto_generated_33">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="lua">CSK_ResultManager.setParameterPosition(pos)</code></pre>
@@ -2317,13 +2479,13 @@ Event on position '1' is related to expression parameter 'param1' and so on.</p>
 <div class="sect4">
 <h5 id="API:Function:CSK_ResultManager.setShowProcessData"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-function">setShowProcessData()</span></h5>
 <div class="sect5">
-<h6 id="_short_description_33">Short description</h6>
+<h6 id="_short_description_36">Short description</h6>
 <div class="paragraph">
 <p>Function to set if process data should be shown in UI.</p>
 </div>
 </div>
 <div class="sect5">
-<h6 id="_parameters_19">Parameters</h6>
+<h6 id="_parameters_22">Parameters</h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 25%;">
@@ -2350,7 +2512,7 @@ Event on position '1' is related to expression parameter 'param1' and so on.</p>
 </table>
 </div>
 <div class="sect5">
-<h6 id="_sample_auto_generated_31">Sample (auto-generated)</h6>
+<h6 id="_sample_auto_generated_34">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="lua">CSK_ResultManager.setShowProcessData(status)</code></pre>
@@ -2364,13 +2526,13 @@ Event on position '1' is related to expression parameter 'param1' and so on.</p>
 <div class="sect4">
 <h5 id="API:Event:CSK_ResultManager.OnDataLoadedOnReboot"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-event">OnDataLoadedOnReboot</span></h5>
 <div class="sect5">
-<h6 id="_short_description_34">Short description</h6>
+<h6 id="_short_description_37">Short description</h6>
 <div class="paragraph">
 <p>Event to call if module tried to load parameters and should be ready.</p>
 </div>
 </div>
 <div class="sect5">
-<h6 id="_sample_auto_generated_32">Sample (auto-generated)</h6>
+<h6 id="_sample_auto_generated_35">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnDataLoadedOnReboot</span>()
@@ -2385,7 +2547,7 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 <div class="sect4">
 <h5 id="API:Event:CSK_ResultManager.OnNewCriteriaResult_EXPRESSION"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-event">OnNewCriteriaResult_EXPRESSION</span></h5>
 <div class="sect5">
-<h6 id="_short_description_35">Short description</h6>
+<h6 id="_short_description_38">Short description</h6>
 <div class="paragraph">
 <p>Example of dynamically served event to provide criteria result of expression.<br>
 EXPRESSION will be replaced by the name of the added expression (e.g. "CSK_OnNewCriteriaResult_CheckSumOfXY").<br>
@@ -2420,7 +2582,7 @@ INFO: Other modules can check via "Script.isServedAsFunction" if event exists.<b
 </table>
 </div>
 <div class="sect5">
-<h6 id="_sample_auto_generated_33">Sample (auto-generated)</h6>
+<h6 id="_sample_auto_generated_36">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnNewCriteriaResult_EXPRESSION</span>(status)
@@ -2435,7 +2597,7 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 <div class="sect4">
 <h5 id="API:Event:CSK_ResultManager.OnNewData_EXPRESSION"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-event">OnNewData_EXPRESSION</span></h5>
 <div class="sect5">
-<h6 id="_short_description_36">Short description</h6>
+<h6 id="_short_description_39">Short description</h6>
 <div class="paragraph">
 <p>Notify forwarded data of expression.</p>
 </div>
@@ -2486,7 +2648,7 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 </table>
 </div>
 <div class="sect5">
-<h6 id="_sample_auto_generated_34">Sample (auto-generated)</h6>
+<h6 id="_sample_auto_generated_37">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnNewData_EXPRESSION</span>(data1, data2, data3, data4)
@@ -2501,7 +2663,7 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 <div class="sect4">
 <h5 id="API:Event:CSK_ResultManager.OnNewParameterName"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-event">OnNewParameterName</span></h5>
 <div class="sect5">
-<h6 id="_short_description_37">Short description</h6>
+<h6 id="_short_description_40">Short description</h6>
 <div class="paragraph">
 <p>Notify name of persistent data parameter.</p>
 </div>
@@ -2534,7 +2696,7 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 </table>
 </div>
 <div class="sect5">
-<h6 id="_sample_auto_generated_35">Sample (auto-generated)</h6>
+<h6 id="_sample_auto_generated_38">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnNewParameterName</span>(name)
@@ -2549,7 +2711,7 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 <div class="sect4">
 <h5 id="API:Event:CSK_ResultManager.OnNewResult_EXPRESSION"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-event">OnNewResult_EXPRESSION</span></h5>
 <div class="sect5">
-<h6 id="_short_description_38">Short description</h6>
+<h6 id="_short_description_41">Short description</h6>
 <div class="paragraph">
 <p>Example of dynamically served event to provide the result of expression itself.<br>
 EXPRESSION will be replaced by the name of the added expression (e.g. "CSK_OnNewResult_CheckSumOfXY").<br>
@@ -2584,7 +2746,7 @@ INFO: Other modules can check via "Script.isServedAsFunction" if event exists.<b
 </table>
 </div>
 <div class="sect5">
-<h6 id="_sample_auto_generated_36">Sample (auto-generated)</h6>
+<h6 id="_sample_auto_generated_39">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnNewResult_EXPRESSION</span>(result)
@@ -2599,7 +2761,7 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 <div class="sect4">
 <h5 id="API:Event:CSK_ResultManager.OnNewStatusAvailableEvents"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-event">OnNewStatusAvailableEvents</span></h5>
 <div class="sect5">
-<h6 id="_short_description_39">Short description</h6>
+<h6 id="_short_description_42">Short description</h6>
 <div class="paragraph">
 <p>Notify available events.</p>
 </div>
@@ -2632,7 +2794,7 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 </table>
 </div>
 <div class="sect5">
-<h6 id="_sample_auto_generated_37">Sample (auto-generated)</h6>
+<h6 id="_sample_auto_generated_40">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnNewStatusAvailableEvents</span>(listOfEvents)
@@ -2647,7 +2809,7 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 <div class="sect4">
 <h5 id="API:Event:CSK_ResultManager.OnNewStatusCheckCriteriaToForwardResult"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-event">OnNewStatusCheckCriteriaToForwardResult</span></h5>
 <div class="sect5">
-<h6 id="_short_description_40">Short description</h6>
+<h6 id="_short_description_43">Short description</h6>
 <div class="paragraph">
 <p>Notify status if criteria needs to be valid to notify result.</p>
 </div>
@@ -2680,7 +2842,7 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 </table>
 </div>
 <div class="sect5">
-<h6 id="_sample_auto_generated_38">Sample (auto-generated)</h6>
+<h6 id="_sample_auto_generated_41">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnNewStatusCheckCriteriaToForwardResult</span>(status)
@@ -2695,7 +2857,7 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 <div class="sect4">
 <h5 id="API:Event:CSK_ResultManager.OnNewStatusCriteria"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-event">OnNewStatusCriteria</span></h5>
 <div class="sect5">
-<h6 id="_short_description_41">Short description</h6>
+<h6 id="_short_description_44">Short description</h6>
 <div class="paragraph">
 <p>Notify (minimum) criteria for selected expression.</p>
 </div>
@@ -2728,7 +2890,7 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 </table>
 </div>
 <div class="sect5">
-<h6 id="_sample_auto_generated_39">Sample (auto-generated)</h6>
+<h6 id="_sample_auto_generated_42">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnNewStatusCriteria</span>(criteria)
@@ -2743,7 +2905,7 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 <div class="sect4">
 <h5 id="API:Event:CSK_ResultManager.OnNewStatusCriteriaMaximum"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-event">OnNewStatusCriteriaMaximum</span></h5>
 <div class="sect5">
-<h6 id="_short_description_42">Short description</h6>
+<h6 id="_short_description_45">Short description</h6>
 <div class="paragraph">
 <p>Notify maximum value of criteria (if criteria is a range).</p>
 </div>
@@ -2776,7 +2938,7 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 </table>
 </div>
 <div class="sect5">
-<h6 id="_sample_auto_generated_40">Sample (auto-generated)</h6>
+<h6 id="_sample_auto_generated_43">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnNewStatusCriteriaMaximum</span>(maxCriteria)
@@ -2791,7 +2953,7 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 <div class="sect4">
 <h5 id="API:Event:CSK_ResultManager.OnNewStatusCriteriaResult"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-event">OnNewStatusCriteriaResult</span></h5>
 <div class="sect5">
-<h6 id="_short_description_43">Short description</h6>
+<h6 id="_short_description_46">Short description</h6>
 <div class="paragraph">
 <p>Notify current criteria result of selected expression.</p>
 </div>
@@ -2824,7 +2986,7 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 </table>
 </div>
 <div class="sect5">
-<h6 id="_sample_auto_generated_41">Sample (auto-generated)</h6>
+<h6 id="_sample_auto_generated_44">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnNewStatusCriteriaResult</span>(result)
@@ -2839,7 +3001,7 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 <div class="sect4">
 <h5 id="API:Event:CSK_ResultManager.OnNewStatusCriteriaString"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-event">OnNewStatusCriteriaString</span></h5>
 <div class="sect5">
-<h6 id="_short_description_44">Short description</h6>
+<h6 id="_short_description_47">Short description</h6>
 <div class="paragraph">
 <p>Notify string criteria.</p>
 </div>
@@ -2872,7 +3034,7 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 </table>
 </div>
 <div class="sect5">
-<h6 id="_sample_auto_generated_42">Sample (auto-generated)</h6>
+<h6 id="_sample_auto_generated_45">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnNewStatusCriteriaString</span>(criteria)
@@ -2887,7 +3049,7 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 <div class="sect4">
 <h5 id="API:Event:CSK_ResultManager.OnNewStatusCriteriaType"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-event">OnNewStatusCriteriaType</span></h5>
 <div class="sect5">
-<h6 id="_short_description_45">Short description</h6>
+<h6 id="_short_description_48">Short description</h6>
 <div class="paragraph">
 <p>Notify type of criteria.</p>
 </div>
@@ -2920,7 +3082,7 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 </table>
 </div>
 <div class="sect5">
-<h6 id="_sample_auto_generated_43">Sample (auto-generated)</h6>
+<h6 id="_sample_auto_generated_46">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnNewStatusCriteriaType</span>(<span class="predefined">type</span>)
@@ -2935,7 +3097,7 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 <div class="sect4">
 <h5 id="API:Event:CSK_ResultManager.OnNewStatusCSKStyle"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-event">OnNewStatusCSKStyle</span></h5>
 <div class="sect5">
-<h6 id="_short_description_46">Short description</h6>
+<h6 id="_short_description_49">Short description</h6>
 <div class="paragraph">
 <p>Notify UI style to use for CSK modules.</p>
 </div>
@@ -2968,7 +3130,7 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 </table>
 </div>
 <div class="sect5">
-<h6 id="_sample_auto_generated_44">Sample (auto-generated)</h6>
+<h6 id="_sample_auto_generated_47">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnNewStatusCSKStyle</span>(theme)
@@ -2981,15 +3143,159 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 </div>
 </div>
 <div class="sect4">
+<h5 id="API:Event:CSK_ResultManager.OnNewStatusCustomResultMode"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-event">OnNewStatusCustomResultMode</span></h5>
+<div class="sect5">
+<h6 id="_short_description_50">Short description</h6>
+<div class="paragraph">
+<p>Notify if custom results should be used.</p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_callback_arguments_13">Callback arguments</h6>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 12.5%;">
+<col style="width: 37.5%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Multiplicity</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">status</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">BOOL</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Status</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect5">
+<h6 id="_sample_auto_generated_48">Sample (auto-generated)</h6>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnNewStatusCustomResultMode</span>(status)
+  <span class="comment">-- Do something</span>
+<span class="keyword">end</span>
+
+Script.register(<span class="string"><span class="delimiter">&quot;</span><span class="content">CSK_ResultManager.OnNewStatusCustomResultMode</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">handleOnNewStatusCustomResultMode</span><span class="delimiter">&quot;</span></span>)</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="API:Event:CSK_ResultManager.OnNewStatusCustomResultNOK"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-event">OnNewStatusCustomResultNOK</span></h5>
+<div class="sect5">
+<h6 id="_short_description_51">Short description</h6>
+<div class="paragraph">
+<p>Notify custom result to send if criteria was not valid.</p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_callback_arguments_14">Callback arguments</h6>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 12.5%;">
+<col style="width: 37.5%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Multiplicity</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">result</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">STRING</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Result</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect5">
+<h6 id="_sample_auto_generated_49">Sample (auto-generated)</h6>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnNewStatusCustomResultNOK</span>(result)
+  <span class="comment">-- Do something</span>
+<span class="keyword">end</span>
+
+Script.register(<span class="string"><span class="delimiter">&quot;</span><span class="content">CSK_ResultManager.OnNewStatusCustomResultNOK</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">handleOnNewStatusCustomResultNOK</span><span class="delimiter">&quot;</span></span>)</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="API:Event:CSK_ResultManager.OnNewStatusCustomResultOK"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-event">OnNewStatusCustomResultOK</span></h5>
+<div class="sect5">
+<h6 id="_short_description_52">Short description</h6>
+<div class="paragraph">
+<p>Notify custom result to send if criteria was valid.</p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_callback_arguments_15">Callback arguments</h6>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 12.5%;">
+<col style="width: 37.5%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Multiplicity</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">result</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">STRING</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Result</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect5">
+<h6 id="_sample_auto_generated_50">Sample (auto-generated)</h6>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnNewStatusCustomResultOK</span>(result)
+  <span class="comment">-- Do something</span>
+<span class="keyword">end</span>
+
+Script.register(<span class="string"><span class="delimiter">&quot;</span><span class="content">CSK_ResultManager.OnNewStatusCustomResultOK</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">handleOnNewStatusCustomResultOK</span><span class="delimiter">&quot;</span></span>)</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect4">
 <h5 id="API:Event:CSK_ResultManager.OnNewStatusEventInfo"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-event">OnNewStatusEventInfo</span></h5>
 <div class="sect5">
-<h6 id="_short_description_47">Short description</h6>
+<h6 id="_short_description_53">Short description</h6>
 <div class="paragraph">
 <p>Notify info about event name of expression.</p>
 </div>
 </div>
 <div class="sect5">
-<h6 id="_callback_arguments_13">Callback arguments</h6>
+<h6 id="_callback_arguments_16">Callback arguments</h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 25%;">
@@ -3016,7 +3322,7 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 </table>
 </div>
 <div class="sect5">
-<h6 id="_sample_auto_generated_45">Sample (auto-generated)</h6>
+<h6 id="_sample_auto_generated_51">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnNewStatusEventInfo</span>(eventInfo)
@@ -3031,13 +3337,13 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 <div class="sect4">
 <h5 id="API:Event:CSK_ResultManager.OnNewStatusEventParameterPosition"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-event">OnNewStatusEventParameterPosition</span></h5>
 <div class="sect5">
-<h6 id="_short_description_48">Short description</h6>
+<h6 id="_short_description_54">Short description</h6>
 <div class="paragraph">
 <p>Notify parameter position to be used for currently selected parameter event.</p>
 </div>
 </div>
 <div class="sect5">
-<h6 id="_callback_arguments_14">Callback arguments</h6>
+<h6 id="_callback_arguments_17">Callback arguments</h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 25%;">
@@ -3064,7 +3370,7 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 </table>
 </div>
 <div class="sect5">
-<h6 id="_sample_auto_generated_46">Sample (auto-generated)</h6>
+<h6 id="_sample_auto_generated_52">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnNewStatusEventParameterPosition</span>(parameterPosition)
@@ -3079,13 +3385,13 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 <div class="sect4">
 <h5 id="API:Event:CSK_ResultManager.OnNewStatusExpression"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-event">OnNewStatusExpression</span></h5>
 <div class="sect5">
-<h6 id="_short_description_49">Short description</h6>
+<h6 id="_short_description_55">Short description</h6>
 <div class="paragraph">
 <p>Notify expression to process of current selected expression.</p>
 </div>
 </div>
 <div class="sect5">
-<h6 id="_callback_arguments_15">Callback arguments</h6>
+<h6 id="_callback_arguments_18">Callback arguments</h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 25%;">
@@ -3112,7 +3418,7 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 </table>
 </div>
 <div class="sect5">
-<h6 id="_sample_auto_generated_47">Sample (auto-generated)</h6>
+<h6 id="_sample_auto_generated_53">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnNewStatusExpression</span>(expression)
@@ -3127,13 +3433,13 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 <div class="sect4">
 <h5 id="API:Event:CSK_ResultManager.OnNewStatusExpressionName"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-event">OnNewStatusExpressionName</span></h5>
 <div class="sect5">
-<h6 id="_short_description_50">Short description</h6>
+<h6 id="_short_description_56">Short description</h6>
 <div class="paragraph">
 <p>Notify name of currently selected expression.</p>
 </div>
 </div>
 <div class="sect5">
-<h6 id="_callback_arguments_16">Callback arguments</h6>
+<h6 id="_callback_arguments_19">Callback arguments</h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 25%;">
@@ -3160,7 +3466,7 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 </table>
 </div>
 <div class="sect5">
-<h6 id="_sample_auto_generated_48">Sample (auto-generated)</h6>
+<h6 id="_sample_auto_generated_54">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnNewStatusExpressionName</span>(name)
@@ -3175,153 +3481,9 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 <div class="sect4">
 <h5 id="API:Event:CSK_ResultManager.OnNewStatusExpressionSelected"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-event">OnNewStatusExpressionSelected</span></h5>
 <div class="sect5">
-<h6 id="_short_description_51">Short description</h6>
+<h6 id="_short_description_57">Short description</h6>
 <div class="paragraph">
 <p>Notify status if an expression is selected.</p>
-</div>
-</div>
-<div class="sect5">
-<h6 id="_callback_arguments_17">Callback arguments</h6>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 25%;">
-<col style="width: 25%;">
-<col style="width: 12.5%;">
-<col style="width: 37.5%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Name</th>
-<th class="tableblock halign-left valign-top">Type</th>
-<th class="tableblock halign-left valign-top">Multiplicity</th>
-<th class="tableblock halign-left valign-top">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">status</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">BOOL</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Status</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="sect5">
-<h6 id="_sample_auto_generated_49">Sample (auto-generated)</h6>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnNewStatusExpressionSelected</span>(status)
-  <span class="comment">-- Do something</span>
-<span class="keyword">end</span>
-
-Script.register(<span class="string"><span class="delimiter">&quot;</span><span class="content">CSK_ResultManager.OnNewStatusExpressionSelected</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">handleOnNewStatusExpressionSelected</span><span class="delimiter">&quot;</span></span>)</code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class="sect4">
-<h5 id="API:Event:CSK_ResultManager.OnNewStatusFlowConfigPriority"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-event">OnNewStatusFlowConfigPriority</span></h5>
-<div class="sect5">
-<h6 id="_short_description_52">Short description</h6>
-<div class="paragraph">
-<p>Notify if FlowConfig should have priority for FlowConfig relevant configurations.</p>
-</div>
-</div>
-<div class="sect5">
-<h6 id="_callback_arguments_18">Callback arguments</h6>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 25%;">
-<col style="width: 25%;">
-<col style="width: 12.5%;">
-<col style="width: 37.5%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Name</th>
-<th class="tableblock halign-left valign-top">Type</th>
-<th class="tableblock halign-left valign-top">Multiplicity</th>
-<th class="tableblock halign-left valign-top">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">status</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">BOOL</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Status</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="sect5">
-<h6 id="_sample_auto_generated_50">Sample (auto-generated)</h6>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnNewStatusFlowConfigPriority</span>(status)
-  <span class="comment">-- Do something</span>
-<span class="keyword">end</span>
-
-Script.register(<span class="string"><span class="delimiter">&quot;</span><span class="content">CSK_ResultManager.OnNewStatusFlowConfigPriority</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">handleOnNewStatusFlowConfigPriority</span><span class="delimiter">&quot;</span></span>)</code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class="sect4">
-<h5 id="API:Event:CSK_ResultManager.OnNewStatusLinkedEvent"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-event">OnNewStatusLinkedEvent</span></h5>
-<div class="sect5">
-<h6 id="_short_description_53">Short description</h6>
-<div class="paragraph">
-<p>Notify linked event of selected expression parameter.</p>
-</div>
-</div>
-<div class="sect5">
-<h6 id="_callback_arguments_19">Callback arguments</h6>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 25%;">
-<col style="width: 25%;">
-<col style="width: 12.5%;">
-<col style="width: 37.5%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Name</th>
-<th class="tableblock halign-left valign-top">Type</th>
-<th class="tableblock halign-left valign-top">Multiplicity</th>
-<th class="tableblock halign-left valign-top">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">eventName</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">STRING</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Name of event.</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="sect5">
-<h6 id="_sample_auto_generated_51">Sample (auto-generated)</h6>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnNewStatusLinkedEvent</span>(eventName)
-  <span class="comment">-- Do something</span>
-<span class="keyword">end</span>
-
-Script.register(<span class="string"><span class="delimiter">&quot;</span><span class="content">CSK_ResultManager.OnNewStatusLinkedEvent</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">handleOnNewStatusLinkedEvent</span><span class="delimiter">&quot;</span></span>)</code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class="sect4">
-<h5 id="API:Event:CSK_ResultManager.OnNewStatusListOfExpressions"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-event">OnNewStatusListOfExpressions</span></h5>
-<div class="sect5">
-<h6 id="_short_description_54">Short description</h6>
-<div class="paragraph">
-<p>Notify list of available expressions.</p>
 </div>
 </div>
 <div class="sect5">
@@ -3343,33 +3505,33 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">list</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">STRING</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">status</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">BOOL</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">List</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Status</p></td>
 </tr>
 </tbody>
 </table>
 </div>
 <div class="sect5">
-<h6 id="_sample_auto_generated_52">Sample (auto-generated)</h6>
+<h6 id="_sample_auto_generated_55">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnNewStatusListOfExpressions</span>(list)
+<pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnNewStatusExpressionSelected</span>(status)
   <span class="comment">-- Do something</span>
 <span class="keyword">end</span>
 
-Script.register(<span class="string"><span class="delimiter">&quot;</span><span class="content">CSK_ResultManager.OnNewStatusListOfExpressions</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">handleOnNewStatusListOfExpressions</span><span class="delimiter">&quot;</span></span>)</code></pre>
+Script.register(<span class="string"><span class="delimiter">&quot;</span><span class="content">CSK_ResultManager.OnNewStatusExpressionSelected</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">handleOnNewStatusExpressionSelected</span><span class="delimiter">&quot;</span></span>)</code></pre>
 </div>
 </div>
 </div>
 </div>
 <div class="sect4">
-<h5 id="API:Event:CSK_ResultManager.OnNewStatusLoadParameterOnReboot"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-event">OnNewStatusLoadParameterOnReboot</span></h5>
+<h5 id="API:Event:CSK_ResultManager.OnNewStatusFlowConfigPriority"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-event">OnNewStatusFlowConfigPriority</span></h5>
 <div class="sect5">
-<h6 id="_short_description_55">Short description</h6>
+<h6 id="_short_description_58">Short description</h6>
 <div class="paragraph">
-<p>Notify status if parameters should be loaded on app/device boot up.</p>
+<p>Notify if FlowConfig should have priority for FlowConfig relevant configurations.</p>
 </div>
 </div>
 <div class="sect5">
@@ -3400,24 +3562,24 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 </table>
 </div>
 <div class="sect5">
-<h6 id="_sample_auto_generated_53">Sample (auto-generated)</h6>
+<h6 id="_sample_auto_generated_56">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnNewStatusLoadParameterOnReboot</span>(status)
+<pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnNewStatusFlowConfigPriority</span>(status)
   <span class="comment">-- Do something</span>
 <span class="keyword">end</span>
 
-Script.register(<span class="string"><span class="delimiter">&quot;</span><span class="content">CSK_ResultManager.OnNewStatusLoadParameterOnReboot</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">handleOnNewStatusLoadParameterOnReboot</span><span class="delimiter">&quot;</span></span>)</code></pre>
+Script.register(<span class="string"><span class="delimiter">&quot;</span><span class="content">CSK_ResultManager.OnNewStatusFlowConfigPriority</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">handleOnNewStatusFlowConfigPriority</span><span class="delimiter">&quot;</span></span>)</code></pre>
 </div>
 </div>
 </div>
 </div>
 <div class="sect4">
-<h5 id="API:Event:CSK_ResultManager.OnNewStatusMergeData"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-event">OnNewStatusMergeData</span></h5>
+<h5 id="API:Event:CSK_ResultManager.OnNewStatusLinkedEvent"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-event">OnNewStatusLinkedEvent</span></h5>
 <div class="sect5">
-<h6 id="_short_description_56">Short description</h6>
+<h6 id="_short_description_59">Short description</h6>
 <div class="paragraph">
-<p>Notify if multiple data should be merged to new event.</p>
+<p>Notify linked event of selected expression parameter.</p>
 </div>
 </div>
 <div class="sect5">
@@ -3439,33 +3601,33 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">status</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">BOOL</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">eventName</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">STRING</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Status</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Name of event.</p></td>
 </tr>
 </tbody>
 </table>
 </div>
 <div class="sect5">
-<h6 id="_sample_auto_generated_54">Sample (auto-generated)</h6>
+<h6 id="_sample_auto_generated_57">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnNewStatusMergeData</span>(status)
+<pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnNewStatusLinkedEvent</span>(eventName)
   <span class="comment">-- Do something</span>
 <span class="keyword">end</span>
 
-Script.register(<span class="string"><span class="delimiter">&quot;</span><span class="content">CSK_ResultManager.OnNewStatusMergeData</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">handleOnNewStatusMergeData</span><span class="delimiter">&quot;</span></span>)</code></pre>
+Script.register(<span class="string"><span class="delimiter">&quot;</span><span class="content">CSK_ResultManager.OnNewStatusLinkedEvent</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">handleOnNewStatusLinkedEvent</span><span class="delimiter">&quot;</span></span>)</code></pre>
 </div>
 </div>
 </div>
 </div>
 <div class="sect4">
-<h5 id="API:Event:CSK_ResultManager.OnNewStatusModuleIsActive"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-event">OnNewStatusModuleIsActive</span></h5>
+<h5 id="API:Event:CSK_ResultManager.OnNewStatusListOfExpressions"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-event">OnNewStatusListOfExpressions</span></h5>
 <div class="sect5">
-<h6 id="_short_description_57">Short description</h6>
+<h6 id="_short_description_60">Short description</h6>
 <div class="paragraph">
-<p>Notify if module can be used on device.</p>
+<p>Notify list of available expressions.</p>
 </div>
 </div>
 <div class="sect5">
@@ -3487,33 +3649,33 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">status</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">BOOL</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">list</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">STRING</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Status</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">List</p></td>
 </tr>
 </tbody>
 </table>
 </div>
 <div class="sect5">
-<h6 id="_sample_auto_generated_55">Sample (auto-generated)</h6>
+<h6 id="_sample_auto_generated_58">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnNewStatusModuleIsActive</span>(status)
+<pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnNewStatusListOfExpressions</span>(list)
   <span class="comment">-- Do something</span>
 <span class="keyword">end</span>
 
-Script.register(<span class="string"><span class="delimiter">&quot;</span><span class="content">CSK_ResultManager.OnNewStatusModuleIsActive</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">handleOnNewStatusModuleIsActive</span><span class="delimiter">&quot;</span></span>)</code></pre>
+Script.register(<span class="string"><span class="delimiter">&quot;</span><span class="content">CSK_ResultManager.OnNewStatusListOfExpressions</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">handleOnNewStatusListOfExpressions</span><span class="delimiter">&quot;</span></span>)</code></pre>
 </div>
 </div>
 </div>
 </div>
 <div class="sect4">
-<h5 id="API:Event:CSK_ResultManager.OnNewStatusModuleVersion"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-event">OnNewStatusModuleVersion</span></h5>
+<h5 id="API:Event:CSK_ResultManager.OnNewStatusLoadParameterOnReboot"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-event">OnNewStatusLoadParameterOnReboot</span></h5>
 <div class="sect5">
-<h6 id="_short_description_58">Short description</h6>
+<h6 id="_short_description_61">Short description</h6>
 <div class="paragraph">
-<p>Notify version of module.</p>
+<p>Notify status if parameters should be loaded on app/device boot up.</p>
 </div>
 </div>
 <div class="sect5">
@@ -3535,33 +3697,33 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">version</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">STRING</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">status</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">BOOL</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Version</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Status</p></td>
 </tr>
 </tbody>
 </table>
 </div>
 <div class="sect5">
-<h6 id="_sample_auto_generated_56">Sample (auto-generated)</h6>
+<h6 id="_sample_auto_generated_59">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnNewStatusModuleVersion</span>(version)
+<pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnNewStatusLoadParameterOnReboot</span>(status)
   <span class="comment">-- Do something</span>
 <span class="keyword">end</span>
 
-Script.register(<span class="string"><span class="delimiter">&quot;</span><span class="content">CSK_ResultManager.OnNewStatusModuleVersion</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">handleOnNewStatusModuleVersion</span><span class="delimiter">&quot;</span></span>)</code></pre>
+Script.register(<span class="string"><span class="delimiter">&quot;</span><span class="content">CSK_ResultManager.OnNewStatusLoadParameterOnReboot</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">handleOnNewStatusLoadParameterOnReboot</span><span class="delimiter">&quot;</span></span>)</code></pre>
 </div>
 </div>
 </div>
 </div>
 <div class="sect4">
-<h5 id="API:Event:CSK_ResultManager.OnNewStatusParameterList"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-event">OnNewStatusParameterList</span></h5>
+<h5 id="API:Event:CSK_ResultManager.OnNewStatusMergeData"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-event">OnNewStatusMergeData</span></h5>
 <div class="sect5">
-<h6 id="_short_description_59">Short description</h6>
+<h6 id="_short_description_62">Short description</h6>
 <div class="paragraph">
-<p>Notify list of expression parameters.</p>
+<p>Notify if multiple data should be merged to new event.</p>
 </div>
 </div>
 <div class="sect5">
@@ -3583,154 +3745,10 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">list</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">STRING</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">status</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">BOOL</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">List of expression parameter details.</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="sect5">
-<h6 id="_sample_auto_generated_57">Sample (auto-generated)</h6>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnNewStatusParameterList</span>(list)
-  <span class="comment">-- Do something</span>
-<span class="keyword">end</span>
-
-Script.register(<span class="string"><span class="delimiter">&quot;</span><span class="content">CSK_ResultManager.OnNewStatusParameterList</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">handleOnNewStatusParameterList</span><span class="delimiter">&quot;</span></span>)</code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class="sect4">
-<h5 id="API:Event:CSK_ResultManager.OnNewStatusResult"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-event">OnNewStatusResult</span></h5>
-<div class="sect5">
-<h6 id="_short_description_60">Short description</h6>
-<div class="paragraph">
-<p>Notify current result of selected expression.</p>
-</div>
-</div>
-<div class="sect5">
-<h6 id="_callback_arguments_26">Callback arguments</h6>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 25%;">
-<col style="width: 25%;">
-<col style="width: 12.5%;">
-<col style="width: 37.5%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Name</th>
-<th class="tableblock halign-left valign-top">Type</th>
-<th class="tableblock halign-left valign-top">Multiplicity</th>
-<th class="tableblock halign-left valign-top">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">result</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">STRING</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Result</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="sect5">
-<h6 id="_sample_auto_generated_58">Sample (auto-generated)</h6>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnNewStatusResult</span>(result)
-  <span class="comment">-- Do something</span>
-<span class="keyword">end</span>
-
-Script.register(<span class="string"><span class="delimiter">&quot;</span><span class="content">CSK_ResultManager.OnNewStatusResult</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">handleOnNewStatusResult</span><span class="delimiter">&quot;</span></span>)</code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class="sect4">
-<h5 id="API:Event:CSK_ResultManager.OnNewStatusSelectedExpression"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-event">OnNewStatusSelectedExpression</span></h5>
-<div class="sect5">
-<h6 id="_short_description_61">Short description</h6>
-<div class="paragraph">
-<p>Notify selected expression.</p>
-</div>
-</div>
-<div class="sect5">
-<h6 id="_callback_arguments_27">Callback arguments</h6>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 25%;">
-<col style="width: 25%;">
-<col style="width: 12.5%;">
-<col style="width: 37.5%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Name</th>
-<th class="tableblock halign-left valign-top">Type</th>
-<th class="tableblock halign-left valign-top">Multiplicity</th>
-<th class="tableblock halign-left valign-top">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">selection</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">STRING</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Selected expression</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="sect5">
-<h6 id="_sample_auto_generated_59">Sample (auto-generated)</h6>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnNewStatusSelectedExpression</span>(selection)
-  <span class="comment">-- Do something</span>
-<span class="keyword">end</span>
-
-Script.register(<span class="string"><span class="delimiter">&quot;</span><span class="content">CSK_ResultManager.OnNewStatusSelectedExpression</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">handleOnNewStatusSelectedExpression</span><span class="delimiter">&quot;</span></span>)</code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class="sect4">
-<h5 id="API:Event:CSK_ResultManager.OnNewStatusSelectedParameter"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-event">OnNewStatusSelectedParameter</span></h5>
-<div class="sect5">
-<h6 id="_short_description_62">Short description</h6>
-<div class="paragraph">
-<p>Notify name of selected expression parameter.</p>
-</div>
-</div>
-<div class="sect5">
-<h6 id="_callback_arguments_28">Callback arguments</h6>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 25%;">
-<col style="width: 25%;">
-<col style="width: 12.5%;">
-<col style="width: 37.5%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Name</th>
-<th class="tableblock halign-left valign-top">Type</th>
-<th class="tableblock halign-left valign-top">Multiplicity</th>
-<th class="tableblock halign-left valign-top">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">parametername</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">STRING</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Name of parameter.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Status</p></td>
 </tr>
 </tbody>
 </table>
@@ -3739,25 +3757,25 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 <h6 id="_sample_auto_generated_60">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnNewStatusSelectedParameter</span>(parametername)
+<pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnNewStatusMergeData</span>(status)
   <span class="comment">-- Do something</span>
 <span class="keyword">end</span>
 
-Script.register(<span class="string"><span class="delimiter">&quot;</span><span class="content">CSK_ResultManager.OnNewStatusSelectedParameter</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">handleOnNewStatusSelectedParameter</span><span class="delimiter">&quot;</span></span>)</code></pre>
+Script.register(<span class="string"><span class="delimiter">&quot;</span><span class="content">CSK_ResultManager.OnNewStatusMergeData</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">handleOnNewStatusMergeData</span><span class="delimiter">&quot;</span></span>)</code></pre>
 </div>
 </div>
 </div>
 </div>
 <div class="sect4">
-<h5 id="API:Event:CSK_ResultManager.OnNewStatusShowProcessData"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-event">OnNewStatusShowProcessData</span></h5>
+<h5 id="API:Event:CSK_ResultManager.OnNewStatusModuleIsActive"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-event">OnNewStatusModuleIsActive</span></h5>
 <div class="sect5">
 <h6 id="_short_description_63">Short description</h6>
 <div class="paragraph">
-<p>Notify if process data should be shown in UI.</p>
+<p>Notify if module can be used on device.</p>
 </div>
 </div>
 <div class="sect5">
-<h6 id="_callback_arguments_29">Callback arguments</h6>
+<h6 id="_callback_arguments_26">Callback arguments</h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 25%;">
@@ -3787,21 +3805,165 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 <h6 id="_sample_auto_generated_61">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnNewStatusShowProcessData</span>(status)
+<pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnNewStatusModuleIsActive</span>(status)
   <span class="comment">-- Do something</span>
 <span class="keyword">end</span>
 
-Script.register(<span class="string"><span class="delimiter">&quot;</span><span class="content">CSK_ResultManager.OnNewStatusShowProcessData</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">handleOnNewStatusShowProcessData</span><span class="delimiter">&quot;</span></span>)</code></pre>
+Script.register(<span class="string"><span class="delimiter">&quot;</span><span class="content">CSK_ResultManager.OnNewStatusModuleIsActive</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">handleOnNewStatusModuleIsActive</span><span class="delimiter">&quot;</span></span>)</code></pre>
 </div>
 </div>
 </div>
 </div>
 <div class="sect4">
-<h5 id="API:Event:CSK_ResultManager.OnPersistentDataModuleAvailable"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-event">OnPersistentDataModuleAvailable</span></h5>
+<h5 id="API:Event:CSK_ResultManager.OnNewStatusModuleVersion"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-event">OnNewStatusModuleVersion</span></h5>
 <div class="sect5">
 <h6 id="_short_description_64">Short description</h6>
 <div class="paragraph">
-<p>Notify status if features of CSK_PersistendData module are available.</p>
+<p>Notify version of module.</p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_callback_arguments_27">Callback arguments</h6>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 12.5%;">
+<col style="width: 37.5%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Multiplicity</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">version</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">STRING</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Version</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect5">
+<h6 id="_sample_auto_generated_62">Sample (auto-generated)</h6>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnNewStatusModuleVersion</span>(version)
+  <span class="comment">-- Do something</span>
+<span class="keyword">end</span>
+
+Script.register(<span class="string"><span class="delimiter">&quot;</span><span class="content">CSK_ResultManager.OnNewStatusModuleVersion</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">handleOnNewStatusModuleVersion</span><span class="delimiter">&quot;</span></span>)</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="API:Event:CSK_ResultManager.OnNewStatusParameterList"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-event">OnNewStatusParameterList</span></h5>
+<div class="sect5">
+<h6 id="_short_description_65">Short description</h6>
+<div class="paragraph">
+<p>Notify list of expression parameters.</p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_callback_arguments_28">Callback arguments</h6>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 12.5%;">
+<col style="width: 37.5%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Multiplicity</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">list</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">STRING</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">List of expression parameter details.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect5">
+<h6 id="_sample_auto_generated_63">Sample (auto-generated)</h6>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnNewStatusParameterList</span>(list)
+  <span class="comment">-- Do something</span>
+<span class="keyword">end</span>
+
+Script.register(<span class="string"><span class="delimiter">&quot;</span><span class="content">CSK_ResultManager.OnNewStatusParameterList</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">handleOnNewStatusParameterList</span><span class="delimiter">&quot;</span></span>)</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="API:Event:CSK_ResultManager.OnNewStatusResult"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-event">OnNewStatusResult</span></h5>
+<div class="sect5">
+<h6 id="_short_description_66">Short description</h6>
+<div class="paragraph">
+<p>Notify current result of selected expression.</p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_callback_arguments_29">Callback arguments</h6>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 12.5%;">
+<col style="width: 37.5%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Multiplicity</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">result</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">STRING</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Result</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect5">
+<h6 id="_sample_auto_generated_64">Sample (auto-generated)</h6>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnNewStatusResult</span>(result)
+  <span class="comment">-- Do something</span>
+<span class="keyword">end</span>
+
+Script.register(<span class="string"><span class="delimiter">&quot;</span><span class="content">CSK_ResultManager.OnNewStatusResult</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">handleOnNewStatusResult</span><span class="delimiter">&quot;</span></span>)</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="API:Event:CSK_ResultManager.OnNewStatusSelectedExpression"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-event">OnNewStatusSelectedExpression</span></h5>
+<div class="sect5">
+<h6 id="_short_description_67">Short description</h6>
+<div class="paragraph">
+<p>Notify selected expression.</p>
 </div>
 </div>
 <div class="sect5">
@@ -3823,33 +3985,33 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">status</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">BOOL</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">selection</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">STRING</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Status</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Selected expression</p></td>
 </tr>
 </tbody>
 </table>
 </div>
 <div class="sect5">
-<h6 id="_sample_auto_generated_62">Sample (auto-generated)</h6>
+<h6 id="_sample_auto_generated_65">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnPersistentDataModuleAvailable</span>(status)
+<pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnNewStatusSelectedExpression</span>(selection)
   <span class="comment">-- Do something</span>
 <span class="keyword">end</span>
 
-Script.register(<span class="string"><span class="delimiter">&quot;</span><span class="content">CSK_ResultManager.OnPersistentDataModuleAvailable</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">handleOnPersistentDataModuleAvailable</span><span class="delimiter">&quot;</span></span>)</code></pre>
+Script.register(<span class="string"><span class="delimiter">&quot;</span><span class="content">CSK_ResultManager.OnNewStatusSelectedExpression</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">handleOnNewStatusSelectedExpression</span><span class="delimiter">&quot;</span></span>)</code></pre>
 </div>
 </div>
 </div>
 </div>
 <div class="sect4">
-<h5 id="API:Event:CSK_ResultManager.OnUserLevelAdminActive"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-event">OnUserLevelAdminActive</span></h5>
+<h5 id="API:Event:CSK_ResultManager.OnNewStatusSelectedParameter"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-event">OnNewStatusSelectedParameter</span></h5>
 <div class="sect5">
-<h6 id="_short_description_65">Short description</h6>
+<h6 id="_short_description_68">Short description</h6>
 <div class="paragraph">
-<p>Status of Admin userlevel. Used internally in combination with the CSK_UserManagement module if available.</p>
+<p>Notify name of selected expression parameter.</p>
 </div>
 </div>
 <div class="sect5">
@@ -3871,33 +4033,33 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">status</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">BOOL</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">parametername</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">STRING</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Status</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Name of parameter.</p></td>
 </tr>
 </tbody>
 </table>
 </div>
 <div class="sect5">
-<h6 id="_sample_auto_generated_63">Sample (auto-generated)</h6>
+<h6 id="_sample_auto_generated_66">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnUserLevelAdminActive</span>(status)
+<pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnNewStatusSelectedParameter</span>(parametername)
   <span class="comment">-- Do something</span>
 <span class="keyword">end</span>
 
-Script.register(<span class="string"><span class="delimiter">&quot;</span><span class="content">CSK_ResultManager.OnUserLevelAdminActive</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">handleOnUserLevelAdminActive</span><span class="delimiter">&quot;</span></span>)</code></pre>
+Script.register(<span class="string"><span class="delimiter">&quot;</span><span class="content">CSK_ResultManager.OnNewStatusSelectedParameter</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">handleOnNewStatusSelectedParameter</span><span class="delimiter">&quot;</span></span>)</code></pre>
 </div>
 </div>
 </div>
 </div>
 <div class="sect4">
-<h5 id="API:Event:CSK_ResultManager.OnUserLevelMaintenanceActive"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-event">OnUserLevelMaintenanceActive</span></h5>
+<h5 id="API:Event:CSK_ResultManager.OnNewStatusShowProcessData"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-event">OnNewStatusShowProcessData</span></h5>
 <div class="sect5">
-<h6 id="_short_description_66">Short description</h6>
+<h6 id="_short_description_69">Short description</h6>
 <div class="paragraph">
-<p>Status of Maintenance userlevel. Used internally in combination with the CSK_UserManagement module if available.</p>
+<p>Notify if process data should be shown in UI.</p>
 </div>
 </div>
 <div class="sect5">
@@ -3928,24 +4090,24 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 </table>
 </div>
 <div class="sect5">
-<h6 id="_sample_auto_generated_64">Sample (auto-generated)</h6>
+<h6 id="_sample_auto_generated_67">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnUserLevelMaintenanceActive</span>(status)
+<pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnNewStatusShowProcessData</span>(status)
   <span class="comment">-- Do something</span>
 <span class="keyword">end</span>
 
-Script.register(<span class="string"><span class="delimiter">&quot;</span><span class="content">CSK_ResultManager.OnUserLevelMaintenanceActive</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">handleOnUserLevelMaintenanceActive</span><span class="delimiter">&quot;</span></span>)</code></pre>
+Script.register(<span class="string"><span class="delimiter">&quot;</span><span class="content">CSK_ResultManager.OnNewStatusShowProcessData</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">handleOnNewStatusShowProcessData</span><span class="delimiter">&quot;</span></span>)</code></pre>
 </div>
 </div>
 </div>
 </div>
 <div class="sect4">
-<h5 id="API:Event:CSK_ResultManager.OnUserLevelOperatorActive"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-event">OnUserLevelOperatorActive</span></h5>
+<h5 id="API:Event:CSK_ResultManager.OnPersistentDataModuleAvailable"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-event">OnPersistentDataModuleAvailable</span></h5>
 <div class="sect5">
-<h6 id="_short_description_67">Short description</h6>
+<h6 id="_short_description_70">Short description</h6>
 <div class="paragraph">
-<p>Status of Operator userlevel. Used internally in combination with the CSK_UserManagement module if available.</p>
+<p>Notify status if features of CSK_PersistendData module are available.</p>
 </div>
 </div>
 <div class="sect5">
@@ -3976,24 +4138,24 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 </table>
 </div>
 <div class="sect5">
-<h6 id="_sample_auto_generated_65">Sample (auto-generated)</h6>
+<h6 id="_sample_auto_generated_68">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnUserLevelOperatorActive</span>(status)
+<pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnPersistentDataModuleAvailable</span>(status)
   <span class="comment">-- Do something</span>
 <span class="keyword">end</span>
 
-Script.register(<span class="string"><span class="delimiter">&quot;</span><span class="content">CSK_ResultManager.OnUserLevelOperatorActive</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">handleOnUserLevelOperatorActive</span><span class="delimiter">&quot;</span></span>)</code></pre>
+Script.register(<span class="string"><span class="delimiter">&quot;</span><span class="content">CSK_ResultManager.OnPersistentDataModuleAvailable</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">handleOnPersistentDataModuleAvailable</span><span class="delimiter">&quot;</span></span>)</code></pre>
 </div>
 </div>
 </div>
 </div>
 <div class="sect4">
-<h5 id="API:Event:CSK_ResultManager.OnUserLevelServiceActive"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-event">OnUserLevelServiceActive</span></h5>
+<h5 id="API:Event:CSK_ResultManager.OnUserLevelAdminActive"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-event">OnUserLevelAdminActive</span></h5>
 <div class="sect5">
-<h6 id="_short_description_68">Short description</h6>
+<h6 id="_short_description_71">Short description</h6>
 <div class="paragraph">
-<p>Status of Service userlevel. Used internally in combination with the CSK_UserManagement module if available.</p>
+<p>Status of Admin userlevel. Used internally in combination with the CSK_UserManagement module if available.</p>
 </div>
 </div>
 <div class="sect5">
@@ -4024,7 +4186,151 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 </table>
 </div>
 <div class="sect5">
-<h6 id="_sample_auto_generated_66">Sample (auto-generated)</h6>
+<h6 id="_sample_auto_generated_69">Sample (auto-generated)</h6>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnUserLevelAdminActive</span>(status)
+  <span class="comment">-- Do something</span>
+<span class="keyword">end</span>
+
+Script.register(<span class="string"><span class="delimiter">&quot;</span><span class="content">CSK_ResultManager.OnUserLevelAdminActive</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">handleOnUserLevelAdminActive</span><span class="delimiter">&quot;</span></span>)</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="API:Event:CSK_ResultManager.OnUserLevelMaintenanceActive"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-event">OnUserLevelMaintenanceActive</span></h5>
+<div class="sect5">
+<h6 id="_short_description_72">Short description</h6>
+<div class="paragraph">
+<p>Status of Maintenance userlevel. Used internally in combination with the CSK_UserManagement module if available.</p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_callback_arguments_35">Callback arguments</h6>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 12.5%;">
+<col style="width: 37.5%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Multiplicity</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">status</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">BOOL</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Status</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect5">
+<h6 id="_sample_auto_generated_70">Sample (auto-generated)</h6>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnUserLevelMaintenanceActive</span>(status)
+  <span class="comment">-- Do something</span>
+<span class="keyword">end</span>
+
+Script.register(<span class="string"><span class="delimiter">&quot;</span><span class="content">CSK_ResultManager.OnUserLevelMaintenanceActive</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">handleOnUserLevelMaintenanceActive</span><span class="delimiter">&quot;</span></span>)</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="API:Event:CSK_ResultManager.OnUserLevelOperatorActive"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-event">OnUserLevelOperatorActive</span></h5>
+<div class="sect5">
+<h6 id="_short_description_73">Short description</h6>
+<div class="paragraph">
+<p>Status of Operator userlevel. Used internally in combination with the CSK_UserManagement module if available.</p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_callback_arguments_36">Callback arguments</h6>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 12.5%;">
+<col style="width: 37.5%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Multiplicity</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">status</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">BOOL</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Status</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect5">
+<h6 id="_sample_auto_generated_71">Sample (auto-generated)</h6>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnUserLevelOperatorActive</span>(status)
+  <span class="comment">-- Do something</span>
+<span class="keyword">end</span>
+
+Script.register(<span class="string"><span class="delimiter">&quot;</span><span class="content">CSK_ResultManager.OnUserLevelOperatorActive</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">handleOnUserLevelOperatorActive</span><span class="delimiter">&quot;</span></span>)</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="API:Event:CSK_ResultManager.OnUserLevelServiceActive"><span class="breadcrumb">CSK_ResultManager.</span><span class="api-event">OnUserLevelServiceActive</span></h5>
+<div class="sect5">
+<h6 id="_short_description_74">Short description</h6>
+<div class="paragraph">
+<p>Status of Service userlevel. Used internally in combination with the CSK_UserManagement module if available.</p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_callback_arguments_37">Callback arguments</h6>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 12.5%;">
+<col style="width: 37.5%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Multiplicity</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">status</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">BOOL</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Status</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect5">
+<h6 id="_sample_auto_generated_72">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnUserLevelServiceActive</span>(status)
@@ -4041,7 +4347,7 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 <div class="sect2">
 <h3 id="API:Crown:ResultManager_FC"><span class="api-crown">ResultManager_FC</span></h3>
 <div class="sect3">
-<h4 id="_short_description_69">Short description</h4>
+<h4 id="_short_description_75">Short description</h4>
 <div class="paragraph">
 <p>Crown to provide CSK_FlowConfig relevant features.</p>
 </div>
@@ -4054,7 +4360,7 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 <div class="sect2">
 <h3 id="API:Crown:ResultManager_FC.DataSource"><span class="api-crown">ResultManager_FC.DataSource</span></h3>
 <div class="sect3">
-<h4 id="_short_description_70">Short description</h4>
+<h4 id="_short_description_76">Short description</h4>
 <div class="paragraph">
 <p>Set source(s) of incoming data to use as parameter in expression / to merge data</p>
 </div>
@@ -4077,13 +4383,13 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 <div class="sect4">
 <h5 id="API:Function:ResultManager_FC.DataSource.create"><span class="breadcrumb">ResultManager_FC.DataSource.</span><span class="api-function">create()</span></h5>
 <div class="sect5">
-<h6 id="_short_description_71">Short description</h6>
+<h6 id="_short_description_77">Short description</h6>
 <div class="paragraph">
 <p>Internally used CSK_FlowConfig create function.</p>
 </div>
 </div>
 <div class="sect5">
-<h6 id="_parameters_20">Parameters</h6>
+<h6 id="_parameters_23">Parameters</h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 25%;">
@@ -4161,7 +4467,7 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 </table>
 </div>
 <div class="sect5">
-<h6 id="_sample_auto_generated_67">Sample (auto-generated)</h6>
+<h6 id="_sample_auto_generated_73">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="lua">handle = ResultManager_FC.DataSource.create(ExpressionName, ParamPos1, ParamPos2, ParamPos3, ParamPos4)</code></pre>
@@ -4172,13 +4478,13 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 <div class="sect4">
 <h5 id="API:Function:ResultManager_FC.DataSource.dataSource"><span class="breadcrumb">ResultManager_FC.DataSource.</span><span class="api-function">dataSource()</span></h5>
 <div class="sect5">
-<h6 id="_short_description_72">Short description</h6>
+<h6 id="_short_description_78">Short description</h6>
 <div class="paragraph">
 <p>Set source(s) of incoming data to use as parameter in expression / to merge data</p>
 </div>
 </div>
 <div class="sect5">
-<h6 id="_parameters_21">Parameters</h6>
+<h6 id="_parameters_24">Parameters</h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 25%;">
@@ -4237,7 +4543,7 @@ Parameter:
 </table>
 </div>
 <div class="sect5">
-<h6 id="_sample_auto_generated_68">Sample (auto-generated)</h6>
+<h6 id="_sample_auto_generated_74">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="lua">ResultManager_FC.DataSource.dataSource(handle, source1, source2, source3, source4)</code></pre>
@@ -4250,7 +4556,7 @@ Parameter:
 <div class="sect2">
 <h3 id="API:Crown:ResultManager_FC.OnNewResult"><span class="api-crown">ResultManager_FC.OnNewResult</span></h3>
 <div class="sect3">
-<h4 id="_short_description_73">Short description</h4>
+<h4 id="_short_description_79">Short description</h4>
 <div class="paragraph">
 <p>Provide result of expression or merged data.</p>
 </div>
@@ -4276,13 +4582,13 @@ Parameter:
 <div class="sect4">
 <h5 id="API:Function:ResultManager_FC.OnNewResult.create"><span class="breadcrumb">ResultManager_FC.OnNewResult.</span><span class="api-function">create()</span></h5>
 <div class="sect5">
-<h6 id="_short_description_74">Short description</h6>
+<h6 id="_short_description_80">Short description</h6>
 <div class="paragraph">
 <p>Internally used CSK_FlowConfig create function.</p>
 </div>
 </div>
 <div class="sect5">
-<h6 id="_parameters_22">Parameters</h6>
+<h6 id="_parameters_25">Parameters</h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 25%;">
@@ -4312,7 +4618,7 @@ Parameter:
 <td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Type of result to provide.
 'CRITERIA' = Result if defined criteria was fullfilled
-'EXPRESSION' = Result of defined expression
+'EXPRESSION' = Result of defined expression or custom defined result based on criteria result.
 'DATA' = Provide merged data of multiple sources</p></td>
 </tr>
 </tbody>
@@ -4346,7 +4652,7 @@ Parameter:
 </table>
 </div>
 <div class="sect5">
-<h6 id="_sample_auto_generated_69">Sample (auto-generated)</h6>
+<h6 id="_sample_auto_generated_75">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="lua">handle = ResultManager_FC.OnNewResult.create(ExpressionName, Mode)</code></pre>
@@ -4357,13 +4663,13 @@ Parameter:
 <div class="sect4">
 <h5 id="API:Function:ResultManager_FC.OnNewResult.register"><span class="breadcrumb">ResultManager_FC.OnNewResult.</span><span class="api-function">register()</span></h5>
 <div class="sect5">
-<h6 id="_short_description_75">Short description</h6>
+<h6 id="_short_description_81">Short description</h6>
 <div class="paragraph">
 <p>Internally used CSK_FlowConfig register function.</p>
 </div>
 </div>
 <div class="sect5">
-<h6 id="_parameters_23">Parameters</h6>
+<h6 id="_parameters_26">Parameters</h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 25%;">
@@ -4429,7 +4735,7 @@ Parameter:
 </table>
 </div>
 <div class="sect5">
-<h6 id="_sample_auto_generated_70">Sample (auto-generated)</h6>
+<h6 id="_sample_auto_generated_76">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="lua">success = ResultManager_FC.OnNewResult.register(handle, eventname, callback)</code></pre>
@@ -4443,13 +4749,13 @@ Parameter:
 <div class="sect4">
 <h5 id="API:Event:ResultManager_FC.OnNewResult.OnNewResult"><span class="breadcrumb">ResultManager_FC.OnNewResult.</span><span class="api-event">OnNewResult</span></h5>
 <div class="sect5">
-<h6 id="_short_description_76">Short description</h6>
+<h6 id="_short_description_82">Short description</h6>
 <div class="paragraph">
 <p>Provide result of expression or merged data.</p>
 </div>
 </div>
 <div class="sect5">
-<h6 id="_callback_arguments_35">Callback arguments</h6>
+<h6 id="_callback_arguments_38">Callback arguments</h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 25%;">
@@ -4485,7 +4791,7 @@ Parameter:
 </table>
 </div>
 <div class="sect5">
-<h6 id="_sample_auto_generated_71">Sample (auto-generated)</h6>
+<h6 id="_sample_auto_generated_77">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnNewResult</span>(handle, OnNewResult)
@@ -4502,7 +4808,7 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 <div class="sect2">
 <h3 id="API:Crown:ResultManager_FC.Process"><span class="api-crown">ResultManager_FC.Process</span></h3>
 <div class="sect3">
-<h4 id="_short_description_77">Short description</h4>
+<h4 id="_short_description_83">Short description</h4>
 <div class="paragraph">
 <p>Set source(s) of incoming data to use as parameter in expression / to merge data and provide result of expression or merged data.</p>
 </div>
@@ -4525,13 +4831,13 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 <div class="sect4">
 <h5 id="API:Function:ResultManager_FC.Process.create"><span class="breadcrumb">ResultManager_FC.Process.</span><span class="api-function">create()</span></h5>
 <div class="sect5">
-<h6 id="_short_description_78">Short description</h6>
+<h6 id="_short_description_84">Short description</h6>
 <div class="paragraph">
 <p>Internally used CSK_FlowConfig create function.</p>
 </div>
 </div>
 <div class="sect5">
-<h6 id="_parameters_24">Parameters</h6>
+<h6 id="_parameters_27">Parameters</h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 25%;">
@@ -4561,7 +4867,7 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 <td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Type of result to provide.
 'CRITERIA' = Result if defined criteria was fullfilled
-'EXPRESSION' = Result of defined expression
+'EXPRESSION' = Result of defined expression or custom defined result based on criteria result.
 'DATA' = Provide merged data of multiple sources</p></td>
 </tr>
 <tr>
@@ -4619,7 +4925,7 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 </table>
 </div>
 <div class="sect5">
-<h6 id="_sample_auto_generated_72">Sample (auto-generated)</h6>
+<h6 id="_sample_auto_generated_78">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="lua">handle = ResultManager_FC.Process.create(ExpressionName, Mode, Param1EventPos, Param2EventPos, Param3EventPos, Param4EventPos)</code></pre>
@@ -4630,13 +4936,13 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 <div class="sect4">
 <h5 id="API:Function:ResultManager_FC.Process.process"><span class="breadcrumb">ResultManager_FC.Process.</span><span class="api-function">process()</span></h5>
 <div class="sect5">
-<h6 id="_short_description_79">Short description</h6>
+<h6 id="_short_description_85">Short description</h6>
 <div class="paragraph">
 <p>Set source(s) of incoming data to use as parameter in expression / to merge data and provide result of expression or merged data.</p>
 </div>
 </div>
 <div class="sect5">
-<h6 id="_parameters_25">Parameters</h6>
+<h6 id="_parameters_28">Parameters</h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 25%;">
@@ -4725,7 +5031,7 @@ Parameter:
 </table>
 </div>
 <div class="sect5">
-<h6 id="_sample_auto_generated_73">Sample (auto-generated)</h6>
+<h6 id="_sample_auto_generated_79">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="lua">OnNewResult = ResultManager_FC.Process.process(handle, source1, source2, source3, source4)</code></pre>
@@ -4851,7 +5157,7 @@ Parameter:
 <div id="footer">
 <div id="footer-text">
 Version 2.0.0<br>
-Last updated 2024-10-22 12:22:59 +0200
+Last updated 2024-11-15 11:50:12 +0100
 </div>
 </div>
 <script type="text/javascript">

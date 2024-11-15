@@ -9,6 +9,7 @@ All notable changes to this project will be documented in this file.
 - New feature to merge multiple parameters of different events and to provide them within a single event with multiple parameters (see 'setMergeData' and 'OnNewData_EXPRESSION')
 - New feature to provide the result of the expression criteria ('OnNewCriteriaResult_EXPRESSION')
 - New feature to only forward result if criteria is valid ('setCheckCriteriaToForward')
+- New feature to use custom results, based on criteria ('setCustomResultMode')
 - Selectable if processed data should be shown in UI ('setShowProcessData')
 - Provide version of module via 'OnNewStatusModuleVersion'
 - Function 'getParameters' to provide PersistentData parameters

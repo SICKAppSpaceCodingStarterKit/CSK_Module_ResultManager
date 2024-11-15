@@ -49,13 +49,19 @@ Repeat this for each parameter. +
 Each expression will wait till ALL parameters got their values via the configured events. +
 As soon as all parameters are available, it will start the processing of the expression. +
 It will compare this result with the defined criteria and will provide its result via a dynamically created "CSK_ResultManager.OnNewCriteriaResult_EXPRESSION" event. +
-The result of the expression itself will be provided via a dynamically created "CSK_ResultManager.OnNewResult_EXPRESSION" event. +
-INFO: It is possible to only provide the result if the criteria was valid. See 'setCheckCriteriaToForward'. +
+{empty} +
+Via a dynamically created "CSK_ResultManager.OnNewResult_EXPRESSION" event, the module can provide: +
 (EXPRESSION will be replaced by the name of the added expression (e.g. "CSK_OnNewResult_CheckSumOfXY"). +
+{empty} +
+- the result of the expression itself (default) +
+or +
+- a custom defined result related to the status if the crtieria was valid or not (see 'setCustomResultMode') +
+{empty} +
+INFO: In general it is possible to only provide the result if the criteria was valid. See 'setCheckCriteriaToForward'. +
 At the end it will clear all parameter values and will wait for new values. +
 INFO: Please make sure that the frequency of the events is in sync to not mix the result of different sources. +
 {empty} +
-Another possibility is to make use of 'addExpression' which combines the mentioned steps. +</desc>
+Another possibility is to make use of 'addExpression' which combines most of the mentioned steps. +</desc>
             <enum name="CriteriaType" trait="released">
                 <desc>Type of criteria.</desc>
                 <item desc="Criteria is a STRING." name="STRING">STRING</item>
@@ -210,6 +216,18 @@ INFO: Other modules can check via "Script.isServedAsFunction" if event exists. +
                     <desc>Notify status if criteria needs to be valid to notify result.</desc>
                     <param desc="Status" multiplicity="1" name="status" type="bool"/>
                 </event>
+                <event name="OnNewStatusCustomResultMode">
+                    <desc>Notify if custom results should be used.</desc>
+                    <param desc="Status" multiplicity="1" name="status" type="bool"/>
+                </event>
+                <event name="OnNewStatusCustomResultOK">
+                    <desc>Notify custom result to send if criteria was valid.</desc>
+                    <param desc="Result" multiplicity="1" name="result" type="string"/>
+                </event>
+                <event name="OnNewStatusCustomResultNOK">
+                    <desc>Notify custom result to send if criteria was not valid.</desc>
+                    <param desc="Result" multiplicity="1" name="result" type="string"/>
+                </event>
                 <function name="setParameterName">
                     <desc>Function to set the name of the parameters if saved/loaded via the CSK_PersistentData module.</desc>
                     <param desc="Name of the parameter." multiplicity="1" name="name" type="string"/>
@@ -336,6 +354,18 @@ INFO: Other modules can check via "Script.isServedAsFunction" if event exists. +
                     <desc>Function to set status if results only should be provided if criteria was valid.</desc>
                     <param desc="Status" multiplicity="1" name="status" type="bool"/>
                 </function>
+                <function name="setCustomResultMode">
+                    <desc>Function to set if custom results should be forwarded instead of expression result itself.</desc>
+                    <param desc="Status" multiplicity="1" name="status" type="bool"/>
+                </function>
+                <function name="setCustomResultOK">
+                    <desc>Function to set result to provide if criteria was valid and customResult mode is active.</desc>
+                    <param desc="Result" multiplicity="1" name="result" type="string"/>
+                </function>
+                <function name="setCustomResultNOK">
+                    <desc>Function to set result to provide if criteria was not valid and customResult mode is active.</desc>
+                    <param desc="Result" multiplicity="1" name="result" type="string"/>
+                </function>
             </serves>
         </crown>
         <crown name="ResultManager_FC">
@@ -385,7 +415,7 @@ INFO: Other modules can check via "Script.isServedAsFunction" if event exists. +
                         <trait>released</trait>
                         <desc>Internally used CSK_FlowConfig create function.</desc>
                         <param desc="Name of expression." multiplicity="1" name="ExpressionName" type="string"/>
-                        <param desc="Type of result to provide.&#10;&#10;'CRITERIA' = Result if defined criteria was fullfilled&#10;&#10;'EXPRESSION' = Result of defined expression&#10;&#10;'DATA' = Provide merged data of multiple sources" multiplicity="1" name="Mode" ref="ResultManager_FC.ResultType" type="enum"/>
+                        <param desc="Type of result to provide.&#10;&#10;'CRITERIA' = Result if defined criteria was fullfilled&#10;&#10;'EXPRESSION' = Result of defined expression or custom defined result based on criteria result.&#10;&#10;'DATA' = Provide merged data of multiple sources" multiplicity="1" name="Mode" ref="ResultManager_FC.ResultType" type="enum"/>
                         <return desc="Handle to internally used FlowConfig instance." multiplicity="1" name="handle" type="handle"/>
                     </function>
                     <function name="register">
@@ -406,7 +436,7 @@ INFO: Other modules can check via "Script.isServedAsFunction" if event exists. +
                         <trait>released</trait>
                         <desc>Internally used CSK_FlowConfig create function.</desc>
                         <param desc="Name of expression." multiplicity="1" name="ExpressionName" type="string"/>
-                        <param desc="Type of result to provide.&#10;&#10;'CRITERIA' = Result if defined criteria was fullfilled&#10;&#10;'EXPRESSION' = Result of defined expression&#10;&#10;'DATA' = Provide merged data of multiple sources" multiplicity="1" name="Mode" ref="ResultManager_FC.ResultType" type="enum"/>
+                        <param desc="Type of result to provide.&#10;&#10;'CRITERIA' = Result if defined criteria was fullfilled&#10;&#10;'EXPRESSION' = Result of defined expression or custom defined result based on criteria result.&#10;&#10;'DATA' = Provide merged data of multiple sources" multiplicity="1" name="Mode" ref="ResultManager_FC.ResultType" type="enum"/>
                         <param desc="Position of parameter1 within event. (default is '1')" multiplicity="?" name="Param1EventPos" type="int"/>
                         <param desc="Position of parameter2 within event. (default is '1')" multiplicity="?" name="Param2EventPos" type="int"/>
                         <param desc="Position of parameter3 within event. (default is '1')" multiplicity="?" name="Param3EventPos" type="int"/>

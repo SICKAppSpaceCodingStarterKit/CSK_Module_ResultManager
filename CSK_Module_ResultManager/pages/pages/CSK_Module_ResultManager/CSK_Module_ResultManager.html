@@ -334,6 +334,10 @@
                                                                             name="CSK_ResultManager/setMergeData"
                                                                             path="param/args/status" auto-commit>
                                                                         </crown-binding>
+                                                                        <crown-edpws-binding property="disabled"
+                                                                            name="CSK_ResultManager/OnNewStatusFlowConfigPriority"
+                                                                            update-on-resume>
+                                                                        </crown-edpws-binding>
                                                                     </davinci-toggle-switch>
                                                                 </layout-row>
                                                             </layout-column>
@@ -689,13 +693,16 @@
                                                                             </crown-on>
                                                                         </davinci-text-field>
                                                                         <layout-row id="RowLayout26"
-                                                                            class="myCustomSpacerVert10_CSK_Module_ResultManager">
+                                                                            class="myCustomSpacerVert10_CSK_Module_ResultManager"
+                                                                            style="flex-grow: 0; flex-shrink: 0">
                                                                         </layout-row>
                                                                         <layout-row id="RowLayout21"
-                                                                            class="myCustomBorderBottom_CSK_Module_ResultManager">
+                                                                            class="myCustomBorderBottom_CSK_Module_ResultManager"
+                                                                            style="flex-grow: 0; flex-shrink: 0">
                                                                         </layout-row>
                                                                         <layout-row id="RowLayout32"
-                                                                            class="myCustomSpacerVert10_CSK_Module_ResultManager">
+                                                                            class="myCustomSpacerVert10_CSK_Module_ResultManager"
+                                                                            style="flex-grow: 0; flex-shrink: 0">
                                                                         </layout-row>
                                                                         <davinci-value-display id="VD_Criteria"
                                                                             label="Criteria">
@@ -912,6 +919,97 @@
                                                                             </crown-edpws-binding>
                                                                         </davinci-value-display>
                                                                         <layout-row id="RowLayout35"
+                                                                            class="myCustomSpacerVert10_CSK_Module_ResultManager"
+                                                                            style="flex-grow: 0; flex-shrink: 0">
+                                                                        </layout-row>
+                                                                        <layout-row id="RowLayout39"
+                                                                            class="myCustomBorderBottom_CSK_Module_ResultManager"
+                                                                            style="flex-grow: 0; flex-shrink: 0">
+                                                                        </layout-row>
+                                                                        <layout-row id="RowLayout40"
+                                                                            class="myCustomSpacerVert10_CSK_Module_ResultManager"
+                                                                            style="flex-grow: 0; flex-shrink: 0">
+                                                                        </layout-row>
+                                                                        <layout-row id="RowLayout42"
+                                                                            style="align-items: center">
+                                                                            <layout-column id="ColumnLayout32">
+                                                                                <davinci-value-display
+                                                                                    id="VD_CustomResult"
+                                                                                    label="Custom results">
+                                                                                </davinci-value-display>
+                                                                            </layout-column>
+                                                                            <layout-column id="ColumnLayout38"
+                                                                                style="align-items: flex-end">
+                                                                                <davinci-toggle-switch
+                                                                                    id="TS_CustomResult"
+                                                                                    title="Set status if custom results should be provided based on the criteria instead of the expression result itself.">
+                                                                                    <crown-edpws-binding
+                                                                                        property="checked"
+                                                                                        name="CSK_ResultManager/OnNewStatusCustomResultMode"
+                                                                                        update-on-resume>
+                                                                                    </crown-edpws-binding>
+                                                                                    <crown-binding event="change"
+                                                                                        name="CSK_ResultManager/setCustomResultMode"
+                                                                                        path="param/args/status"
+                                                                                        auto-commit>
+                                                                                    </crown-binding>
+                                                                                </davinci-toggle-switch>
+                                                                            </layout-column>
+                                                                        </layout-row>
+                                                                        <stacked-view id="SV_CustomResults">
+                                                                            <stacked-pane id="SP_CustomResultActive"
+                                                                                value="true">
+                                                                                <layout-row id="RowLayout43">
+                                                                                    <layout-column id="ColumnLayout39"
+                                                                                        style="align-items: stretch">
+                                                                                        <davinci-text-field
+                                                                                            id="TF_Valid" type="text"
+                                                                                            label="Valid"
+                                                                                            title="Result to send if criteria was valid">
+                                                                                            <crown-edpws-binding
+                                                                                                property="value"
+                                                                                                name="CSK_ResultManager/OnNewStatusCustomResultOK"
+                                                                                                update-on-resume>
+                                                                                            </crown-edpws-binding>
+                                                                                            <crown-binding
+                                                                                                event="change"
+                                                                                                name="CSK_ResultManager/setCustomResultOK"
+                                                                                                path="param/args/result"
+                                                                                                auto-commit>
+                                                                                            </crown-binding>
+                                                                                        </davinci-text-field>
+                                                                                    </layout-column>
+                                                                                    <layout-column id="ColumnLayout40"
+                                                                                        style="align-items: stretch">
+                                                                                        <davinci-text-field
+                                                                                            id="TF_NotValid" type="text"
+                                                                                            label="Not valid"
+                                                                                            title="Result to send if criteria was not valid">
+                                                                                            <crown-edpws-binding
+                                                                                                property="value"
+                                                                                                name="CSK_ResultManager/OnNewStatusCustomResultNOK"
+                                                                                                update-on-resume>
+                                                                                            </crown-edpws-binding>
+                                                                                            <crown-binding
+                                                                                                event="change"
+                                                                                                name="CSK_ResultManager/setCustomResultNOK"
+                                                                                                path="param/args/result"
+                                                                                                auto-commit>
+                                                                                            </crown-binding>
+                                                                                        </davinci-text-field>
+                                                                                    </layout-column>
+                                                                                </layout-row>
+                                                                            </stacked-pane>
+                                                                            <stacked-pane id="SP_CustomResultNotActive"
+                                                                                value="false">
+                                                                            </stacked-pane>
+                                                                            <crown-edpws-binding property="value"
+                                                                                name="CSK_ResultManager/OnNewStatusCustomResultMode"
+                                                                                update-on-resume
+                                                                                converter="function(value) {return value.toString();}">
+                                                                            </crown-edpws-binding>
+                                                                        </stacked-view>
+                                                                        <layout-row id="RowLayout41"
                                                                             class="myCustomSpacerVert10_CSK_Module_ResultManager"
                                                                             style="flex-grow: 0; flex-shrink: 0">
                                                                         </layout-row>

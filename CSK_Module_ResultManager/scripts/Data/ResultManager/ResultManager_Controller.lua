@@ -52,6 +52,10 @@ Script.serveEvent('CSK_ResultManager.OnNewStatusCriteria', 'ResultManager_OnNewS
 Script.serveEvent('CSK_ResultManager.OnNewStatusCriteriaString', 'ResultManager_OnNewStatusCriteriaString')
 Script.serveEvent('CSK_ResultManager.OnNewStatusCheckCriteriaToForwardResult', 'ResultManager_OnNewStatusCheckCriteriaToForwardResult')
 
+Script.serveEvent('CSK_ResultManager.OnNewStatusCustomResultMode', 'ResultManager_OnNewStatusCustomResultMode')
+Script.serveEvent('CSK_ResultManager.OnNewStatusCustomResultOK', 'ResultManager_OnNewStatusCustomResultOK')
+Script.serveEvent('CSK_ResultManager.OnNewStatusCustomResultNOK', 'ResultManager_OnNewStatusCustomResultNOK')
+
 Script.serveEvent('CSK_ResultManager.OnNewStatusCriteriaMaximum', 'ResultManager_OnNewStatusCriteriaMaximum')
 Script.serveEvent('CSK_ResultManager.OnNewStatusParameterList', 'ResultManager_OnNewStatusParameterList')
 
@@ -156,6 +160,10 @@ local function handleOnExpiredTmrResultManager()
     Script.notifyEvent("ResultManager_OnNewStatusExpression", resultManager_Model.parameters.expressions[resultManager_Model.selectedExpression].expression)
     Script.notifyEvent("ResultManager_OnNewStatusCriteriaType", resultManager_Model.parameters.expressions[resultManager_Model.selectedExpression].criteriaType)
     Script.notifyEvent("ResultManager_OnNewStatusCheckCriteriaToForwardResult", resultManager_Model.parameters.expressions[resultManager_Model.selectedExpression].checkCriteraToForward)
+
+    Script.notifyEvent("ResultManager_OnNewStatusCustomResultMode", resultManager_Model.parameters.expressions[resultManager_Model.selectedExpression].customResultMode)
+    Script.notifyEvent("ResultManager_OnNewStatusCustomResultOK", resultManager_Model.parameters.expressions[resultManager_Model.selectedExpression].customResultOK)
+    Script.notifyEvent("ResultManager_OnNewStatusCustomResultNOK", resultManager_Model.parameters.expressions[resultManager_Model.selectedExpression].customResultNOK)
 
     if resultManager_Model.parameters.expressions[resultManager_Model.selectedExpression].criteriaType == 'STRING' then
       Script.notifyEvent("ResultManager_OnNewStatusCriteriaString", resultManager_Model.parameters.expressions[resultManager_Model.selectedExpression].criteria)
@@ -318,6 +326,31 @@ local function setCheckCriteriaToForward(status)
   end
 end
 Script.serveFunction('CSK_ResultManager.setCheckCriteriaToForward', setCheckCriteriaToForward)
+
+local function setCustomResultMode(status)
+  if resultManager_Model.parameters.expressions[resultManager_Model.selectedExpression] then
+    _G.logger:fine(nameOfModule .. ": Set status of customResult mode to '" .. tostring(status) .. "'.")
+    resultManager_Model.parameters.expressions[resultManager_Model.selectedExpression].customResultMode = status
+    Script.notifyEvent("ResultManager_OnNewStatusCustomResultMode", status)
+  end
+end
+Script.serveFunction('CSK_ResultManager.setCustomResultMode', setCustomResultMode)
+
+local function setCustomResultOK(result)
+  if resultManager_Model.parameters.expressions[resultManager_Model.selectedExpression] then
+    _G.logger:fine(nameOfModule .. ": Set custom result for OK to '" .. tostring(result) .. "'.")
+    resultManager_Model.parameters.expressions[resultManager_Model.selectedExpression].customResultOK = result
+  end
+end
+Script.serveFunction('CSK_ResultManager.setCustomResultOK', setCustomResultOK)
+
+local function setCustomResultNOK(result)
+  if resultManager_Model.parameters.expressions[resultManager_Model.selectedExpression] then
+    _G.logger:fine(nameOfModule .. ": Set custom result for NOK to '" .. tostring(result) .. "'.")
+    resultManager_Model.parameters.expressions[resultManager_Model.selectedExpression].customResultNOK = result
+  end
+end
+Script.serveFunction('CSK_ResultManager.setCustomResultNOK', setCustomResultNOK)
 
 --- Function to check if selection in UIs DynamicTable can find related pattern
 ---@param selection string Full text of selection
