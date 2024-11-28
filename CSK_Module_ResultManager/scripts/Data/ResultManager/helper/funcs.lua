@@ -20,8 +20,9 @@ funcs.json = require('Data/ResultManager/helper/Json')
 --- Function to create a json string out of expression parameters table content
 ---@param eventContent string[] Table with linked events for expression parameters
 ---@param valueContent string[] Table with current expression parameter values
+---@param selectedParam int Currently selected parameter
 ---@return string jsonstring JSON string
-local function createJsonListExpressionParameters(eventContent, valueContent)
+local function createJsonListExpressionParameters(eventContent, valueContent, selectedParam)
 
   local list = {}
   if eventContent == nil then
@@ -30,7 +31,11 @@ local function createJsonListExpressionParameters(eventContent, valueContent)
 
     for key, value in ipairs(eventContent) do
       local paramName = 'param' .. tostring(key)
-      table.insert(list, {DTC_ParameterName = paramName, DTC_LinkedEvent = value, DTC_CurrentValue = valueContent[paramName]})
+      local isSelected = false
+      if key == selectedParam then
+        isSelected = true
+      end
+      table.insert(list, {DTC_ParameterName = paramName, DTC_LinkedEvent = value, DTC_CurrentValue = valueContent[paramName], selected = isSelected})
     end
 
     if #list == 0 then
@@ -182,17 +187,19 @@ local function getAvailableEvents()
       local content = Engine.getCrownAsXML(crownName)
       local lastSearchPos = 0
 
-      while true do
-        local _, eventStart = string.find(content, 'event name="', lastSearchPos)
-        if eventStart then
-          lastSearchPos = eventStart+1
-          local endPos = string.find(content, '"', eventStart+1)
-          if endPos then
-            local eventName = crownName .. '.' .. string.sub(content, eventStart+1, endPos-1)
-            table.insert(listOfEvents, eventName)
+      if content then
+        while true do
+          local _, eventStart = string.find(content, 'event name="', lastSearchPos)
+          if eventStart then
+            lastSearchPos = eventStart+1
+            local endPos = string.find(content, '"', eventStart+1)
+            if endPos then
+              local eventName = crownName .. '.' .. string.sub(content, eventStart+1, endPos-1)
+              table.insert(listOfEvents, eventName)
+            end
+          else
+            break
           end
-        else
-          break
         end
       end
     end

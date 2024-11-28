@@ -1,425 +1,1079 @@
-<layout-row id="RowLayout1">
-	<layout-column id="ColumnLayout1" style="align-items:stretch">
-		<stacked-view id="SV_Login">
-			<stacked-pane id="SP_LoginOK" value="true">
-				<layout-row id="RowLayout5">
-					<layout-column id="ColumnLayout7" style="align-items: stretch">
-						<layout-row id="RowLayout6">
-							<layout-column id="ColumnLayout8" style="align-items: stretch">
-								<layout-row id="RowLayout9">
-									<layout-column id="ColumnLayout11" style="align-items: stretch">
-										<davinci-text-field id="TF_ExpressionName" type="text"
-											title="Name of expression" label="Name of expression">
-											<crown-edpws-binding property="value"
-												name="CSK_ResultManager/OnNewStatusExpressionName"
-												update-on-resume>
-											</crown-edpws-binding>
-											<crown-binding event="change"
-												name="CSK_ResultManager/setExpressionName" path="param/args/name"
-												auto-commit>
-											</crown-binding>
-										</davinci-text-field>
-									</layout-column>
-									<layout-column id="ColumnLayout12" style="align-items: stretch">
-										<davinci-button id="Button_AddExpression" type="primary"
-											icon-position="append">
-											<span>Add Expression</span>
-											<crown-binding event="submit"
-												name="CSK_ResultManager/addExpressionViaUI" auto-commit>
-											</crown-binding>
-										</davinci-button>
-									</layout-column>
-								</layout-row>
-								<layout-row id="RowLayout17">
-									<layout-column id="ColumnLayout18" style="align-items: stretch">
-										<davinci-drop-down id="DD_Expressions" label="Selected Expression">
-											<crown-edpws-binding property="data"
-												name="CSK_ResultManager/OnNewStatusListOfExpressions"
-												update-on-resume converter="convertToList">
-											</crown-edpws-binding>
-											<crown-edpws-binding property="value"
-												name="CSK_ResultManager/OnNewStatusSelectedExpression"
-												update-on-resume>
-											</crown-edpws-binding>
-											<crown-binding event="change"
-												name="CSK_ResultManager/selectExpressionByName"
-												path="param/args/selection" auto-commit>
-											</crown-binding>
-										</davinci-drop-down>
-									</layout-column>
-									<layout-column id="ColumnLayout19" style="align-items: stretch">
-										<davinci-button id="Button_DeleteExpression" type="accent"
-											icon-position="append">
-											<span>Delete Expression</span>
-											<crown-binding event="submit"
-												name="CSK_ResultManager/deleteExpressionViaUI" auto-commit>
-											</crown-binding>
-										</davinci-button>
-									</layout-column>
-								</layout-row>
-								<davinci-value-display id="VD_Expression"
-									label="Expression to process"
-									title="Expression to process, like 'param1 * (10+param2)' (see also https://www.toggledbits.com/luaxp )">
-								</davinci-value-display>
-								<davinci-text-field id="TF_Expression" type="text"
-									title="Expression to process, like 'param1 * (10+param2)' (see also https://www.toggledbits.com/luaxp )"
-									placeholder="e.g. 'param1 * (10+param2)' OR 'param1'">
-									<crown-edpws-binding property="value"
-										name="CSK_ResultManager/OnNewStatusExpression" update-on-resume>
-									</crown-edpws-binding>
-									<crown-binding event="change" name="CSK_ResultManager/setExpression"
-										path="param/args/expression" auto-commit>
-									</crown-binding>
-								</davinci-text-field>
-								<layout-row id="RowLayout7" style="justify-content: flex-end">
-									<davinci-collapse id="CollapseExpressionInfo" collapsed-title="Info"
-										expanded-title="Hide">
-										<davinci-value-display id="VD_ExpressionInfo"
-											value="Expression to process, like 'param1 * (10+param2)' or 'param1 && param2' etc. (see also https://www.toggledbits.com/luaxp)">
-										</davinci-value-display>
-									</davinci-collapse>
-								</layout-row>
-								<layout-row id="RowLayout15" style="align-items: center">
-									<davinci-value-display id="VD_ExpressionResultLabel"
-										label="Expression result:">
-									</davinci-value-display>
-									<davinci-value-display id="VD_ExpressionResult">
-										<crown-edpws-binding property="value"
-											name="CSK_ResultManager/OnNewStatusResult" update-on-resume>
-										</crown-edpws-binding>
-									</davinci-value-display>
-								</layout-row>
-								<layout-row id="RowLayout8"
-									class="myCustomFrame_CSK_Module_ResultManager">
-									<layout-column id="ColumnLayout9" style="align-items: stretch">
-										<davinci-value-display id="VD_Criteria" label="Criteria">
-										</davinci-value-display>
-										<davinci-drop-down id="DD_CriteriaType" label="Type">
-											<davinci-option id="Option_NUMBER" value="NUMBER">
-												<span>NUMBER</span>
-											</davinci-option>
-											<davinci-option id="Option_RANGE" value="RANGE">
-												<span>RANGE</span>
-											</davinci-option>
-											<davinci-option id="Option_STRING" value="STRING">
-												<span>STRING</span>
-											</davinci-option>
-											<davinci-option id="Option_BOOL" value="BOOL">
-												<span>BOOL</span>
-											</davinci-option>
-											<crown-edpws-binding property="value"
-												name="CSK_ResultManager/OnNewStatusCriteriaType" update-on-resume>
-											</crown-edpws-binding>
-											<crown-binding event="change" name="CSK_ResultManager/setCriteriaType"
-												path="param/args/criteriaType" auto-commit>
-											</crown-binding>
-										</davinci-drop-down>
-										<stacked-view id="SV_Criteria">
-											<stacked-pane id="SP_Number" value="NUMBER">
-												<layout-row id="RowLayout11">
-												<layout-column id="ColumnLayout10" style="align-items: stretch">
-												<davinci-numeric-field id="NF_CriteriaNumber" type="outline"
-													min="-9007199254740991" max="9007199254740991" ticks="1"
-													group-separator="," decimal-separator="." format-pattern="0.00">
-												<crown-binding event="change" name="CSK_ResultManager/setCriteria"
-													path="param/args/criteria" auto-commit>
-												</crown-binding>
-												<crown-edpws-binding property="value"
-													name="CSK_ResultManager/OnNewStatusCriteria" update-on-resume>
-												</crown-edpws-binding>
-												</davinci-numeric-field>
-												</layout-column>
-												</layout-row>
-											</stacked-pane>
-											<stacked-pane id="SP_Range" value="RANGE">
-												<layout-row id="RowLayout10">
-												<layout-column id="ColumnLayout13" style="align-items: stretch">
-												<davinci-numeric-field id="NF_CriteriaMin" type="outline"
-													min="-9007199254740991" max="9007199254740991" ticks="1"
-													group-separator="," decimal-separator="." format-pattern="0.00">
-												<crown-binding event="change" name="CSK_ResultManager/setCriteria"
-													path="param/args/criteria" auto-commit>
-												</crown-binding>
-												<crown-edpws-binding property="value"
-													name="CSK_ResultManager/OnNewStatusCriteria" update-on-resume>
-												</crown-edpws-binding>
-												</davinci-numeric-field>
-												</layout-column>
-												<layout-column id="ColumnLayout14" style="align-items: stretch">
-												<davinci-numeric-field id="NF_CriteriaMax" type="outline"
-													min="-9007199254740991" max="9007199254740991" ticks="1"
-													group-separator="," decimal-separator="." format-pattern="0.00">
-												<crown-binding event="change"
-													name="CSK_ResultManager/setCriteriaMaximum"
-													path="param/args/maxCriteria" auto-commit>
-												</crown-binding>
-												<crown-edpws-binding property="value"
-													name="CSK_ResultManager/OnNewStatusCriteriaMaximum"
-													update-on-resume>
-												</crown-edpws-binding>
-												</davinci-numeric-field>
-												</layout-column>
-												</layout-row>
-											</stacked-pane>
-											<stacked-pane id="SP_Bool" value="BOOL">
-												<layout-row id="RowLayout12">
-												<layout-column id="ColumnLayout15" style="align-items: stretch">
-												<davinci-toggle-switch id="TS_Criteria"
-													class="myCustomMargin_CSK_Module_ResultManager">
-												<crown-binding event="change" name="CSK_ResultManager/setCriteria"
-													path="param/args/criteria" auto-commit>
-												</crown-binding>
-												<crown-edpws-binding property="checked"
-													name="CSK_ResultManager/OnNewStatusCriteria" update-on-resume>
-												</crown-edpws-binding>
-												</davinci-toggle-switch>
-												</layout-column>
-												</layout-row>
-											</stacked-pane>
-											<stacked-pane id="SP_String" value="STRING">
-												<layout-row id="RowLayout13">
-												<layout-column id="ColumnLayout16" style="align-items: stretch">
-												<davinci-text-field id="TF_Criteria" type="text" label="Text"
-													title="Criteria for expression result (optional minimum value if range)">
-												<crown-binding event="change" name="CSK_ResultManager/setCriteria"
-													path="param/args/criteria" auto-commit>
-												</crown-binding>
-												<crown-edpws-binding property="value"
-													name="CSK_ResultManager/OnNewStatusCriteriaString"
-													update-on-resume>
-												</crown-edpws-binding>
-												</davinci-text-field>
-												</layout-column>
-												</layout-row>
-											</stacked-pane>
-											<crown-edpws-binding property="value"
-												name="CSK_ResultManager/OnNewStatusCriteriaType" update-on-resume>
-											</crown-edpws-binding>
-										</stacked-view>
-									</layout-column>
-								</layout-row>
-								<layout-row id="RowLayout18" style="align-items: center">
-									<davinci-value-display id="VD_CriteriaResult"
-										label="Criteria result:">
-									</davinci-value-display>
-									<davinci-status-indicator id="SI_CriteriaResult">
-										<span></span>
-										<crown-edpws-binding property="status"
-											name="CSK_ResultManager/OnNewStatusCriteriaResult"
-											update-on-resume>
-										</crown-edpws-binding>
-									</davinci-status-indicator>
-								</layout-row>
-								<layout-row id="RowLayout14"
-									class="myCustomFrame_CSK_Module_ResultManager">
-									<layout-column id="ColumnLayout17" style="align-items: stretch">
-										<layout-row id="RowLayout16" style="justify-content: space-between">
-											<davinci-button id="Button_AddParameter" type="bare"
-												icon-position="append">
-												<span>Add Parameter</span>
-												<crown-binding event="submit"
-													name="CSK_ResultManager/addParameterViaUI" auto-commit>
-												</crown-binding>
-											</davinci-button>
-											<davinci-button id="Button_ClearData" type="bare-neutral"
-												icon-position="append"
-												title="Clear latest received values of paramter">
-												<span>Clear Data</span>
-												<crown-binding event="submit"
-													name="CSK_ResultManager/clearParameterDataViaUI" auto-commit>
-												</crown-binding>
-											</davinci-button>
-											<davinci-button id="Button_DeleteParameter" type="bare-neutral"
-												icon-position="append">
-												<span>Delete Parameter</span>
-												<crown-binding event="submit"
-													name="CSK_ResultManager/deleteParameterViaUI" auto-commit>
-												</crown-binding>
-											</davinci-button>
-										</layout-row>
-										<davinci-auto-suggest id="AS_ListOfEvents" min-length="0"
-											label="List of available events">
-											<crown-edpws-binding property="data"
-												name="CSK_ResultManager/OnNewStatusAvailableEvents"
-												update-on-resume converter="convertToList">
-											</crown-edpws-binding>
-											<crown-binding event="change"
-												name="CSK_ResultManager/selectEventViaUI" path="param/args/event"
-												auto-commit>
-											</crown-binding>
-										</davinci-auto-suggest>
-										<curie-table id="DT_Parameter" selectable select-mode="highlight_row">
-											<curie-table-column id="DTC_ParameterName" header="Parameter Name">
-											</curie-table-column>
-											<curie-table-column id="DTC_LinkedEvent" header="Linked Event">
-											</curie-table-column>
-											<curie-table-column id="DTC_CurrentValue" header="Current Value">
-											</curie-table-column>
-											<crown-edpws-binding property="data"
-												name="CSK_ResultManager/OnNewStatusParameterList" update-on-resume
-												converter="convertToList">
-											</crown-edpws-binding>
-											<crown-binding event="row-selected"
-												name="CSK_ResultManager/selectParameterViaUI"
-												path="param/args/selection" auto-commit>
-											</crown-binding>
-										</curie-table>
-										<davinci-value-display id="VD_SelectedParameter"
-											label="Selected parameter">
-											<crown-edpws-binding property="value"
-												name="CSK_ResultManager/OnNewStatusSelectedParameter"
-												update-on-resume>
-											</crown-edpws-binding>
-										</davinci-value-display>
-										<layout-row id="RowLayout19" style="align-items: center">
-											<layout-column id="ColumnLayout20" style="align-items: stretch">
-												<davinci-value-display id="VD_LinkedEvent" value="Linked event">
-												</davinci-value-display>
-											</layout-column>
-											<layout-column id="ColumnLayout21"
-												style="align-items: stretch; flex-grow: 3">
-												<davinci-text-field id="TF_LinkedEvent" type="text"
-													placeholder="CrownName.EventName">
-												<crown-edpws-binding property="value"
-													name="CSK_ResultManager/OnNewStatusLinkedEvent" update-on-resume>
-												</crown-edpws-binding>
-												<crown-binding event="change"
-													name="CSK_ResultManager/setParameterEvent" path="param/args/event"
-													auto-commit>
-												</crown-binding>
-												</davinci-text-field>
-											</layout-column>
-										</layout-row>
-										<layout-row id="RowLayout20" style="align-items: center">
-											<layout-column id="ColumnLayout22" style="align-items: stretch">
-												<davinci-value-display id="VD_ParameterPosition"
-													value="Event parameter position"
-													title="Parameter position of event to use (default is '1')">
-												</davinci-value-display>
-											</layout-column>
-											<layout-column id="ColumnLayout23"
-												style="align-items: stretch; flex-grow: 3">
-												<davinci-numeric-field id="NF_ParameterPosition" type="outline"
-													min="1" max="8" ticks="1" group-separator=","
-													decimal-separator="." format-pattern="0"
-													title="Parameter position of event to use (default is '1')">
-												<crown-edpws-binding property="value"
-													name="CSK_ResultManager/OnNewStatusEventParameterPosition"
-													update-on-resume>
-												</crown-edpws-binding>
-												<crown-binding event="change"
-													name="CSK_ResultManager/setParameterPosition"
-													path="param/args/pos" auto-commit>
-												</crown-binding>
-												</davinci-numeric-field>
-											</layout-column>
-										</layout-row>
-									</layout-column>
-								</layout-row>
-							</layout-column>
-						</layout-row>
-					</layout-column>
-					<layout-column id="Column_PersistentData"
-						class="myCustomFrame_CSK_Module_ResultManager"
-						style="align-items: stretch">
-						<layout-row id="RowLayout4"
-							style="justify-content: space-between; align-items: center">
-							<layout-column id="ColumnLayout5" style="align-items: stretch">
-								<davinci-value-display id="VD_ParameterName" value="Parameter name:"
-									title="Name of the parameters within the CSK_PersistentData module to be uses for this module.">
-								</davinci-value-display>
-							</layout-column>
-							<layout-column id="ColumnLayout6" style="align-items: stretch">
-								<davinci-text-field id="TF_ParameterName" type="text"
-									title="Name of the parameters within the CSK_PersistentData module to be uses for this module.">
-									<crown-edpws-binding property="value"
-										name="CSK_ResultManager/OnNewParameterName" update-on-resume>
-									</crown-edpws-binding>
-									<crown-binding event="change"
-										name="CSK_ResultManager/setParameterName" path="param/args/name"
-										auto-commit>
-									</crown-binding>
-									<crown-edpws-binding property="disabled"
-										name="CSK_ResultManager/OnPersistentDataModuleAvailable"
-										update-on-resume converter="function(value) {return !value;}">
-									</crown-edpws-binding>
-								</davinci-text-field>
-							</layout-column>
-						</layout-row>
-						<layout-row id="RowLayout2"
-							style="justify-content: space-between; align-items: center">
-							<davinci-value-display id="VD_LoadConfig"
-								value="Load config on app start:"
-								title="Load configured parameters from CSK_PersistentData on app start.">
-							</davinci-value-display>
-							<davinci-checkbox id="CB_LoadConfig"
-								title="Load configured parameters from CSK_PersistentData on app start.">
-								<span></span>
-								<crown-edpws-binding property="checked"
-									name="CSK_ResultManager/OnNewStatusLoadParameterOnReboot"
-									update-on-resume>
-								</crown-edpws-binding>
-								<crown-edpws-binding property="disabled"
-									name="CSK_ResultManager/OnPersistentDataModuleAvailable"
-									update-on-resume converter="function(value) {return !value;}">
-								</crown-edpws-binding>
-								<crown-binding event="change" name="CSK_ResultManager/setLoadOnReboot"
-									path="param/args/status" auto-commit>
-								</crown-binding>
-							</davinci-checkbox>
-						</layout-row>
-						<layout-row id="RowLayout3">
-							<layout-column id="ColumnLayout3" style="align-items: stretch">
-								<davinci-button id="B_LoadConfig" type="primary"
-									icon-position="append"
-									title="Load configured parameters from CSK_PersistentData module.">
-									<span>Load Config</span>
-									<crown-binding event="submit" name="CSK_ResultManager/loadParameters"
-										auto-commit>
-									</crown-binding>
-									<crown-edpws-binding property="disabled"
-										name="CSK_ResultManager/OnPersistentDataModuleAvailable"
-										update-on-resume converter="function(value) {return !value;}">
-									</crown-edpws-binding>
-								</davinci-button>
-							</layout-column>
-							<layout-column id="ColumnLayout4" style="align-items: stretch">
-								<davinci-button id="B_SaveConfig" type="primary"
-									icon-position="append"
-									title="Save current configured parameters of this module within CSK_PersistentData module.">
-									<span>Save Config</span>
-									<crown-binding event="submit" name="CSK_ResultManager/sendParameters"
-										auto-commit>
-									</crown-binding>
-									<crown-edpws-binding property="disabled"
-										name="CSK_ResultManager/OnPersistentDataModuleAvailable"
-										update-on-resume converter="function(value) {return !value;}">
-									</crown-edpws-binding>
-								</davinci-button>
-							</layout-column>
-						</layout-row>
-					</layout-column>
-				</layout-row>
-			</stacked-pane>
-			<stacked-pane id="SP_LoginNotOK" value="false">
-				<davinci-callout id="Callout1" type="info">
-					<span>
-						Please log in via CSK_UserManagement module (at least via user level "Operator")
-					</span>
-				</davinci-callout>
-			</stacked-pane>
-			<crown-edpws-binding property="value"
-				name="CSK_ResultManager/OnUserLevelOperatorActive" update-on-resume
-				converter="function(value) {return value.toString();}">
-			</crown-edpws-binding>
-		</stacked-view>
-		<stacked-view id="SV_PageCalled">
-			<crown-binding property="value" name="CSK_ResultManager/pageCalled"
-				path="result/data/empty" auto-update="0" update-on-resume>
-			</crown-binding>
-		</stacked-view>
-	</layout-column>
-	<layout-column id="ColumnLayout2" style="align-items: stretch">
-	</layout-column>
-  
+<layout-row id="RowLayout1" class="myCustomBackground_CSK_Module_ResultManager">
+    <layout-column id="ColumnLayout1" class="myCustomFrameNoColor_CSK_Module_ResultManager"
+        style="align-items: stretch">
+        <layout-row id="RowLayout28" class="myCustomSpacerVert20_CSK_Module_ResultManager">
+        </layout-row>
+        <layout-row id="RowLayout29">
+            <layout-column id="ColumnLayout34" style="align-items: stretch">
+                <layout-row id="RowLayout01" style="align-items: baseline">
+                    <davinci-value-display id="VD_Title" class="myCustomLabel_CSK_Module_ResultManager"
+                        value="Result Manager">
+                    </davinci-value-display>
+                    <davinci-value-display id="VD_Version">
+                        <crown-edpws-binding property="value" name="CSK_ResultManager/OnNewStatusModuleVersion"
+                            update-on-resume>
+                        </crown-edpws-binding>
+                    </davinci-value-display>
+                </layout-row>
+            </layout-column>
+        </layout-row>
+        <stacked-view id="SV_FeatureSupport">
+            <stacked-pane id="SP_Supported" value="true">
+                <stacked-view id="SV_Login">
+                    <stacked-pane id="SP_LoginOK" value="true">
+                        <layout-row id="RowLayout5">
+                            <layout-column id="ColumnLayout35" style="align-items: stretch">
+                                <layout-row id="RowLayout30" class="myCustomMarginFirstRow_CSK_Module_ResultManager">
+                                    <layout-column id="ColumnLayout36" style="align-items: stretch">
+                                    </layout-column>
+                                    <layout-column id="ColumnLayout37"
+                                        class="myCustomBorderLeft_CSK_Module_ResultManager"
+                                        style="align-items: stretch">
+                                        <layout-row id="RowLayout46" style="align-items: baseline">
+                                            <layout-column id="ColumnLayout81" style="align-items: stretch">
+                                                <layout-row id="RowLayout241" style="align-items: center">
+                                                    <layout-column id="ColumnLayout57" style="align-items: stretch">
+                                                        <davinci-value-display id="VD_PersistentDatax"
+                                                            value="Persistent Data">
+                                                        </davinci-value-display>
+                                                    </layout-column>
+                                                    <layout-column id="ColumnLayout73"
+                                                        style="align-items: stretch; flex-grow: 2">
+                                                        <davinci-text-field id="TF_ParameterName" type="text"
+                                                            title="Name of the parameters within the CSK_PersistentData module to be uses for this module.">
+                                                            <crown-edpws-binding property="value"
+                                                                name="CSK_ResultManager/OnNewParameterName"
+                                                                update-on-resume>
+                                                            </crown-edpws-binding>
+                                                            <crown-binding event="change"
+                                                                name="CSK_ResultManager/setParameterName"
+                                                                path="param/args/name" auto-commit>
+                                                            </crown-binding>
+                                                            <crown-edpws-binding property="disabled"
+                                                                name="CSK_ResultManager/OnPersistentDataModuleAvailable"
+                                                                update-on-resume
+                                                                converter="function(value) {return !value;}">
+                                                            </crown-edpws-binding>
+                                                        </davinci-text-field>
+                                                    </layout-column>
+                                                    <layout-column id="Column_PersistentDatax"
+                                                        style="align-items: stretch">
+                                                        <layout-row id="RowLayout55">
+                                                            <layout-column id="ColumnLayout76"
+                                                                style="align-items: stretch">
+                                                                <layout-row id="RowLayout34"
+                                                                    class="myCustomMarginTop7PX_CSK_Module_ResultManager"
+                                                                    style="justify-content: center; align-items: center">
+                                                                    <davinci-button id="B_LoadConfig"
+                                                                        class="myCustomButton_CSK_Module_ResultManager"
+                                                                        type="outline" icon-position="append"
+                                                                        title="Load configured parameters from CSK_PersistentData module."
+                                                                        icon="action/history">
+                                                                        <span></span>
+                                                                        <crown-binding event="submit"
+                                                                            name="CSK_ResultManager/loadParameters"
+                                                                            auto-commit>
+                                                                        </crown-binding>
+                                                                        <crown-edpws-binding property="disabled"
+                                                                            name="CSK_ResultManager/OnPersistentDataModuleAvailable"
+                                                                            update-on-resume
+                                                                            converter="function(value) {return !value;}">
+                                                                        </crown-edpws-binding>
+                                                                    </davinci-button>
+                                                                    <davinci-button id="B_SaveConfig"
+                                                                        class="myCustomButton_CSK_Module_ResultManager"
+                                                                        type="outline" icon-position="append"
+                                                                        title="Save current configured parameters of this module within CSK_PersistentData module."
+                                                                        icon="content/save">
+                                                                        <span></span>
+                                                                        <crown-binding event="submit"
+                                                                            name="CSK_ResultManager/sendParameters"
+                                                                            auto-commit>
+                                                                        </crown-binding>
+                                                                        <crown-edpws-binding property="disabled"
+                                                                            name="CSK_ResultManager/OnPersistentDataModuleAvailable"
+                                                                            update-on-resume
+                                                                            converter="function(value) {return !value;}">
+                                                                        </crown-edpws-binding>
+                                                                    </davinci-button>
+                                                                </layout-row>
+                                                            </layout-column>
+                                                        </layout-row>
+                                                    </layout-column>
+                                                </layout-row>
+                                                <layout-row id="RowLayout57" style="align-items: center">
+                                                    <layout-column id="ColumnLayout511" style="align-items: stretch">
+                                                        <davinci-collapse id="Collapse_PersistentData"
+                                                            class="myCustomPersistentDataMargin_CSK_Module_ResultManager"
+                                                            collapsed-title="..." expanded-title="...">
+                                                            <layout-row id="RowLayout45"
+                                                                class="myCustomPersistentDataMarginBack_CSK_Module_ResultManager"
+                                                                style="align-items: center">
+                                                                <layout-column id="ColumnLayout6x"
+                                                                    style="align-items: stretch">
+                                                                </layout-column>
+                                                                <layout-column id="ColumnLayout72"
+                                                                    style="align-items: stretch; flex-grow: 2">
+                                                                    <layout-row id="RowLayout37">
+                                                                        <layout-column id="ColumnLayout25"
+                                                                            style="align-items: stretch">
+                                                                            <layout-row id="RowLayout2x"
+                                                                                style="align-items: center">
+                                                                                <davinci-value-display
+                                                                                    id="VD_LoadConfig"
+                                                                                    value="Load on reboot:"
+                                                                                    title="Load configured parameters from CSK_PersistentData on app start.">
+                                                                                </davinci-value-display>
+                                                                                <davinci-checkbox id="CB_LoadConfig"
+                                                                                    title="Load configured parameters from CSK_PersistentData on app start.">
+                                                                                    <span></span>
+                                                                                    <crown-edpws-binding
+                                                                                        property="checked"
+                                                                                        name="CSK_ResultManager/OnNewStatusLoadParameterOnReboot"
+                                                                                        update-on-resume>
+                                                                                    </crown-edpws-binding>
+                                                                                    <crown-edpws-binding
+                                                                                        property="disabled"
+                                                                                        name="CSK_ResultManager/OnPersistentDataModuleAvailable"
+                                                                                        update-on-resume
+                                                                                        converter="function(value) {return !value;}">
+                                                                                    </crown-edpws-binding>
+                                                                                    <crown-binding event="change"
+                                                                                        name="CSK_ResultManager/setLoadOnReboot"
+                                                                                        path="param/args/status"
+                                                                                        auto-commit>
+                                                                                    </crown-binding>
+                                                                                </davinci-checkbox>
+                                                                            </layout-row>
+                                                                        </layout-column>
+                                                                        <layout-column id="ColumnLayout77"
+                                                                            style="align-items: stretch">
+                                                                            <layout-row id="RowLayout56"
+                                                                                style="align-items: center; justify-content: flex-end">
+                                                                                <davinci-value-display
+                                                                                    id="VD_FLowConfigPrio"
+                                                                                    value="Flow config priority:"
+                                                                                    title="FlowConfig priority for FlowConfig relevant configurations.">
+                                                                                </davinci-value-display>
+                                                                                <davinci-checkbox id="CB_FlowConfigPrio"
+                                                                                    title="FlowConfig priority for FlowConfig relevant configurations.">
+                                                                                    <span></span>
+                                                                                    <crown-edpws-binding
+                                                                                        property="checked"
+                                                                                        name="CSK_ResultManager/OnNewStatusFlowConfigPriority"
+                                                                                        update-on-resume>
+                                                                                    </crown-edpws-binding>
+                                                                                    <crown-binding event="change"
+                                                                                        name="CSK_ResultManager/setFlowConfigPriority"
+                                                                                        path="param/args/status"
+                                                                                        auto-commit>
+                                                                                    </crown-binding>
+                                                                                </davinci-checkbox>
+                                                                            </layout-row>
+                                                                        </layout-column>
+                                                                    </layout-row>
+                                                                </layout-column>
+                                                                <layout-column id="ColumnLayout79"
+                                                                    style="align-items: stretch">
+                                                                </layout-column>
+                                                            </layout-row>
+                                                        </davinci-collapse>
+                                                    </layout-column>
+                                                </layout-row>
+                                            </layout-column>
+                                        </layout-row>
+                                    </layout-column>
+                                </layout-row>
+                                <layout-row id="RowLayout60" class="myCustomSpacerVert10_CSK_Module_ResultManager"
+                                    style="flex-grow: 0; flex-shrink: 0">
+                                </layout-row>
+                                <layout-row id="RowLayout47" class="myCustomBorderBottom_CSK_Module_ResultManager"
+                                    style="flex-grow: 0; flex-shrink: 0">
+                                </layout-row>
+                                <layout-row id="RowLayout61" class="myCustomSpacerVert20_CSK_Module_ResultManager"
+                                    style="flex-grow: 0; flex-shrink: 0">
+                                </layout-row>
+                                <layout-row id="RowLayout9" style="align-items: center">
+                                    <layout-column id="ColumnLayout28" style="align-items: stretch">
+                                        <layout-row id="RowLayout38">
+                                            <layout-column id="ColumnLayout11"
+                                                style="align-items: stretch; flex-grow: 3">
+                                                <davinci-text-field id="TF_ExpressionName" type="text"
+                                                    title="Name of expression" label="Name of expression">
+                                                    <crown-edpws-binding property="value"
+                                                        name="CSK_ResultManager/OnNewStatusExpressionName"
+                                                        update-on-resume>
+                                                    </crown-edpws-binding>
+                                                    <crown-binding event="change"
+                                                        name="CSK_ResultManager/setExpressionName"
+                                                        path="param/args/name" auto-commit>
+                                                    </crown-binding>
+                                                </davinci-text-field>
+                                            </layout-column>
+                                            <layout-column id="ColumnLayout2"
+                                                style="align-items: stretch; flex-grow: 3">
+                                                <davinci-drop-down id="DD_Expressions" label="Selected Expression">
+                                                    <crown-edpws-binding property="data"
+                                                        name="CSK_ResultManager/OnNewStatusListOfExpressions"
+                                                        update-on-resume converter="convertToList">
+                                                    </crown-edpws-binding>
+                                                    <crown-edpws-binding property="value"
+                                                        name="CSK_ResultManager/OnNewStatusSelectedExpression"
+                                                        update-on-resume>
+                                                    </crown-edpws-binding>
+                                                    <crown-binding event="change"
+                                                        name="CSK_ResultManager/selectExpressionByName"
+                                                        path="param/args/selection" auto-commit>
+                                                    </crown-binding>
+                                                </davinci-drop-down>
+                                            </layout-column>
+                                            <layout-column id="ColumnLayout12" style="align-items: stretch">
+                                                <layout-row id="RowLayout2" style="justify-content: space-evenly">
+                                                    <davinci-button id="Button_AddExpression"
+                                                        class="myCustomButton_CSK_Module_ResultManager" type="primary"
+                                                        icon-position="append" title="Add Expression"
+                                                        icon="content/add">
+                                                        <span></span>
+                                                        <crown-binding event="submit"
+                                                            name="CSK_ResultManager/addExpressionViaUI" auto-commit>
+                                                        </crown-binding>
+                                                    </davinci-button>
+                                                    <davinci-button id="Button_DeleteExpression"
+                                                        class="myCustomButton_CSK_Module_ResultManager" type="outline"
+                                                        icon-position="append" title="Delete Expression"
+                                                        icon="action/delete">
+                                                        <span></span>
+                                                        <crown-binding event="submit"
+                                                            name="CSK_ResultManager/deleteExpressionViaUI" auto-commit>
+                                                        </crown-binding>
+                                                    </davinci-button>
+                                                </layout-row>
+                                            </layout-column>
+                                        </layout-row>
+                                    </layout-column>
+                                    <layout-column id="ColumnLayout29" style="align-items: stretch">
+                                        <layout-row id="RowLayout33"
+                                            style="justify-content: flex-end; align-items: center">
+                                            <davinci-value-display id="VD_ShowProcessData" value="Show process data:"
+                                                title="Set status if UI should show processed data.">
+                                            </davinci-value-display>
+                                            <davinci-toggle-switch id="TS_ShowProcessData"
+                                                title="Set status if UI should show processed data.">
+                                                <crown-edpws-binding property="checked"
+                                                    name="CSK_ResultManager/OnNewStatusShowProcessData"
+                                                    update-on-resume>
+                                                </crown-edpws-binding>
+                                                <crown-binding event="change"
+                                                    name="CSK_ResultManager/setShowProcessData" path="param/args/status"
+                                                    auto-commit>
+                                                </crown-binding>
+                                            </davinci-toggle-switch>
+                                        </layout-row>
+                                    </layout-column>
+                                </layout-row>
+                                <layout-row id="RowLayout31">
+                                    <layout-column id="ColumnLayout18" style="align-items: stretch">
+                                        <stacked-view id="SV_ExpressionSelected1">
+                                            <stacked-pane id="SP_ExpSelected1" value="true">
+                                                <layout-row id="RowLayout14">
+                                                    <layout-column id="ColumnLayout17"
+                                                        class="myCustomFrame_CSK_Module_ResultManager"
+                                                        style="align-items: stretch">
+                                                        <davinci-value-display id="VD_IncomingParameters"
+                                                            class="myCustomFrameLabel_CSK_Module_ResultManager"
+                                                            label="Incoming Parameters" style="align-self: flex-start">
+                                                        </davinci-value-display>
+                                                        <curie-callout id="DC_FlowConfigInfo" type="info"
+                                                            value="FlowConfig priority active.">
+                                                            <crown-edpws-binding property="hidden"
+                                                                name="CSK_ResultManager/OnNewStatusFlowConfigPriority"
+                                                                update-on-resume
+                                                                converter="function(value) {return !value;}">
+                                                            </crown-edpws-binding>
+                                                        </curie-callout>
+                                                        <davinci-collapse id="CollapseParameterInfo"
+                                                            collapsed-title="Info" expanded-title="Hide"
+                                                            style="align-self: flex-end">
+                                                            <layout-row id="RowLayout117">
+                                                                <layout-column id="ColumnLayout124"
+                                                                    style="align-items: stretch">
+                                                                    <davinci-callout id="Callout_ParameterInfo"
+                                                                        type="info">
+                                                                        <span>
+                                                                            Here you can configure parameters to receive from other modules by their events to process them.
+                                                                            <br>
+                                                                            As events can have multiple parameters, it is possible to define the position of the parameter to use.
+                                                                            <br>
+                                                                            If you activate 'Merge data', it will only collect the data of all configured events and forwards them as a new event. No expression will be used.
+                                                                            <br>
+                                                                            INFO: In general, it will always wait to receive all configured events before it will process them. So make sure that the timing of the events is valid.
+                                                                        </span>
+                                                                    </davinci-callout>
+                                                                </layout-column>
+                                                            </layout-row>
+                                                        </davinci-collapse>
+                                                        <layout-row id="RowLayout6"
+                                                            style="align-items: center; justify-content: space-between">
+                                                            <layout-column id="ColumnLayout9"
+                                                                style="align-items: stretch">
+                                                            </layout-column>
+                                                            <layout-column id="ColumnLayout4"
+                                                                style="align-items: stretch">
+                                                                <layout-row id="RowLayout15"
+                                                                    style="align-items: center; justify-content: flex-end">
+                                                                    <davinci-value-display id="VD_MergeData"
+                                                                        value="Merge data:"
+                                                                        title="Merge data of multiple sources and provide them as new event.">
+                                                                    </davinci-value-display>
+                                                                    <davinci-toggle-switch id="TS_MergeData">
+                                                                        <crown-edpws-binding property="checked"
+                                                                            name="CSK_ResultManager/OnNewStatusMergeData"
+                                                                            update-on-resume>
+                                                                        </crown-edpws-binding>
+                                                                        <crown-binding event="change"
+                                                                            name="CSK_ResultManager/setMergeData"
+                                                                            path="param/args/status" auto-commit>
+                                                                        </crown-binding>
+                                                                        <crown-edpws-binding property="disabled"
+                                                                            name="CSK_ResultManager/OnNewStatusFlowConfigPriority"
+                                                                            update-on-resume>
+                                                                        </crown-edpws-binding>
+                                                                    </davinci-toggle-switch>
+                                                                </layout-row>
+                                                            </layout-column>
+                                                        </layout-row>
+                                                        <curie-table id="DT_Parameter"
+                                                            class="myCustomCssClass_CSK_Module_ResultManager"
+                                                            select-mode="" selectable>
+                                                            <curie-table-column id="DTC_ParameterName"
+                                                                header="Parameter Name">
+                                                            </curie-table-column>
+                                                            <curie-table-column id="DTC_LinkedEvent"
+                                                                header="Linked Event">
+                                                            </curie-table-column>
+                                                            <curie-table-column id="DTC_CurrentValue"
+                                                                header="Current Value">
+                                                            </curie-table-column>
+                                                            <crown-binding event="row-selected"
+                                                                name="CSK_ResultManager/selectParameterViaUI"
+                                                                path="param/args/selection" auto-commit>
+                                                            </crown-binding>
+                                                            <crown-edpws-binding property="data"
+                                                                name="CSK_ResultManager/OnNewStatusParameterList"
+                                                                update-on-resume converter="convertToList">
+                                                            </crown-edpws-binding>
+                                                        </curie-table>
+                                                        <layout-row id="RowLayout16"
+                                                            style="justify-content: space-between; align-items: center">
+                                                            <davinci-value-display id="VD_SelectedParameter"
+                                                                label="Selected parameter">
+                                                                <crown-edpws-binding property="value"
+                                                                    name="CSK_ResultManager/OnNewStatusSelectedParameter"
+                                                                    update-on-resume>
+                                                                </crown-edpws-binding>
+                                                            </davinci-value-display>
+                                                            <layout-column id="ColumnLayout8"
+                                                                style="align-items: stretch">
+                                                                <layout-row id="RowLayout25"
+                                                                    style="justify-content: flex-end">
+                                                                    <davinci-button id="Button_AddParameter"
+                                                                        class="myCustomButton_CSK_Module_ResultManager"
+                                                                        type="primary" icon-position="append"
+                                                                        title="Add Parameter" icon="av/playlist_add">
+                                                                        <span></span>
+                                                                        <crown-binding event="submit"
+                                                                            name="CSK_ResultManager/addParameterViaUI"
+                                                                            auto-commit>
+                                                                        </crown-binding>
+                                                                        <crown-edpws-binding property="disabled"
+                                                                            name="CSK_ResultManager/OnNewStatusFlowConfigPriority"
+                                                                            update-on-resume>
+                                                                        </crown-edpws-binding>
+                                                                    </davinci-button>
+                                                                    <davinci-button id="Button_DeleteParameter"
+                                                                        class="myCustomButton_CSK_Module_ResultManager"
+                                                                        type="outline" icon-position="append"
+                                                                        icon="content/delete_sweep"
+                                                                        title="Delete selected parameter">
+                                                                        <span></span>
+                                                                        <crown-binding event="submit"
+                                                                            name="CSK_ResultManager/deleteParameterViaUI"
+                                                                            auto-commit>
+                                                                        </crown-binding>
+                                                                        <crown-edpws-binding property="disabled"
+                                                                            name="CSK_ResultManager/OnNewStatusFlowConfigPriority"
+                                                                            update-on-resume>
+                                                                        </crown-edpws-binding>
+                                                                    </davinci-button>
+                                                                    <davinci-button id="Button_ClearData"
+                                                                        class="myCustomButton_CSK_Module_ResultManager"
+                                                                        type="outline" icon-position="append"
+                                                                        title="Clear latest received values of paramter"
+                                                                        icon="content/clear">
+                                                                        <span></span>
+                                                                        <crown-binding event="submit"
+                                                                            name="CSK_ResultManager/clearParameterDataViaUI"
+                                                                            auto-commit>
+                                                                        </crown-binding>
+                                                                    </davinci-button>
+                                                                </layout-row>
+                                                            </layout-column>
+                                                        </layout-row>
+                                                        <layout-row id="RowLayout22" style="align-items: center">
+                                                            <layout-column id="ColumnLayout26"
+                                                                style="align-items: stretch">
+                                                                <davinci-value-display id="VD_ListOfEvents"
+                                                                    value="Available events">
+                                                                </davinci-value-display>
+                                                            </layout-column>
+                                                            <layout-column id="ColumnLayout27"
+                                                                style="align-items: stretch; flex-grow: 3">
+                                                                <davinci-auto-suggest id="AS_ListOfEvents"
+                                                                    min-length="0" label="List of available events">
+                                                                    <crown-edpws-binding property="data"
+                                                                        name="CSK_ResultManager/OnNewStatusAvailableEvents"
+                                                                        update-on-resume converter="convertToList">
+                                                                    </crown-edpws-binding>
+                                                                    <crown-binding event="change"
+                                                                        name="CSK_ResultManager/selectEventViaUI"
+                                                                        path="param/args/event" auto-commit>
+                                                                    </crown-binding>
+                                                                    <crown-edpws-binding property="disabled"
+                                                                        name="CSK_ResultManager/OnNewStatusFlowConfigPriority"
+                                                                        update-on-resume>
+                                                                    </crown-edpws-binding>
+                                                                </davinci-auto-suggest>
+                                                            </layout-column>
+                                                        </layout-row>
+                                                        <layout-row id="RowLayout8"
+                                                            class="myCustomSpacerVert10_CSK_Module_ResultManager">
+                                                        </layout-row>
+                                                        <layout-row id="RowLayout4"
+                                                            class="myCustomBorderBottom_CSK_Module_ResultManager">
+                                                        </layout-row>
+                                                        <layout-row id="RowLayout19" style="align-items: center">
+                                                            <layout-column id="ColumnLayout20"
+                                                                style="align-items: stretch">
+                                                                <davinci-value-display id="VD_LinkedEvent"
+                                                                    value="Linked event">
+                                                                </davinci-value-display>
+                                                            </layout-column>
+                                                            <layout-column id="ColumnLayout21"
+                                                                style="align-items: stretch; flex-grow: 3">
+                                                                <davinci-text-field id="TF_LinkedEvent" type="text"
+                                                                    placeholder="CrownName.EventName">
+                                                                    <crown-edpws-binding property="value"
+                                                                        name="CSK_ResultManager/OnNewStatusLinkedEvent"
+                                                                        update-on-resume>
+                                                                    </crown-edpws-binding>
+                                                                    <crown-binding event="change"
+                                                                        name="CSK_ResultManager/setParameterEvent"
+                                                                        path="param/args/event" auto-commit>
+                                                                    </crown-binding>
+                                                                    <crown-edpws-binding property="disabled"
+                                                                        name="CSK_ResultManager/OnNewStatusFlowConfigPriority"
+                                                                        update-on-resume>
+                                                                    </crown-edpws-binding>
+                                                                </davinci-text-field>
+                                                            </layout-column>
+                                                        </layout-row>
+                                                        <layout-row id="RowLayout20" style="align-items: center">
+                                                            <layout-column id="ColumnLayout22"
+                                                                style="align-items: stretch">
+                                                                <davinci-value-display id="VD_ParameterPosition"
+                                                                    value="Event parameter position"
+                                                                    title="Parameter position of event to use (default is '1')">
+                                                                </davinci-value-display>
+                                                            </layout-column>
+                                                            <layout-column id="ColumnLayout23"
+                                                                style="align-items: stretch; flex-grow: 3">
+                                                                <davinci-numeric-field id="NF_ParameterPosition"
+                                                                    type="outline" min="1" max="8" ticks="1"
+                                                                    group-separator="," decimal-separator="."
+                                                                    format-pattern="0"
+                                                                    title="Parameter position of event to use (default is '1')">
+                                                                    <crown-edpws-binding property="value"
+                                                                        name="CSK_ResultManager/OnNewStatusEventParameterPosition"
+                                                                        update-on-resume>
+                                                                    </crown-edpws-binding>
+                                                                    <crown-binding event="change"
+                                                                        name="CSK_ResultManager/setParameterPosition"
+                                                                        path="param/args/pos" auto-commit>
+                                                                    </crown-binding>
+                                                                    <crown-edpws-binding property="disabled"
+                                                                        name="CSK_ResultManager/OnNewStatusFlowConfigPriority"
+                                                                        update-on-resume>
+                                                                    </crown-edpws-binding>
+                                                                </davinci-numeric-field>
+                                                            </layout-column>
+                                                        </layout-row>
+                                                    </layout-column>
+                                                </layout-row>
+                                            </stacked-pane>
+                                            <stacked-pane id="SP_NoExpSelectd1" value="false">
+                                            </stacked-pane>
+                                            <crown-edpws-binding property="value"
+                                                name="CSK_ResultManager/OnNewStatusExpressionSelected" update-on-resume
+                                                converter="function(value) {return value.toString();}">
+                                            </crown-edpws-binding>
+                                        </stacked-view>
+                                    </layout-column>
+                                    <layout-column id="ColumnLayout19" style="align-items: stretch">
+                                        <layout-row id="RowLayout36">
+                                            <layout-column id="ColumnLayout3" style="align-items: stretch">
+                                                <stacked-view id="SV_ExpressionSelected2">
+                                                    <stacked-pane id="SP_ExpSelected2" value="true">
+                                                        <stacked-view id="SV_MergeData">
+                                                            <stacked-pane id="SP_MergeDataNotActive" value="false">
+                                                                <layout-row id="RowLayout23">
+                                                                    <layout-column id="ColumnLayout30"
+                                                                        class="myCustomFrame_CSK_Module_ResultManager"
+                                                                        style="align-items: stretch">
+                                                                        <davinci-value-display id="VD_Expression"
+                                                                            class="myCustomFrameLabel_CSK_Module_ResultManager"
+                                                                            label="Expression Details"
+                                                                            title="Expression to process, like 'param1 * (10+param2)' (see also https://www.toggledbits.com/luaxp )"
+                                                                            style="align-self: flex-start">
+                                                                        </davinci-value-display>
+                                                                        <davinci-collapse id="CollapseExpressionInfo"
+                                                                            collapsed-title="Info"
+                                                                            expanded-title="Hide">
+                                                                            <layout-row id="RowLayout7">
+                                                                                <layout-column id="ColumnLayout24"
+                                                                                    style="align-items: stretch">
+                                                                                    <davinci-callout
+                                                                                        id="Callout_ExpressionInfo"
+                                                                                        type="info">
+                                                                                        <span>
+                                                                                            Expression to process, like:
+                                                                                            <br>
+                                                                                            'param1 * (10+param2)' or 'param1 && param2' etc.
+                                                                                            <br>
+                                                                                            see also <a href='https://www.toggledbits.com/luaxp' target='_blank'>www.toggledbits.com/luaxp</a>
+                                                                                            <br>
+                                                                                            <br>
+                                                                                            Furthermore there are additional syntaxes available:
+                                                                                            <br>
+                                                                                            INFO: Please be aware, that following functions can not be combined with others (beside of 'dateTime' and 'timestamp'). If this is needed, just create an additional expression and link them...
+                                                                                        </span>
+                                                                                    </davinci-callout>
+                                                                                    <davinci-collapse
+                                                                                        id="Collapse_StringPack"
+                                                                                        class="myCustomMarginLeft55px_CSK_Module_ResultManager"
+                                                                                        collapsed-title="stringPack"
+                                                                                        expanded-title="Hide">
+                                                                                        <davinci-callout
+                                                                                            id="Callout_StringPack"
+                                                                                            type="info">
+                                                                                            <span>
+                                                                                                'stringPack' : returns a binary string (see <a href='https://www.lua.org/manual/5.3/manual.html#6.4.2' target='_blank'>further info</a> )
+                                                                                                <br>
+                                                                                                <br>
+                                                                                                Sample:
+                                                                                                <br>
+                                                                                                stringPack('I2', param1) or
+                                                                                                <br>
+                                                                                                stringPack('I2I4I2', param1, param2, param3)
+                                                                                                <br>
+                                                                                                INFO: If you make use of multiple parameters, it is necessary to have them in a full and increasing order, like shown in the sample.
+                                                                                            </span>
+                                                                                        </davinci-callout>
+                                                                                    </davinci-collapse>
+                                                                                    <davinci-collapse
+                                                                                        id="Collapse_StringUnpack"
+                                                                                        class="myCustomMarginLeft55px_CSK_Module_ResultManager"
+                                                                                        collapsed-title="stringUnpack"
+                                                                                        expanded-title="Hide">
+                                                                                        <davinci-callout
+                                                                                            id="Callout_StringUnpack"
+                                                                                            type="info">
+                                                                                            <span>
+                                                                                                'stringUnpack': returns the value packed in binary string (see <a href='https://www.lua.org/manual/5.3/manual.html#6.4.2' target='_blank'>further info</a> )
+                                                                                                <br>
+                                                                                                <br>
+                                                                                                Sample:
+                                                                                                <br>
+                                                                                                stringUnpack('I2', param1) or
+                                                                                                <br>
+                                                                                                stringUnpack('I4', param1, 1,4)
+                                                                                                <br>
+                                                                                                <br>
+                                                                                                The additional parameters are only needed if it is necessary to substract a substring out of the received value, e.g. here it will cut the binary string from position 1 to 4.
+                                                                                                <br>
+                                                                                                INFO: 'stringUnpack' only works with one single parameter!
+                                                                                            </span>
+                                                                                        </davinci-callout>
+                                                                                    </davinci-collapse>
+                                                                                    <davinci-collapse
+                                                                                        id="Collapse_searchAndCut"
+                                                                                        class="myCustomMarginLeft55px_CSK_Module_ResultManager"
+                                                                                        collapsed-title="searchAndCut"
+                                                                                        expanded-title="Hide">
+                                                                                        <davinci-callout
+                                                                                            id="Callout_SearchAndCut"
+                                                                                            type="info">
+                                                                                            <span>
+                                                                                                'searchAndCut': searches for 2 strings in the received data as start and end positions and cuts the part between these positions. It is possible to add 2 additional numeric values to extend/reduce the positions.
+                                                                                                <br>
+                                                                                                <br>
+                                                                                                Sample:
+                                                                                                <br>
+                                                                                                searchAndCut(param1, 'Value1', '}') or
+                                                                                                <br>
+                                                                                                searchAndCut(param1, 'Value1', '}', 1, -2)
+                                                                                                <br>
+                                                                                            </span>
+                                                                                        </davinci-callout>
+                                                                                    </davinci-collapse>
+                                                                                    <davinci-collapse
+                                                                                        id="Collapse_dateTimestamp"
+                                                                                        class="myCustomMarginLeft55px_CSK_Module_ResultManager"
+                                                                                        collapsed-title="dateTime and timestamp"
+                                                                                        expanded-title="Hide">
+                                                                                        <davinci-callout
+                                                                                            id="Callout_DateTimeStamp"
+                                                                                            type="info">
+                                                                                            <span>
+                                                                                                'dateTime': returns Date and Time in string format = 'YYYY-MM-DDTHH_MM_SS', like '20240709T14_12_59'
+                                                                                                <br>
+                                                                                                <br>
+                                                                                                'timestamp': returns a timestamp as string, like '2265809'
+                                                                                                <br>
+                                                                                            </span>
+                                                                                        </davinci-callout>
+                                                                                    </davinci-collapse>
+                                                                                </layout-column>
+                                                                            </layout-row>
+                                                                        </davinci-collapse>
+                                                                        <layout-row id="RowLayout17">
+                                                                            <layout-column id="ColumnLayout5"
+                                                                                style="align-items: stretch; flex-grow: 6">
+                                                                                <davinci-text-field id="TF_Expression"
+                                                                                    type="text"
+                                                                                    title="Expression to process, like 'param1 * (10+param2)' (see also https://www.toggledbits.com/luaxp )"
+                                                                                    placeholder="e.g. 'param1 * (10+param2)' OR 'param1'"
+                                                                                    label="Expression">
+                                                                                    <crown-edpws-binding
+                                                                                        property="value"
+                                                                                        name="CSK_ResultManager/OnNewStatusExpression"
+                                                                                        update-on-resume>
+                                                                                    </crown-edpws-binding>
+                                                                                    <crown-binding event="change"
+                                                                                        name="CSK_ResultManager/setExpression"
+                                                                                        path="param/args/expression"
+                                                                                        auto-commit>
+                                                                                    </crown-binding>
+                                                                                </davinci-text-field>
+                                                                            </layout-column>
+                                                                            <layout-column id="ColumnLayout6"
+                                                                                style="align-items: center">
+                                                                                <davinci-button id="Button_Execute"
+                                                                                    class="myCustomButton_CSK_Module_ResultManager"
+                                                                                    type="outline"
+                                                                                    icon-position="append"
+                                                                                    title="Execute expression manually. IMPORTANT: Only works for static expressions (no dynamic received parameters)."
+                                                                                    icon="action/gavel">
+                                                                                    <span></span>
+                                                                                    <crown-binding event="submit"
+                                                                                        name="CSK_ResultManager/executeExpressionViaUI"
+                                                                                        auto-commit>
+                                                                                    </crown-binding>
+                                                                                </davinci-button>
+                                                                            </layout-column>
+                                                                        </layout-row>
+                                                                        <davinci-value-display
+                                                                            id="VD_ExpressionResultLabel"
+                                                                            value="Expression result">
+                                                                        </davinci-value-display>
+                                                                        <davinci-text-field id="TF_ExpressionResult"
+                                                                            type="text" readonly disabled
+                                                                            style="flex-grow: 1; flex-shrink: 0">
+                                                                            <crown-on property="value"
+                                                                                crown-event="CSK_ResultManager/OnNewStatusResult">
+                                                                            </crown-on>
+                                                                        </davinci-text-field>
+                                                                        <layout-row id="RowLayout26"
+                                                                            class="myCustomSpacerVert10_CSK_Module_ResultManager"
+                                                                            style="flex-grow: 0; flex-shrink: 0">
+                                                                        </layout-row>
+                                                                        <layout-row id="RowLayout21"
+                                                                            class="myCustomBorderBottom_CSK_Module_ResultManager"
+                                                                            style="flex-grow: 0; flex-shrink: 0">
+                                                                        </layout-row>
+                                                                        <layout-row id="RowLayout32"
+                                                                            class="myCustomSpacerVert10_CSK_Module_ResultManager"
+                                                                            style="flex-grow: 0; flex-shrink: 0">
+                                                                        </layout-row>
+                                                                        <davinci-value-display id="VD_Criteria"
+                                                                            label="Criteria">
+                                                                        </davinci-value-display>
+                                                                        <davinci-drop-down id="DD_CriteriaType"
+                                                                            label="Type">
+                                                                            <davinci-option id="Option_NUMBER"
+                                                                                value="NUMBER">
+                                                                                <span>NUMBER</span>
+                                                                            </davinci-option>
+                                                                            <davinci-option id="Option_RANGE"
+                                                                                value="RANGE">
+                                                                                <span>RANGE</span>
+                                                                            </davinci-option>
+                                                                            <davinci-option id="Option_STRING"
+                                                                                value="STRING">
+                                                                                <span>STRING</span>
+                                                                            </davinci-option>
+                                                                            <davinci-option id="Option_BOOL"
+                                                                                value="BOOL">
+                                                                                <span>BOOL</span>
+                                                                            </davinci-option>
+                                                                            <crown-edpws-binding property="value"
+                                                                                name="CSK_ResultManager/OnNewStatusCriteriaType"
+                                                                                update-on-resume>
+                                                                            </crown-edpws-binding>
+                                                                            <crown-binding event="change"
+                                                                                name="CSK_ResultManager/setCriteriaType"
+                                                                                path="param/args/criteriaType"
+                                                                                auto-commit>
+                                                                            </crown-binding>
+                                                                        </davinci-drop-down>
+                                                                        <stacked-view id="SV_Criteria">
+                                                                            <stacked-pane id="SP_Number" value="NUMBER">
+                                                                                <layout-row id="RowLayout11">
+                                                                                    <layout-column id="ColumnLayout10"
+                                                                                        style="align-items: stretch">
+                                                                                        <davinci-numeric-field
+                                                                                            id="NF_CriteriaNumber"
+                                                                                            type="outline"
+                                                                                            min="-9007199254740991"
+                                                                                            max="9007199254740991"
+                                                                                            ticks="1"
+                                                                                            group-separator=","
+                                                                                            decimal-separator="."
+                                                                                            format-pattern="0.00">
+                                                                                            <crown-binding
+                                                                                                event="change"
+                                                                                                name="CSK_ResultManager/setCriteria"
+                                                                                                path="param/args/criteria"
+                                                                                                auto-commit>
+                                                                                            </crown-binding>
+                                                                                            <crown-edpws-binding
+                                                                                                property="value"
+                                                                                                name="CSK_ResultManager/OnNewStatusCriteria"
+                                                                                                update-on-resume>
+                                                                                            </crown-edpws-binding>
+                                                                                        </davinci-numeric-field>
+                                                                                    </layout-column>
+                                                                                </layout-row>
+                                                                            </stacked-pane>
+                                                                            <stacked-pane id="SP_Range" value="RANGE">
+                                                                                <layout-row id="RowLayout10">
+                                                                                    <layout-column id="ColumnLayout13"
+                                                                                        style="align-items: stretch">
+                                                                                        <davinci-numeric-field
+                                                                                            id="NF_CriteriaMin"
+                                                                                            type="outline"
+                                                                                            min="-9007199254740991"
+                                                                                            max="9007199254740991"
+                                                                                            ticks="1"
+                                                                                            group-separator=","
+                                                                                            decimal-separator="."
+                                                                                            format-pattern="0.00">
+                                                                                            <crown-binding
+                                                                                                event="change"
+                                                                                                name="CSK_ResultManager/setCriteria"
+                                                                                                path="param/args/criteria"
+                                                                                                auto-commit>
+                                                                                            </crown-binding>
+                                                                                            <crown-edpws-binding
+                                                                                                property="value"
+                                                                                                name="CSK_ResultManager/OnNewStatusCriteria"
+                                                                                                update-on-resume>
+                                                                                            </crown-edpws-binding>
+                                                                                        </davinci-numeric-field>
+                                                                                    </layout-column>
+                                                                                    <layout-column id="ColumnLayout14"
+                                                                                        style="align-items: stretch">
+                                                                                        <davinci-numeric-field
+                                                                                            id="NF_CriteriaMax"
+                                                                                            type="outline"
+                                                                                            min="-9007199254740991"
+                                                                                            max="9007199254740991"
+                                                                                            ticks="1"
+                                                                                            group-separator=","
+                                                                                            decimal-separator="."
+                                                                                            format-pattern="0.00">
+                                                                                            <crown-binding
+                                                                                                event="change"
+                                                                                                name="CSK_ResultManager/setCriteriaMaximum"
+                                                                                                path="param/args/maxCriteria"
+                                                                                                auto-commit>
+                                                                                            </crown-binding>
+                                                                                            <crown-edpws-binding
+                                                                                                property="value"
+                                                                                                name="CSK_ResultManager/OnNewStatusCriteriaMaximum"
+                                                                                                update-on-resume>
+                                                                                            </crown-edpws-binding>
+                                                                                        </davinci-numeric-field>
+                                                                                    </layout-column>
+                                                                                </layout-row>
+                                                                            </stacked-pane>
+                                                                            <stacked-pane id="SP_Bool" value="BOOL">
+                                                                                <layout-row id="RowLayout12">
+                                                                                    <layout-column id="ColumnLayout15"
+                                                                                        style="align-items: stretch">
+                                                                                        <davinci-toggle-switch
+                                                                                            id="TS_Criteria"
+                                                                                            class="myCustomMargin_CSK_Module_ResultManager">
+                                                                                            <crown-binding
+                                                                                                event="change"
+                                                                                                name="CSK_ResultManager/setCriteria"
+                                                                                                path="param/args/criteria"
+                                                                                                auto-commit>
+                                                                                            </crown-binding>
+                                                                                            <crown-edpws-binding
+                                                                                                property="checked"
+                                                                                                name="CSK_ResultManager/OnNewStatusCriteria"
+                                                                                                update-on-resume>
+                                                                                            </crown-edpws-binding>
+                                                                                        </davinci-toggle-switch>
+                                                                                    </layout-column>
+                                                                                </layout-row>
+                                                                            </stacked-pane>
+                                                                            <stacked-pane id="SP_String" value="STRING">
+                                                                                <layout-row id="RowLayout13">
+                                                                                    <layout-column id="ColumnLayout16"
+                                                                                        style="align-items: stretch">
+                                                                                        <davinci-text-field
+                                                                                            id="TF_Criteria" type="text"
+                                                                                            label="Text"
+                                                                                            title="Criteria for expression result (optional minimum value if range)">
+                                                                                            <crown-binding
+                                                                                                event="change"
+                                                                                                name="CSK_ResultManager/setCriteria"
+                                                                                                path="param/args/criteria"
+                                                                                                auto-commit>
+                                                                                            </crown-binding>
+                                                                                            <crown-edpws-binding
+                                                                                                property="value"
+                                                                                                name="CSK_ResultManager/OnNewStatusCriteriaString"
+                                                                                                update-on-resume>
+                                                                                            </crown-edpws-binding>
+                                                                                        </davinci-text-field>
+                                                                                    </layout-column>
+                                                                                </layout-row>
+                                                                            </stacked-pane>
+                                                                            <crown-edpws-binding property="value"
+                                                                                name="CSK_ResultManager/OnNewStatusCriteriaType"
+                                                                                update-on-resume>
+                                                                            </crown-edpws-binding>
+                                                                        </stacked-view>
+                                                                        <layout-row id="RowLayout3"
+                                                                            style="align-items: center">
+                                                                            <layout-column id="ColumnLayout7">
+                                                                                <layout-row id="RowLayout18"
+                                                                                    style="align-items: center">
+                                                                                    <davinci-value-display
+                                                                                        id="VD_CriteriaResult"
+                                                                                        value="Criteria result:">
+                                                                                    </davinci-value-display>
+                                                                                    <davinci-status-indicator
+                                                                                        id="SI_CriteriaResult">
+                                                                                        <span></span>
+                                                                                        <crown-edpws-binding
+                                                                                            property="status"
+                                                                                            name="CSK_ResultManager/OnNewStatusCriteriaResult"
+                                                                                            update-on-resume>
+                                                                                        </crown-edpws-binding>
+                                                                                    </davinci-status-indicator>
+                                                                                </layout-row>
+                                                                            </layout-column>
+                                                                            <layout-column id="ColumnLayout31"
+                                                                                style="align-items: flex-end">
+                                                                                <layout-row id="RowLayout24"
+                                                                                    style="align-items: center">
+                                                                                    <davinci-value-display
+                                                                                        id="VD_CheckCriteriaToForward"
+                                                                                        value="Check criteria to forward:"
+                                                                                        title="Only forward result if criteria was valid.">
+                                                                                    </davinci-value-display>
+                                                                                    <davinci-toggle-switch
+                                                                                        id="TS_CheckCriteriaToForward"
+                                                                                        title="Only forward result if criteria was valid.">
+                                                                                        <crown-edpws-binding
+                                                                                            property="checked"
+                                                                                            name="CSK_ResultManager/OnNewStatusCheckCriteriaToForwardResult"
+                                                                                            update-on-resume>
+                                                                                        </crown-edpws-binding>
+                                                                                        <crown-binding event="change"
+                                                                                            name="CSK_ResultManager/setCheckCriteriaToForward"
+                                                                                            path="param/args/status"
+                                                                                            auto-commit>
+                                                                                        </crown-binding>
+                                                                                    </davinci-toggle-switch>
+                                                                                </layout-row>
+                                                                            </layout-column>
+                                                                        </layout-row>
+                                                                        <davinci-value-display id="VD_EventInfo">
+                                                                            <crown-edpws-binding property="value"
+                                                                                name="CSK_ResultManager/OnNewStatusEventInfo"
+                                                                                update-on-resume>
+                                                                            </crown-edpws-binding>
+                                                                        </davinci-value-display>
+                                                                        <layout-row id="RowLayout35"
+                                                                            class="myCustomSpacerVert10_CSK_Module_ResultManager"
+                                                                            style="flex-grow: 0; flex-shrink: 0">
+                                                                        </layout-row>
+                                                                        <layout-row id="RowLayout39"
+                                                                            class="myCustomBorderBottom_CSK_Module_ResultManager"
+                                                                            style="flex-grow: 0; flex-shrink: 0">
+                                                                        </layout-row>
+                                                                        <layout-row id="RowLayout40"
+                                                                            class="myCustomSpacerVert10_CSK_Module_ResultManager"
+                                                                            style="flex-grow: 0; flex-shrink: 0">
+                                                                        </layout-row>
+                                                                        <layout-row id="RowLayout42"
+                                                                            style="align-items: center">
+                                                                            <layout-column id="ColumnLayout32">
+                                                                                <davinci-value-display
+                                                                                    id="VD_CustomResult"
+                                                                                    label="Custom results">
+                                                                                </davinci-value-display>
+                                                                            </layout-column>
+                                                                            <layout-column id="ColumnLayout38"
+                                                                                style="align-items: flex-end">
+                                                                                <davinci-toggle-switch
+                                                                                    id="TS_CustomResult"
+                                                                                    title="Set status if custom results should be provided based on the criteria instead of the expression result itself.">
+                                                                                    <crown-edpws-binding
+                                                                                        property="checked"
+                                                                                        name="CSK_ResultManager/OnNewStatusCustomResultMode"
+                                                                                        update-on-resume>
+                                                                                    </crown-edpws-binding>
+                                                                                    <crown-binding event="change"
+                                                                                        name="CSK_ResultManager/setCustomResultMode"
+                                                                                        path="param/args/status"
+                                                                                        auto-commit>
+                                                                                    </crown-binding>
+                                                                                </davinci-toggle-switch>
+                                                                            </layout-column>
+                                                                        </layout-row>
+                                                                        <stacked-view id="SV_CustomResults">
+                                                                            <stacked-pane id="SP_CustomResultActive"
+                                                                                value="true">
+                                                                                <layout-row id="RowLayout43">
+                                                                                    <layout-column id="ColumnLayout39"
+                                                                                        style="align-items: stretch">
+                                                                                        <davinci-text-field
+                                                                                            id="TF_Valid" type="text"
+                                                                                            label="Valid"
+                                                                                            title="Result to send if criteria was valid">
+                                                                                            <crown-edpws-binding
+                                                                                                property="value"
+                                                                                                name="CSK_ResultManager/OnNewStatusCustomResultOK"
+                                                                                                update-on-resume>
+                                                                                            </crown-edpws-binding>
+                                                                                            <crown-binding
+                                                                                                event="change"
+                                                                                                name="CSK_ResultManager/setCustomResultOK"
+                                                                                                path="param/args/result"
+                                                                                                auto-commit>
+                                                                                            </crown-binding>
+                                                                                        </davinci-text-field>
+                                                                                    </layout-column>
+                                                                                    <layout-column id="ColumnLayout40"
+                                                                                        style="align-items: stretch">
+                                                                                        <davinci-text-field
+                                                                                            id="TF_NotValid" type="text"
+                                                                                            label="Not valid"
+                                                                                            title="Result to send if criteria was not valid">
+                                                                                            <crown-edpws-binding
+                                                                                                property="value"
+                                                                                                name="CSK_ResultManager/OnNewStatusCustomResultNOK"
+                                                                                                update-on-resume>
+                                                                                            </crown-edpws-binding>
+                                                                                            <crown-binding
+                                                                                                event="change"
+                                                                                                name="CSK_ResultManager/setCustomResultNOK"
+                                                                                                path="param/args/result"
+                                                                                                auto-commit>
+                                                                                            </crown-binding>
+                                                                                        </davinci-text-field>
+                                                                                    </layout-column>
+                                                                                </layout-row>
+                                                                            </stacked-pane>
+                                                                            <stacked-pane id="SP_CustomResultNotActive"
+                                                                                value="false">
+                                                                            </stacked-pane>
+                                                                            <crown-edpws-binding property="value"
+                                                                                name="CSK_ResultManager/OnNewStatusCustomResultMode"
+                                                                                update-on-resume
+                                                                                converter="function(value) {return value.toString();}">
+                                                                            </crown-edpws-binding>
+                                                                        </stacked-view>
+                                                                        <layout-row id="RowLayout41"
+                                                                            class="myCustomSpacerVert10_CSK_Module_ResultManager"
+                                                                            style="flex-grow: 0; flex-shrink: 0">
+                                                                        </layout-row>
+                                                                    </layout-column>
+                                                                </layout-row>
+                                                            </stacked-pane>
+                                                            <stacked-pane id="SP_MergeDataActive" value="true">
+                                                            </stacked-pane>
+                                                            <crown-edpws-binding property="value"
+                                                                name="CSK_ResultManager/OnNewStatusMergeData"
+                                                                update-on-resume
+                                                                converter="function(value) {return value.toString();}">
+                                                            </crown-edpws-binding>
+                                                        </stacked-view>
+                                                    </stacked-pane>
+                                                    <stacked-pane id="SP_NoExpSelectd2" value="false">
+                                                    </stacked-pane>
+                                                    <crown-edpws-binding property="value"
+                                                        name="CSK_ResultManager/OnNewStatusExpressionSelected"
+                                                        update-on-resume
+                                                        converter="function(value) {return value.toString();}">
+                                                    </crown-edpws-binding>
+                                                </stacked-view>
+                                            </layout-column>
+                                        </layout-row>
+                                    </layout-column>
+                                </layout-row>
+                            </layout-column>
+                        </layout-row>
+                    </stacked-pane>
+                    <stacked-pane id="SP_LoginNotOK" value="false">
+                        <davinci-callout id="Callout1" type="info">
+                            <span>
+								Please log in via CSK_UserManagement module (at least via user level "Operator")
+							</span>
+                        </davinci-callout>
+                    </stacked-pane>
+                    <crown-edpws-binding property="value" name="CSK_ResultManager/OnUserLevelOperatorActive"
+                        update-on-resume converter="function(value) {return value.toString();}">
+                    </crown-edpws-binding>
+                </stacked-view>
+            </stacked-pane>
+            <stacked-pane id="SP_NoSupport" value="false">
+                <layout-row id="RowLayout27">
+                    <layout-column id="ColumnLayout33">
+                        <davinci-callout id="Callout31" type="warning" style="width: 99%">
+                            <span>Module is not supported on this device...</span>
+                        </davinci-callout>
+                        <img id="UI_sample" src="assets/CSK_Module_ResultManager/UI_sample.png"
+                            alt="UI sample">
+                    </layout-column>
+                </layout-row>
+            </stacked-pane>
+            <crown-edpws-binding property="value" name="CSK_ResultManager/OnNewStatusModuleIsActive" update-on-resume
+                converter="function(value) {return value.toString();}">
+            </crown-edpws-binding>
+        </stacked-view>
+        <stacked-view id="SV_PageCalled">
+            <crown-binding property="value" name="CSK_ResultManager/pageCalled" path="result/data/empty" auto-update="0"
+                update-on-resume>
+            </crown-binding>
+            <crown-edpws-binding property="value" name="CSK_ResultManager/OnNewStatusCSKStyle" update-on-resume
+                converter="changeStyle">
+            </crown-edpws-binding>
+        </stacked-view>
+    </layout-column>
 </layout-row>

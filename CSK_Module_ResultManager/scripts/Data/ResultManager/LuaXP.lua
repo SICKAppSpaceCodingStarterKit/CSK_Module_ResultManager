@@ -211,6 +211,7 @@ end
 -- Somewhat simple time parsing. Handles the most common forms of ISO 8601, plus many less regular forms.
 -- If mm/dd vs dd/mm is ambiguous, it tries to discern using current locale's rule.
 local function xp_parse_time( t )
+--[[
     if base.type(t) == "number" then return t end -- if already numeric, assume it's already timestamp
     if t == nil or tostring(t):lower() == "now" then return os.time() end
     t = tostring(t) -- force string
@@ -398,6 +399,23 @@ local function xp_parse_time( t )
     end
     tm = tm + delta
     return tm -- returns time in UTC
+    ]]
+
+    return tostring(DateTime.getUnixTime())
+end
+
+-- Somewhat simple timestamp.
+local function xp_parse_timestamp()
+  return tostring(DateTime.getTimestamp())
+end
+
+-- Get date time in format 'YYYY-MM_DDT_HH_MM_SS'
+local function xp_parse_dateTime()
+  local localDay, localMonth, localYear, localHour, localMin, localSec = DateTime.getDateTimeValuesLocal()
+  local currentLocalTime = string.format( "%04u-%02u-%02uT%02u_%02u_%02u",
+  localYear, localMonth, localDay, localHour, localMin, localSec)
+
+  return tostring(currentLocalTime)
 end
 
 -- Date add. First arg is timestamp, then secs, mins, hours, days, months, years
@@ -563,6 +581,8 @@ local nativeFuncs = {
     , ['split'] = { nargs = 1, impl = xp_split }
     , ['join'] = { nargs = 1, impl = xp_join }
     , ['time']  = { nargs = 0, impl = function( argv ) return xp_parse_time( argv[1] ) end }
+    , ['timestamp']  = { nargs = 0, impl = function( argv ) return xp_parse_timestamp() end } -- NEW
+    , ['dateTime']  = { nargs = 0, impl = function( argv ) return xp_parse_dateTime() end } -- NEW
     , ['timepart'] = { nargs = 0, impl = function( argv ) return os.date( argv[2] and "!*t" or "*t", argv[1] ) end }
     , ['date'] = { nargs = 0, impl = function( argv ) return xp_mktime( unpack(argv) ) end }
     , ['strftime'] = { nargs = 1, impl = function( argv ) return os.date(unpack(argv)) end }

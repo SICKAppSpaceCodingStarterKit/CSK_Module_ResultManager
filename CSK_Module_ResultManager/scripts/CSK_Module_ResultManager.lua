@@ -21,7 +21,6 @@
 --SOFTWARE.
 
 ---@diagnostic disable: undefined-global, redundant-parameter, missing-parameter
--- CreationTemplateVersion: 3.6.0
 --**************************************************************************
 --**********************Start Global Scope *********************************
 --**************************************************************************
@@ -42,6 +41,11 @@ _G.logHandle:applyConfig()
 -- Loading script regarding ResultManager_Model
 -- Check this script regarding ResultManager_Model parameters and functions
 _G.resultManager_Model = require('Data/ResultManager/ResultManager_Model')
+require('Data/ResultManager/FlowConfig/ResultManager_FlowConfig')
+
+if _G.availableAPIs.default == false then
+  _G.logger:warning("CSK_ResultManager: Relevant CROWN(s) not available on device. Module is not supported...")
+end
 
 --**************************************************************************
 --**********************End Global Scope ***********************************
@@ -62,7 +66,7 @@ local function main()
   --
   -- local events = {'ValueProvider.OnNewValueA', 'ValueProvider.OnNewValueB'}
   -- local nameOfCheck = 'checkIfParameterSumIs50'
-  -- CSK_ResultManager.addExpression(nameOfCheck, 'param1 + param2', 'NUMBER', 50, nil, events)
+  -- CSK_ResultManager.addExpression(nameOfCheck, false, 'param1 + param2', 'NUMBER', 50, nil, events)
   ----------------------------------------------------------------------------------------
 
   CSK_ResultManager.pageCalled() -- Update UI
