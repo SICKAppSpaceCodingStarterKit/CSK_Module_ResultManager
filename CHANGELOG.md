@@ -1,6 +1,11 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## Release 2.0.1
+
+### Bugfix
+- Merge data mode still active after switching mode within FlowConfig block
+
 ## Release 2.0.0
 
 ### New features
