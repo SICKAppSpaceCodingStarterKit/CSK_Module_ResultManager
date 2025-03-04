@@ -1,9 +1,14 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
-## Release 2.0.1
+## Release 2.1.0
+
+### Improvements
+- Custom functions (like stringPack, stringUnpack, searchAndCut) can be used in combination with other functions (e.g. tonumber(stringUnpack('I2', stringPack('I2', param1)))
+- Removed temp data from persistent parameters
 
 ### Bugfix
+- Expression function "tonumber" was not able to handle float values
 - Merge data mode still active after switching mode within FlowConfig block
 
 ## Release 2.0.0
