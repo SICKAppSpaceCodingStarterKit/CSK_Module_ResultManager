@@ -457,7 +457,7 @@ INFO: Other modules can check via "Script.isServedAsFunction" if event exists. +
             </crown>
         </crown>
         <meta key="author">SICK AG</meta>
-        <meta key="version">2.0.0</meta>
+        <meta key="version">2.1.0</meta>
         <meta key="priority">low</meta>
         <meta key="copy-protected">false</meta>
         <meta key="read-protected">false</meta>

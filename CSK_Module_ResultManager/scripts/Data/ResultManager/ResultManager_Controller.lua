@@ -174,7 +174,7 @@ local function handleOnExpiredTmrResultManager()
     if resultManager_Model.parameters.expressions[resultManager_Model.selectedExpression].criteriaType == 'RANGE' then
       Script.notifyEvent("ResultManager_OnNewStatusCriteriaMaximum", resultManager_Model.parameters.expressions[resultManager_Model.selectedExpression].criteriaMax)
     end
-    Script.notifyEvent("ResultManager_OnNewStatusParameterList", resultManager_Model.helperFuncs.createJsonListExpressionParameters(resultManager_Model.parameters.expressions[resultManager_Model.selectedExpression].events, resultManager_Model.parameters.expressions[resultManager_Model.selectedExpression].data, resultManager_Model.selectedParameter))
+    Script.notifyEvent("ResultManager_OnNewStatusParameterList", resultManager_Model.helperFuncs.createJsonListExpressionParameters(resultManager_Model.parameters.expressions[resultManager_Model.selectedExpression].events, resultManager_Model.expressionData[resultManager_Model.selectedExpression], resultManager_Model.selectedParameter))
 
     if resultManager_Model.selectedParameter ~= '' then
       Script.notifyEvent("ResultManager_OnNewStatusLinkedEvent", resultManager_Model.parameters.expressions[resultManager_Model.selectedExpression].events[resultManager_Model.selectedParameter])
@@ -454,7 +454,7 @@ Script.serveFunction('CSK_ResultManager.addParameterViaUI', addParameterViaUI)
 
 local function clearParameterDataViaUI()
   resultManager_Model.clearParameterData(resultManager_Model.selectedExpression)
-  Script.notifyEvent("ResultManager_OnNewStatusParameterList", resultManager_Model.helperFuncs.createJsonListExpressionParameters(resultManager_Model.parameters.expressions[resultManager_Model.selectedExpression].events, resultManager_Model.parameters.expressions[resultManager_Model.selectedExpression].data))
+  Script.notifyEvent("ResultManager_OnNewStatusParameterList", resultManager_Model.helperFuncs.createJsonListExpressionParameters(resultManager_Model.parameters.expressions[resultManager_Model.selectedExpression].events, resultManager_Model.expressionData[resultManager_Model.selectedExpression]))
 end
 Script.serveFunction('CSK_ResultManager.clearParameterDataViaUI', clearParameterDataViaUI)
 
@@ -489,8 +489,7 @@ end
 Script.serveFunction('CSK_ResultManager.deleteParameterViaUI', deleteParameterViaUI)
 
 local function executeExpressionViaUI()
-  local temp = {}
-  resultManager_Model.process(resultManager_Model.selectedExpression, temp)
+  resultManager_Model.process(resultManager_Model.selectedExpression, resultManager_Model.expressionData[resultManager_Model.selectedExpression])
 end
 
 Script.serveFunction('CSK_ResultManager.executeExpressionViaUI', executeExpressionViaUI)
@@ -561,6 +560,7 @@ local function loadParameters()
 
       -- If something needs to be configured/activated with new loaded data, place this here
       for expressionName, _ in pairs(resultManager_Model.parameters.expressions) do
+        resultManager_Model.addCustomFunction(expressionName)
         for key, value in ipairs(resultManager_Model.parameters.expressions[expressionName]['events']) do
           resultManager_Model.addParameter(expressionName, key)
         end

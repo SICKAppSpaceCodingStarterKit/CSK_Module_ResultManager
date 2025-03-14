@@ -576,7 +576,7 @@ local nativeFuncs = {
     , ['ltrim'] = { nargs = 1, impl = function( argv ) return xp_ltrim(tostring(argv[1])) end }
     , ['rtrim'] = { nargs = 1, impl = function( argv ) return xp_rtrim(tostring(argv[1])) end }
     , ['tostring'] = { nargs = 1, impl = function( argv ) if isNull(argv[1]) then return "" else return tostring(argv[1]) end end }
-    , ['tonumber'] = { nargs = 1, impl = function( argv ) if base.type(argv[1]) == "boolean" then if argv[1] then return 1 else return 0 end end return tonumber(argv[1], argv[2] or 10) or evalerror('Argument could not be converted to number') end }
+    , ['tonumber'] = { nargs = 1, impl = function( argv ) if base.type(argv[1]) == "boolean" then if argv[1] then return 1 else return 0 end end return tonumber(argv[1], argv[2] or nil) or evalerror('Argument could not be converted to number') end }
     , ['format'] = { nargs = 1, impl = function( argv ) return string.format( unpack(argv) ) end }
     , ['split'] = { nargs = 1, impl = xp_split }
     , ['join'] = { nargs = 1, impl = xp_join }

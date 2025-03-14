@@ -43,8 +43,10 @@ local function process(handle, source1, source2, source3, source4)
 
   local mode = Container.get(handle, 'Mode')
   if mode == 'CRITERIA' then
+    CSK_ResultManager.setMergeData(false)
     return 'CSK_ResultManager.OnNewCriteriaResult_' .. expName
   elseif mode == 'EXPRESSION' then
+    CSK_ResultManager.setMergeData(false)
     return 'CSK_ResultManager.OnNewResult_' .. expName
   elseif mode == 'DATA' then
     CSK_ResultManager.setMergeData(true)

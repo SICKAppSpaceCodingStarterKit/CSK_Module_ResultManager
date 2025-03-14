@@ -41,6 +41,8 @@ resultManager_Model.selectedParameter = '' -- Selected parameter of expression
 resultManager_Model.styleForUI = 'None' -- Optional parameter to set UI style
 resultManager_Model.version = Engine.getCurrentAppVersion() -- Version of module
 
+resultManager_Model.expressionData = {} -- Stores temporarily the incoming parameters, received by the configured events and holds custom functions
+
 -- Parameters to be saved permanently if wanted
 resultManager_Model.parameters = {}
 resultManager_Model.parameters.flowConfigPriority = CSK_FlowConfig ~= nil or false -- Status if FlowConfig should have priority for FlowConfig relevant configurations
@@ -57,7 +59,6 @@ resultManager_Model.parameters.expressions[name].criteria -- Criteria to compare
 resultManager_Model.parameters.expressions[name].criteriaMax -- If 'criteriaType' = 'RANGE' this is the maximum valid value.
 resultManager_Model.parameters.expressions[name].events = {} -- Register to the events listed to receive values from other apps/modules. Event on position '1' is related to expression parameter 'param1' and so on ...
 resultManager_Model.parameters.expressions[name].parameterPositions = {} -- Position of event parameter to use
-resultManager_Model.parameters.expressions[name].data = {} -- Stores temporarily the incoming parameters, received by the configured events.
 resultManager_Model.parameters.expressions[name].eventFunctions = {} -- Internally used functions to react on events of parameter values.
 resultManager_Model.parameters.expressions[name].paramAmount -- Amount of parameters to collect before expression processing.
 resultManager_Model.parameters.expressions[name].checkCriteraToForward -- Status if results should only be forwarded via events if criteria was valid
@@ -73,89 +74,92 @@ resultManager_Model.parameters.expressions[name].customResultNOK -- Result to pr
 --**************************************************************************
 
 --- Function to react on UI style change
+---@param theme string Theme to use
 local function handleOnStyleChanged(theme)
   resultManager_Model.styleForUI = theme
   Script.notifyEvent("ResultManager_OnNewStatusCSKStyle", resultManager_Model.styleForUI)
 end
 Script.register('CSK_PersistentData.OnNewStatusCSKStyle', handleOnStyleChanged)
 
+--- Function to pack a value into a binary string
+---@param args auto[] Context data
+---@return string res Binary string
 local function stringPack(args)
   local res = NULLATOM
   if type(args[1]) == 'string' then
-    local paramSize = #args.__context.__packParam
+    local paramSize = #args
 
-    if paramSize == 1 then
-      res = string.pack(args[1], args.__context.__packParam[1])
+    if paramSize == 2 then
+      res = string.pack(args[1], args[2])
     elseif paramSize == 2 then
-      res = string.pack(args[1], args.__context.__packParam[1], args.__context.__packParam[2])
-    elseif paramSize == 3 then
-      res = string.pack(args[1], args.__context.__packParam[1], args.__context.__packParam[2], args.__context.__packParam[3])
+      res = string.pack(args[1], args[2], args[3])
     elseif paramSize == 4 then
-      res = string.pack(args[1], args.__context.__packParam[1], args.__context.__packParam[2], args.__context.__packParam[3], args.__context.__packParam[4])
+      res = string.pack(args[1], args[2], args[3], args[4])
     elseif paramSize == 5 then
-      res = string.pack(args[1], args.__context.__packParam[1], args.__context.__packParam[2], args.__context.__packParam[3], args.__context.__packParam[4], args.__context.__packParam[5])
+      res = string.pack(args[1], args[2], args[3], args[4], args[5])
     elseif paramSize == 6 then
-      res = string.pack(args[1], args.__context.__packParam[1], args.__context.__packParam[2], args.__context.__packParam[3], args.__context.__packParam[4], args.__context.__packParam[5], args.__context.__packParam[6])
+      res = string.pack(args[1], args[2], args[3], args[4], args[5], args[6])
     elseif paramSize == 7 then
-      res = string.pack(args[1], args.__context.__packParam[1], args.__context.__packParam[2], args.__context.__packParam[3], args.__context.__packParam[4], args.__context.__packParam[5], args.__context.__packParam[6], args.__context.__packParam[7])
+      res = string.pack(args[1], args[2], args[3], args[4], args[5], args[6], args[7])
     elseif paramSize == 8 then
-      res = string.pack(args[1], args.__context.__packParam[1], args.__context.__packParam[2], args.__context.__packParam[3], args.__context.__packParam[4], args.__context.__packParam[5], args.__context.__packParam[6], args.__context.__packParam[7], args.__context.__packParam[8])
+      res = string.pack(args[1], args[2], args[3], args[4], args[5], args[6], args[7], args[8])
     end
   end
-  args.__context.__packParam = {}
   return res
 end
+resultManager_Model.stringPack = stringPack
 
+--- Function to unpack data from a binary string
+---@param args auto[] Context data
+---@return auto res Unpacked data
 local function stringUnpack(args)
   local res = NULLATOM
   if type(args[1]) == 'string' then
-    if args.__context.__unpackParam[2] ~= nil and args.__context.__unpackParam[3] ~= nil then
+    if args[3] ~= nil and args[4] ~= nil then
       -- Cut string
-      args.__context.__unpackParam[1] = string.sub(args.__context.__unpackParam[1], args.__context.__unpackParam[2], args.__context.__unpackParam[3])
+      local subString = string.sub(args[2], args[3], args[4])
+      res = string.unpack(args[1], subString)
+    else
+      res = string.unpack(args[1], args[2])
     end
-    res = string.unpack(args[1], args.__context.__unpackParam[1])
   end
-  args.__context.__unpackParam = {}
   return res
 end
+resultManager_Model.stringUnpack = stringUnpack
 
+--- Function to search for a specific beginning and end part within a string and to cut out the part in between (optionally possible to shift the found part)
+---@param args auto[] Context data
+---@return string res Cutted string
 local function searchAndCut(args)
   local res = NULLATOM
-  if type(args.__context.__searchAndCutParam[1]) == 'string' then
-    if args.__context.__searchAndCutParam[2] ~= nil and args.__context.__searchAndCutParam[3] ~= nil then --and args.__context.__searchAndCutParam[4] ~= nil and args.__context.__searchAndCutParam[5] ~= nil then
-      local foundStart = string.find(args.__context.__searchAndCutParam[1], args.__context.__searchAndCutParam[2])
+  if type(args[1]) == 'string' then
+    if args[2] ~= nil and args[3] ~= nil then
+      local foundStart = string.find(args[1], args[2])
       if foundStart then
-        local foundEnd = string.find(args.__context.__searchAndCutParam[1], args.__context.__searchAndCutParam[3], foundStart+1)
+        local foundEnd = string.find(args[1], args[3], foundStart+1)
         if foundEnd then
-          if args.__context.__searchAndCutParam[4] ~= nil and args.__context.__searchAndCutParam[5] ~= nil then
-            res = string.sub(args.__context.__searchAndCutParam[1], foundStart+args.__context.__searchAndCutParam[4], foundEnd+args.__context.__searchAndCutParam[5])
+          if args[4] ~= nil and args[5] ~= nil then
+            res = string.sub(args[1], foundStart+args[4], foundEnd+args[5])
           else
-            res = string.sub(args.__context.__searchAndCutParam[1], foundStart, foundEnd)
+            res = string.sub(args[1], foundStart, foundEnd)
           end
         end
       end
     end
   end
-  args.__context.__searchAndCutParam = {}
   return res
 end
-
-local context = {}
-context.__functions = {}
-context.__packParam = {}
-context.__unpackParam = {}
-context.__searchAndCutParam = {}
-
-context.__functions.stringPack = stringPack
-context.__functions.stringUnpack = stringUnpack
-context.__functions.searchAndCut = searchAndCut
+resultManager_Model.searchAndCut = searchAndCut
 
 --- Function to clear temporarily saved parameter data
+---@param expressionName string Name of rexpression
 local function clearParameterData(expressionName)
   if resultManager_Model.parameters.expressions[expressionName] then
     _G.logger:fine(nameOfModule .. ": Clear temporary data of expression '" .. expressionName .. "'.")
-    for key, value in pairs(resultManager_Model.parameters.expressions[expressionName].data) do
-      resultManager_Model.parameters.expressions[expressionName].data[key] = nil
+    for key, value in pairs(resultManager_Model.expressionData[expressionName]) do
+      if key ~= '__functions' then
+        resultManager_Model.expressionData[expressionName][key] = nil
+      end
     end
   end
 end
@@ -167,119 +171,16 @@ resultManager_Model.clearParameterData = clearParameterData
 local function process(expressionName, data)
   local expr = resultManager_Model.parameters.expressions[expressionName]['expression']
   if resultManager_Model.parameters.expressions[expressionName] and expr ~= '' then
-    local resultValue, err
-    if string.sub(expr, 1, 10) == 'stringPack' then
-      local foundPos = 0
-      local cnt = 1
-      local foundParam = string.find(expr, 'param', foundPos)
-      while foundParam do
-        local paramPos = 'param' .. tostring(cnt)
-        context.__packParam[cnt] = data[paramPos]
-        cnt = cnt + 1
-        foundPos = foundParam + 1
-        foundParam = string.find(expr, 'param', foundPos)
-        if not foundParam then
-          break
-        end
-      end
-      local pos = string.find(expr, ',')
-      if pos then
-        local newExpr = string.sub(expr, 1, pos-1) .. ')'
-        resultValue, err = resultManager_Model.luaXP.evaluate(newExpr, context)
-      end
-    elseif string.sub(expr, 1, 12) == 'stringUnpack' then
-      local foundParam = string.find(expr, 'param')
-      if foundParam then
-        local paramNumber = string.sub(expr, foundParam+5, foundParam+5)
-        local paramPos = 'param' .. tostring(paramNumber)
-        context.__unpackParam[1] = data[paramPos]
-
-        local pos = string.find(expr, ',')
-
-        if pos then
-          local newExpr = string.sub(expr, 1, pos-1) .. ')'
-
-          -- Check if string needs to be cutted
-          local subStartPos = string.find(expr, ',', pos+1)
-          if subStartPos then
-            local subEndPos = string.find(expr, ',', subStartPos+1)
-
-            if subStartPos then
-              local expEndPos = string.find(expr, ')', subEndPos+1)
-
-              local startPosToCut = string.sub(expr, subStartPos+1, subEndPos-1)
-              local endPosToCut = string.sub(expr, subEndPos+1, expEndPos-1)
-
-              startPosToCut = startPosToCut:gsub("%s+", "")
-              startPosToCut = string.gsub(startPosToCut, "%s+", "")
-
-              endPosToCut = endPosToCut:gsub("%s+", "")
-              endPosToCut = string.gsub(endPosToCut, "%s+", "")
-
-              context.__unpackParam[2] = tonumber(startPosToCut)
-              context.__unpackParam[3] = tonumber(endPosToCut)
-            end
-          end
-          resultValue, err = resultManager_Model.luaXP.evaluate(newExpr, context)
-        end
-      end
-    elseif string.sub(expr, 1, 12) == 'searchAndCut' then
-
-      local foundParam = string.find(expr, 'param')
-      if foundParam then
-        local paramNumber = string.sub(expr, foundParam+5, foundParam+5)
-        local paramPos = 'param' .. tostring(paramNumber)
-        context.__searchAndCutParam[1] = data[paramPos]
-        local firstParamStart = string.find(expr, "'")
-
-        if firstParamStart then
-          local newExpr = string.sub(expr, 1, firstParamStart-1) .. ')'
-
-          -- Check for additional parameters
-          local firstParamEnd = string.find(expr, "'", firstParamStart+1)
-          if firstParamEnd then
-            local secondParamStart = string.find(expr, "'", firstParamEnd+1)
-            if secondParamStart then
-              local secondParamEnd = string.find(expr, "'", secondParamStart+1)
-              if secondParamEnd then
-                local thirdParamStart = string.find(expr, ",", secondParamEnd+1)
-                if thirdParamStart then
-                  local thirdParamEnd = string.find(expr, ",", thirdParamStart+1)
-                  if thirdParamEnd then
-                    local fourthParamEnd = string.find(expr, ")", thirdParamEnd+2)
-                    if fourthParamEnd then
-                      context.__searchAndCutParam[2] = string.sub(expr, firstParamStart+1, firstParamEnd-1)
-                      context.__searchAndCutParam[3] = string.sub(expr, secondParamStart+1, secondParamEnd-1)
-
-                      local tempParam4 = string.sub(expr, thirdParamStart+1, thirdParamEnd-1)
-                      tempParam4 = tempParam4:gsub("%s+", "")
-                      tempParam4 = string.gsub(tempParam4, "%s+", "")
-                      context.__searchAndCutParam[4] = tonumber(tempParam4)
-
-                      local tempParam5 = string.sub(expr, thirdParamEnd+1, fourthParamEnd-1)
-                      tempParam5 = tempParam5:gsub("%s+", "")
-                      tempParam5 = string.gsub(tempParam5, "%s+", "")
-                      context.__searchAndCutParam[5] = tonumber(tempParam5)
-                    end
-                  end
-                else
-                  context.__searchAndCutParam[2] = string.sub(expr, firstParamStart+1, firstParamEnd-1)
-                  context.__searchAndCutParam[3] = string.sub(expr, secondParamStart+1, secondParamEnd-1)
-                end
-              end
-            end
-          end
-          resultValue, err = resultManager_Model.luaXP.evaluate("searchAndCut('Blub')", context)
-        end
-      end
-    else
-      resultValue, err = resultManager_Model.luaXP.evaluate(expr, data)
-    end
-    -----------------------------
+    local resultValue, err = resultManager_Model.luaXP.evaluate(expr, data)
 
     if resultValue == nil then
-      Script.notifyEvent('ResultManager_OnNewStatusResult', "Error in evaluation of expression: " .. tostring(err.message))
-      _G.logger:warning(nameOfModule .. ": Error in evaluation of expression: " .. tostring(err.message))
+      if type(err) == 'table' then
+        Script.notifyEvent('ResultManager_OnNewStatusResult', "Error in evaluation of expression: " .. tostring(err.message))
+        _G.logger:warning(nameOfModule .. ": Error in evaluation of expression: " .. tostring(err.message))
+      else
+        Script.notifyEvent('ResultManager_OnNewStatusResult', "Error in evaluation of expression.")
+        _G.logger:warning(nameOfModule .. ": Error in evaluation of expression: No error message available.")
+      end
     else
       local suc = false
       local processOK = true
@@ -340,7 +241,7 @@ local function process(expressionName, data)
 
       -- If currently selected show result on UI
       if expressionName == resultManager_Model.selectedExpression and resultManager_Model.showProcessData then
-        Script.notifyEvent("ResultManager_OnNewStatusParameterList", resultManager_Model.helperFuncs.createJsonListExpressionParameters(resultManager_Model.parameters.expressions[expressionName].events, resultManager_Model.parameters.expressions[expressionName].data, resultManager_Model.selectedParameter))
+        Script.notifyEvent("ResultManager_OnNewStatusParameterList", resultManager_Model.helperFuncs.createJsonListExpressionParameters(resultManager_Model.parameters.expressions[expressionName].events, resultManager_Model.expressionData[expressionName], resultManager_Model.selectedParameter))
         if processOK then
           Script.notifyEvent('ResultManager_OnNewStatusResult', tostring(resultValue))
         end
@@ -400,21 +301,21 @@ resultManager_Model.process = process
 local function setInternalValue(expressionName, paramName, value1, value2, value3, value4, value5, value6, value7, value8)
   local parameterLocation = tonumber(string.sub(paramName, #paramName, #paramName))
   if resultManager_Model.parameters.expressions[expressionName].parameterPositions[parameterLocation] == 1 and value1 ~= nil then
-    resultManager_Model.parameters.expressions[expressionName]['data'][paramName] = value1
+    resultManager_Model.expressionData[expressionName][paramName] = value1
   elseif resultManager_Model.parameters.expressions[expressionName].parameterPositions[parameterLocation] == 2 and value2 ~= nil then
-    resultManager_Model.parameters.expressions[expressionName]['data'][paramName] = value2
+    resultManager_Model.expressionData[expressionName][paramName] = value2
   elseif resultManager_Model.parameters.expressions[expressionName].parameterPositions[parameterLocation] == 3 and value3 ~= nil then
-    resultManager_Model.parameters.expressions[expressionName]['data'][paramName] = value3
+    resultManager_Model.expressionData[expressionName][paramName] = value3
   elseif resultManager_Model.parameters.expressions[expressionName].parameterPositions[parameterLocation] == 4 and value4 ~= nil then
-    resultManager_Model.parameters.expressions[expressionName]['data'][paramName] = value4
+    resultManager_Model.expressionData[expressionName][paramName] = value4
   elseif resultManager_Model.parameters.expressions[expressionName].parameterPositions[parameterLocation] == 5 and value5 ~= nil then
-    resultManager_Model.parameters.expressions[expressionName]['data'][paramName] = value5
+    resultManager_Model.expressionData[expressionName][paramName] = value5
   elseif resultManager_Model.parameters.expressions[expressionName].parameterPositions[parameterLocation] == 6 and value6 ~= nil then
-    resultManager_Model.parameters.expressions[expressionName]['data'][paramName] = value6
+    resultManager_Model.expressionData[expressionName][paramName] = value6
   elseif resultManager_Model.parameters.expressions[expressionName].parameterPositions[parameterLocation] == 7 and value7 ~= nil then
-    resultManager_Model.parameters.expressions[expressionName]['data'][paramName] = value7
+    resultManager_Model.expressionData[expressionName][paramName] = value7
   elseif resultManager_Model.parameters.expressions[expressionName].parameterPositions[parameterLocation] == 8 and value8 ~= nil then
-    resultManager_Model.parameters.expressions[expressionName]['data'][paramName] = value8
+    resultManager_Model.expressionData[expressionName][paramName] = value8
   else
     _G.logger:fine(nameOfModule .. ": Parameter not available")
   end
@@ -422,7 +323,7 @@ local function setInternalValue(expressionName, paramName, value1, value2, value
   local allData = true
   for i = 1, resultManager_Model.parameters.expressions[expressionName]['paramAmount'], 1 do
     local tempParamName = 'param' .. tostring(i)
-    if resultManager_Model.parameters.expressions[expressionName]['data'][tempParamName] == nil then
+    if resultManager_Model.expressionData[expressionName][tempParamName] == nil then
       allData = false
     end
   end
@@ -433,19 +334,19 @@ local function setInternalValue(expressionName, paramName, value1, value2, value
       if Script.isServedAsEvent("CSK_ResultManager.OnNewData_" .. expressionName) then
         local dataAmount = resultManager_Model.parameters.expressions[expressionName]['paramAmount']
         if dataAmount == 1 then
-          Script.notifyEvent('ResultManager_OnNewData_'..expressionName, resultManager_Model.parameters.expressions[expressionName]['data']['param1'])
+          Script.notifyEvent('ResultManager_OnNewData_'..expressionName, resultManager_Model.expressionData[expressionName]['param1'])
         elseif dataAmount == 2 then
-          Script.notifyEvent('ResultManager_OnNewData_'..expressionName, resultManager_Model.parameters.expressions[expressionName]['data']['param1'], resultManager_Model.parameters.expressions[expressionName]['data']['param2'])
+          Script.notifyEvent('ResultManager_OnNewData_'..expressionName, resultManager_Model.expressionData[expressionName]['param1'], resultManager_Model.expressionData[expressionName]['param2'])
         elseif dataAmount == 3 then
-          Script.notifyEvent('ResultManager_OnNewData_'..expressionName, resultManager_Model.parameters.expressions[expressionName]['data']['param1'], resultManager_Model.parameters.expressions[expressionName]['data']['param2'], resultManager_Model.parameters.expressions[expressionName]['data']['param3'])
+          Script.notifyEvent('ResultManager_OnNewData_'..expressionName, resultManager_Model.expressionData[expressionName]['param1'], resultManager_Model.expressionData[expressionName]['param2'], resultManager_Model.expressionData[expressionName]['param3'])
         elseif dataAmount == 4 then
-          Script.notifyEvent('ResultManager_OnNewData_'..expressionName, resultManager_Model.parameters.expressions[expressionName]['data']['param1'], resultManager_Model.parameters.expressions[expressionName]['data']['param2'], resultManager_Model.parameters.expressions[expressionName]['data']['param3'], resultManager_Model.parameters.expressions[expressionName]['data']['param4'])
+          Script.notifyEvent('ResultManager_OnNewData_'..expressionName, resultManager_Model.expressionData[expressionName]['param1'], resultManager_Model.expressionData[expressionName]['param2'], resultManager_Model.expressionData[expressionName]['param3'], resultManager_Model.expressionData[expressionName]['param4'])
         end
         -- Clear parameters
         clearParameterData(expressionName)
       end
     elseif resultManager_Model.parameters.expressions[expressionName]['expression'] ~= '' then
-      process(expressionName, resultManager_Model.parameters.expressions[expressionName]['data'])
+      process(expressionName, resultManager_Model.expressionData[expressionName])
     end
   end
 end
@@ -497,6 +398,17 @@ local function addParameter(expressionName, paramNo, parameterPosition)
 end
 resultManager_Model.addParameter = addParameter
 
+-- Function to add custom functions to expression
+---@param expressionName string Name of the expression to add functions
+local function addCustomFunction(expressionName)
+  resultManager_Model.expressionData[expressionName] = {}
+  resultManager_Model.expressionData[expressionName].__functions = {}
+  resultManager_Model.expressionData[expressionName].__functions.searchAndCut = searchAndCut
+  resultManager_Model.expressionData[expressionName].__functions.stringPack = stringPack
+  resultManager_Model.expressionData[expressionName].__functions.stringUnpack = stringUnpack
+end
+resultManager_Model.addCustomFunction = addCustomFunction
+
 local function addExpression(name, mergeData, expression, criteriaType, criteria, criteriaMax, events, parameterPositions)
   if name then
     if not resultManager_Model.parameters.expressions[name] then
@@ -518,7 +430,7 @@ local function addExpression(name, mergeData, expression, criteriaType, criteria
         resultManager_Model.parameters.expressions[name].criteriaMax = 99999999.0
       end
       resultManager_Model.parameters.expressions[name].expression = expression
-      resultManager_Model.parameters.expressions[name].data = {}
+      addCustomFunction(name)
 
       resultManager_Model.parameters.expressions[name].events = {}
       resultManager_Model.parameters.expressions[name].eventFunctions = {}
