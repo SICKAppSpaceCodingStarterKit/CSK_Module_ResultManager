@@ -6,13 +6,12 @@
         <layout-row id="RowLayout29">
             <layout-column id="ColumnLayout34" style="align-items: stretch">
                 <layout-row id="RowLayout01" style="align-items: baseline">
-                    <davinci-value-display id="VD_Title" class="myCustomLabel_CSK_Module_ResultManager"
-                        value="Result Manager">
-                    </davinci-value-display>
+                    <h1 id="Heading_Title" class="myCustomLabel_CSK_Module_ResultManager">
+                        Result Manager
+                    </h1>
                     <davinci-value-display id="VD_Version">
-                        <crown-edpws-binding property="value" name="CSK_ResultManager/OnNewStatusModuleVersion"
-                            update-on-resume>
-                        </crown-edpws-binding>
+                        <crown-on property="value" crown-event="CSK_ResultManager/OnNewStatusModuleVersion">
+                        </crown-on>
                     </davinci-value-display>
                 </layout-row>
             </layout-column>
@@ -66,9 +65,10 @@
                                                                     style="justify-content: center; align-items: center">
                                                                     <davinci-button id="B_LoadConfig"
                                                                         class="myCustomButton_CSK_Module_ResultManager"
-                                                                        type="outline" icon-position="append"
-                                                                        title="Load configured parameters from CSK_PersistentData module."
-                                                                        icon="action/history">
+                                                                        type="outline"
+                                                                        title="Load configured parameters from CSK_PersistentData module.">
+                                                                        <davinci-icon icon="action/history">
+                                                                        </davinci-icon>
                                                                         <span></span>
                                                                         <crown-binding event="submit"
                                                                             name="CSK_ResultManager/loadParameters"
@@ -82,9 +82,10 @@
                                                                     </davinci-button>
                                                                     <davinci-button id="B_SaveConfig"
                                                                         class="myCustomButton_CSK_Module_ResultManager"
-                                                                        type="outline" icon-position="append"
-                                                                        title="Save current configured parameters of this module within CSK_PersistentData module."
-                                                                        icon="content/save">
+                                                                        type="outline"
+                                                                        title="Save current configured parameters of this module within CSK_PersistentData module.">
+                                                                        <davinci-icon icon="content/save">
+                                                                        </davinci-icon>
                                                                         <span></span>
                                                                         <crown-binding event="submit"
                                                                             name="CSK_ResultManager/sendParameters"
@@ -231,8 +232,8 @@
                                                 <layout-row id="RowLayout2" style="justify-content: space-evenly">
                                                     <davinci-button id="Button_AddExpression"
                                                         class="myCustomButton_CSK_Module_ResultManager" type="primary"
-                                                        icon-position="append" title="Add Expression"
-                                                        icon="content/add">
+                                                        title="Add Expression">
+                                                        <davinci-icon icon="content/add"></davinci-icon>
                                                         <span></span>
                                                         <crown-binding event="submit"
                                                             name="CSK_ResultManager/addExpressionViaUI" auto-commit>
@@ -240,8 +241,8 @@
                                                     </davinci-button>
                                                     <davinci-button id="Button_DeleteExpression"
                                                         class="myCustomButton_CSK_Module_ResultManager" type="outline"
-                                                        icon-position="append" title="Delete Expression"
-                                                        icon="action/delete">
+                                                        title="Delete Expression">
+                                                        <davinci-icon icon="action/delete"></davinci-icon>
                                                         <span></span>
                                                         <crown-binding event="submit"
                                                             name="CSK_ResultManager/deleteExpressionViaUI" auto-commit>
@@ -367,10 +368,9 @@
                                                             style="justify-content: space-between; align-items: center">
                                                             <davinci-value-display id="VD_SelectedParameter"
                                                                 label="Selected parameter">
-                                                                <crown-edpws-binding property="value"
-                                                                    name="CSK_ResultManager/OnNewStatusSelectedParameter"
-                                                                    update-on-resume>
-                                                                </crown-edpws-binding>
+                                                                <crown-on property="value"
+                                                                    crown-event="CSK_ResultManager/OnNewStatusSelectedParameter">
+                                                                </crown-on>
                                                             </davinci-value-display>
                                                             <layout-column id="ColumnLayout8"
                                                                 style="align-items: stretch">
@@ -378,8 +378,9 @@
                                                                     style="justify-content: flex-end">
                                                                     <davinci-button id="Button_AddParameter"
                                                                         class="myCustomButton_CSK_Module_ResultManager"
-                                                                        type="primary" icon-position="append"
-                                                                        title="Add Parameter" icon="av/playlist_add">
+                                                                        type="primary" title="Add Parameter">
+                                                                        <davinci-icon icon="av/playlist_add">
+                                                                        </davinci-icon>
                                                                         <span></span>
                                                                         <crown-binding event="submit"
                                                                             name="CSK_ResultManager/addParameterViaUI"
@@ -392,9 +393,10 @@
                                                                     </davinci-button>
                                                                     <davinci-button id="Button_DeleteParameter"
                                                                         class="myCustomButton_CSK_Module_ResultManager"
-                                                                        type="outline" icon-position="append"
-                                                                        icon="content/delete_sweep"
+                                                                        type="outline"
                                                                         title="Delete selected parameter">
+                                                                        <davinci-icon icon="content/delete_sweep">
+                                                                        </davinci-icon>
                                                                         <span></span>
                                                                         <crown-binding event="submit"
                                                                             name="CSK_ResultManager/deleteParameterViaUI"
@@ -407,9 +409,10 @@
                                                                     </davinci-button>
                                                                     <davinci-button id="Button_ClearData"
                                                                         class="myCustomButton_CSK_Module_ResultManager"
-                                                                        type="outline" icon-position="append"
-                                                                        title="Clear latest received values of paramter"
-                                                                        icon="content/clear">
+                                                                        type="outline"
+                                                                        title="Clear latest received values of paramter">
+                                                                        <davinci-icon icon="content/clear">
+                                                                        </davinci-icon>
                                                                         <span></span>
                                                                         <crown-binding event="submit"
                                                                             name="CSK_ResultManager/clearParameterDataViaUI"
@@ -666,9 +669,9 @@
                                                                                 <davinci-button id="Button_Execute"
                                                                                     class="myCustomButton_CSK_Module_ResultManager"
                                                                                     type="outline"
-                                                                                    icon-position="append"
-                                                                                    title="Execute expression manually. IMPORTANT: Only works for static expressions (no dynamic received parameters)."
-                                                                                    icon="action/gavel">
+                                                                                    title="Execute expression manually. IMPORTANT: Only works for static expressions (no dynamic received parameters).">
+                                                                                    <davinci-icon icon="action/gavel">
+                                                                                    </davinci-icon>
                                                                                     <span></span>
                                                                                     <crown-binding event="submit"
                                                                                         name="CSK_ResultManager/executeExpressionViaUI"
@@ -909,10 +912,9 @@
                                                                             </layout-column>
                                                                         </layout-row>
                                                                         <davinci-value-display id="VD_EventInfo">
-                                                                            <crown-edpws-binding property="value"
-                                                                                name="CSK_ResultManager/OnNewStatusEventInfo"
-                                                                                update-on-resume>
-                                                                            </crown-edpws-binding>
+                                                                            <crown-on property="value"
+                                                                                crown-event="CSK_ResultManager/OnNewStatusEventInfo">
+                                                                            </crown-on>
                                                                         </davinci-value-display>
                                                                         <layout-row id="RowLayout35"
                                                                             class="myCustomSpacerVert10_CSK_Module_ResultManager"
